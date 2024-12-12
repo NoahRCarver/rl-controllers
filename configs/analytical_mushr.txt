@@ -1,0 +1,40 @@
+  {
+  "env_name": "CarLikeEnv_VG-v0",
+
+  # Environment Setup Configuration:
+  "dt": 0.1,
+  "max_steps": 150,
+  "prop_steps": 3,
+  "velocity_limits": [-0.2, 0.7],
+  "acceleration_limits": [-1, 1],
+  "steering_angle_limits": [-0.523, 0.523],
+  "env_limit": 11.0,
+
+  # Goal Configuration
+  "distance_threshold": [0.5, 0.25, 0.3],
+  "loss_mode": "combine_all_dist", # Possible Values: "combine_pos_angle_dist", "combine_all_dist", "individual"
+  "goal_limit": [
+    ["-env_limit", "env_limit"],
+    ["-env_limit", "env_limit"],
+    ["-pi", "pi"],
+    ["low_vel", "high_vel"]
+  ],
+  "start_limit": [
+    ["-env_limit", "env_limit"],
+    ["-env_limit", "env_limit"],
+    ["-pi", "pi"],
+    ["low_vel", "high_vel"],
+    [0.0,0.0],  # ["low_steer", "high_steer"]
+  ],
+
+  # Training Configuration:
+  "num_steps": 1e7,
+  "alg": "HER_SAC",
+  "seed": 0, # Possible Values: Numerical Values, "random",
+
+  # geometry Configuration
+  "geometry": False,
+
+  # edge_enhancement config
+  "edge_enhancement": False
+}

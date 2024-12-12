@@ -1,0 +1,7 @@
+{
+  "load_model_name": 'CarLikeEnv-v0_HER_SAC_vel_goal_random_start_env_limit_7_combined_prop_steps_3',
+
+  # Changed Params
+  "env_limit": 10.0,
+  "distance_threshold": [0.4, 0.25, 0.1],
+}

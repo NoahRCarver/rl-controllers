@@ -1,0 +1,21 @@
+{
+  "load_model_name": 'car_like.pt',
+
+  # Changed Params
+  "env_limit": 10.0,
+  "distance_threshold": [0.4, 0.25, 0.1],
+  "start":[],
+  "goal":[],
+  "epsilon":.5,
+
+  # Training Configuration:
+  "num_steps": 5e6,
+  "alg": "HER_SAC",
+  "seed": 0, # Possible Values: Numerical Values, "random",
+
+  # geometry Configuration
+  "geometry": False,
+
+  # edge_enhancement config
+  "edge_enhancement": True
+}
