@@ -52,8 +52,6 @@ def forward(args, obs):
 
     action, _ = model.predict(obs, deterministic=True)
 
-    print(model.actor._get_constructor_parameters)
-
     return action
 
 def rollout(args):
@@ -150,13 +148,14 @@ if __name__ == '__main__':
     args.alg = 'HER_SAC'
     args.model_path = dir_path+'/trained_models/CL_VZG_HS_1/best/best_model'
 
-    raw = "0.0384611 -0.203729 0.22317 0 1 0.0384611 -0.203729 0.22317 0 0 0 0 0.5 -0.882334 0.999776"
+    raw = "7.20575 4.63214 -1.4493 1 -0.5236 7.20575 4.63214 -1.4493 1 0 0 0 0 0.971262 -0.0978561"
     data = np.fromstring(raw, sep = " ")
 
     obs = {'observation': data[:5], 'achieved_goal': data[5:9], 'desired_goal': data[9:13]}
-
-    print(forward(args, obs))
-    print(data[13:])
+    out_data = forward(args, obs)
+    print("input vector: ", data[:13])
+    print("sb3 rl_controller: ", out_data)
+    print("ml4kp learned_controller: ",data[13:])
 
     
     
