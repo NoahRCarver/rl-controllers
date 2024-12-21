@@ -1,7 +1,7 @@
 import os
 import argparse
 import math
-import gymnasium as gym
+import gym
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import Circle
@@ -15,7 +15,7 @@ argparser = argparse.ArgumentParser()
 argparser.add_argument('--no_velocity_goals', default=False, action='store_true')
 argparser.add_argument('--train_config', type=str, default="analytical_mushr")
 argparser.add_argument('--alg', choices=['PPO', "HER_SAC", "BangBang"], type=str, default="HER_SAC")
-argparser.add_argument('--model_path', type=str, default='trained_models/CL_VZG_HS_1/best/best_model')
+argparser.add_argument('--model_path', type=str, default='trained_models/latest1/best/best_model')
 argparser.add_argument('--plan_file', type=str, default='plan.txt')
 argparser.add_argument('--traj_file', type=str, default='simulated_traj.txt')
 argparser.add_argument('--plot', action='store_true')
@@ -95,9 +95,9 @@ def rollout(args):
     done = False
     # Enter the goal here.
     #{"start":[0., 0., 0., 0., 0.],"goal":[7.5, -7.5, np.pi/2, 0.]})
-    obs, info = env.reset(options = {"start":args.start,"goal":args.goal})
+    obs = env.reset(options = {"start":args.start,"goal":args.goal})
     print(obs)
-    traj = [obs['achieved_goal']]
+    traj = [obs['observation']]
     goal = obs['desired_goal']
     start = obs['achieved_goal']
     plan = []
@@ -106,8 +106,7 @@ def rollout(args):
         action, _ = model.predict(obs, deterministic=True)
         action_with_time = np.hstack([action, 1.0])
         plan.append(action_with_time)
-        obs, reward, terminated, truncated, info = env.step(action)
-        done = terminated or truncated
+        obs, reward, done, info = env.step(action)
         traj.append(info['traj'])
 
         timestep += 1
@@ -136,80 +135,82 @@ def rollout(args):
         plt.title(np.array_str(start, precision=2)+" to " +np.array_str(goal, precision=2))
         plt.savefig(dir_path+"/plans_and_trajs/"+args.img_file)
 
-    return env.unwrapped.terminal(traj[-1],goal), env.unwrapped.goal_distance(start,goal,LOSS_MODE_TYPES['COMBINE_ALL_DIST'])[0]
+    return env.unwrapped.terminal(traj[-1][:4],goal), env.unwrapped.goal_distance(start,goal,LOSS_MODE_TYPES['COMBINE_ALL_DIST'])[0]
 
 if __name__ == '__main__':
 
     args = argparser.parse_args()
 
     
-    args.no_velocity_goals = False
-    args.train_config = 'analytical_mushr_zero_goal'
-    args.alg = 'HER_SAC'
-    args.model_path = dir_path+'/trained_models/CL_VZG_HS_1/best/best_model'
+    # args.no_velocity_goals = False
+    # args.train_config = 'analytical_mushr_zero_goal'
+    # args.alg = 'HER_SAC'
+    # args.model_path = dir_path+'/trained_models/latest1/best/best_model'
 
-    raw = "7.20575 4.63214 -1.4493 1 -0.5236 7.20575 4.63214 -1.4493 1 0 0 0 0 0.971262 -0.0978561"
-    data = np.fromstring(raw, sep = " ")
+    # raw = "0.0817182 -3.87213 1.32572 -0.0155519 0.5236 0 0 0 0 0.0231178 0.982653"
+    # data = np.fromstring(raw, sep = " ")
 
-    obs = {'observation': data[:5], 'achieved_goal': data[5:9], 'desired_goal': data[9:13]}
-    out_data = forward(args, obs)
-    print("input vector: ", data[:13])
-    print("sb3 rl_controller: ", out_data)
-    print("ml4kp learned_controller: ",data[13:])
+    # obs = {'observation': data[:5], 'achieved_goal': data[:4], 'desired_goal': data[5:9]}
+    # out_data = forward(args, obs)
+    # print("input vector: ", data[:13])
+    # print("sb3 rl_controller: ", out_data)
+    # print("ml4kp learned_controller: ",data[9:])
+
 
     
     
+    
 
-    # quit
-
-
-    # results = []
-    # # nodes = np.array([ [-4.17407, -4.66024, 0.504611, 0],
-    # #           [-1.95382,  6.38656,  2.22234, 0],
-    # #           [ 4.91496,  2.53724, -2.96407, 0],
-    # #           [ 2.51846,  5.69094, -2.30681, 0],
-    # #           [-5.92729,  7.43364,  2.08309, 0],
-    # #           [ 8.75710, -8.26489,  2.97140, 0],
-    # #           [-1.56683,  6.61476,  1.07434, 0],
-    # #           [-2.23892, -9.10369, -2.60551, 0],
-    # #           [-1.83843, -7.67478, -2.24940, 0],
-    # #           [-6.52077,  7.50903, -2.74895, 0],
-    # #           [ 3.13479,  4.65402,  1.63715, 0],
-    # #           [-8.29047,  4.20373, -3.09735, 0],
-    # #           [-4.50943,  6.09398,-0.899594, 0],
-    # #           [-3.51021, -0.149177, -1.81628, 0],
-    # #           [-8.9859, 5.95172, 0.702144, 0]])
-    # # N = len(nodes)
-    # N = 10
-
-    # for i in range(N):
-    #     # for j in range(N):
-    #     #     if i != j:
-    #     args.no_velocity_goals = False
-    #     args.train_config = 'analytical_mushr_zero_goal'
-    #     args.alg = 'HER_SAC'
-    #     args.model_path = dir_path+'/trained_models/CL_VZG_HS_1/best/best_model'
-    #     args.plan_file = f'random_plan_{i}.txt'
-    #     args.traj_file = f'random_traj_{i}.txt'
-    #     args.img_file =  f'random_img_{i}.png'
-    #     args.start = None #np.append(nodes[i],0.0)
-    #     args.goal = [0., 0., 0., 0.] #nodes[j]
-    #     args.plot = True
-    #     args.save_plan = True
-    #     args.save_traj = True
-    #     args.max_steps = 150
-
-    #     results.append(np.array(rollout(args)))
+    
 
 
-    # results = np.swapaxes(np.stack(results),0,1)
-    # filter = results[0].astype(bool)
-    # distances = results[1]
-    # successes = distances[filter]
-    # failures = distances[np.logical_not(filter)]
+    results = []
+    # nodes = np.array([ [-4.17407, -4.66024, 0.504611, 0],
+    #           [-1.95382,  6.38656,  2.22234, 0],
+    #           [ 4.91496,  2.53724, -2.96407, 0],
+    #           [ 2.51846,  5.69094, -2.30681, 0],
+    #           [-5.92729,  7.43364,  2.08309, 0],
+    #           [ 8.75710, -8.26489,  2.97140, 0],
+    #           [-1.56683,  6.61476,  1.07434, 0],
+    #           [-2.23892, -9.10369, -2.60551, 0],
+    #           [-1.83843, -7.67478, -2.24940, 0],
+    #           [-6.52077,  7.50903, -2.74895, 0],
+    #           [ 3.13479,  4.65402,  1.63715, 0],
+    #           [-8.29047,  4.20373, -3.09735, 0],
+    #           [-4.50943,  6.09398,-0.899594, 0],
+    #           [-3.51021, -0.149177, -1.81628, 0],
+    #           [-8.9859, 5.95172, 0.702144, 0]])
+    # N = len(nodes)
+    N = 10
 
-    # print("success:", successes.size, ", distances: mean =", np.mean(successes),", std = ", np.std(successes))
-    # print("failure:", failures.size, ",  distances: mean =", np.mean(failures),", std = ", np.std(failures))
+    for i in range(N):
+        # for j in range(N):
+        #     if i != j:
+        args.no_velocity_goals = False
+        args.train_config = 'analytical_mushr_zero_goal'
+        args.alg = 'HER_SAC'
+        args.model_path = dir_path+'/trained_models/latest/best/best_model'
+        args.plan_file = f'random_plan_{i}.txt'
+        args.traj_file = f'random_traj_{i}.txt'
+        args.img_file =  f'random_img_{i}.png'
+        args.start = None #np.append(nodes[i],0.0)
+        args.goal = [0., 0., 0., 0.] #nodes[j]
+        args.plot = True
+        args.save_plan = True
+        args.save_traj = True
+        args.max_steps = 150
 
-    # # Dict('achieved_goal': Box([ -7.  -7. -3.1415925 -0.2], [ 7.  7. 3.1415927 0.7], (4,), float32), 'desired_goal': Box([-7.        -7.        -3.1415925 -0.2      ], [7.        7.        3.1415927 0.7      ], (4,), float32), 'observation': Box(-inf, inf, (5,), float32)) != 
-    # # Dict('achieved_goal': Box([-11. -11. -3.1415925 -0.2], [11. 11. 3.1415927 0.7], (4,), float32), 'desired_goal': Box([-11.        -11.         -3.1415925  -0.2      ], [11.        11.         3.1415927  0.7      ], (4,), float32), 'observation': Box(-inf, inf, (5,), float32))
+        results.append(np.array(rollout(args)))
+
+
+    results = np.swapaxes(np.stack(results),0,1)
+    filter = results[0].astype(bool)
+    distances = results[1]
+    successes = distances[filter]
+    failures = distances[np.logical_not(filter)]
+
+    print("success:", successes.size, ", distances: mean =", np.mean(successes),", std = ", np.std(successes))
+    print("failure:", failures.size, ",  distances: mean =", np.mean(failures),", std = ", np.std(failures))
+
+    # Dict('achieved_goal': Box([ -7.  -7. -3.1415925 -0.2], [ 7.  7. 3.1415927 0.7], (4,), float32), 'desired_goal': Box([-7.        -7.        -3.1415925 -0.2      ], [7.        7.        3.1415927 0.7      ], (4,), float32), 'observation': Box(-inf, inf, (5,), float32)) != 
+    # Dict('achieved_goal': Box([-11. -11. -3.1415925 -0.2], [11. 11. 3.1415927 0.7], (4,), float32), 'desired_goal': Box([-11.        -11.         -3.1415925  -0.2      ], [11.        11.         3.1415927  0.7      ], (4,), float32), 'observation': Box(-inf, inf, (5,), float32))

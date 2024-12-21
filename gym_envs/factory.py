@@ -2,7 +2,7 @@ import os
 
 from gym_envs.car_like_env import CarLikeEnv
 from gym_envs.car_like_env_edge_enhancement import CarLikeEnvEE
-from gymnasium.envs.registration import register
+from gym.envs.registration import register
 
 class CarLikeFactory:
     def __init__(self, exp_config, return_full_trajectory=False):
@@ -12,7 +12,7 @@ class CarLikeFactory:
 
     def register_environments_for_edge_enhancement(self):
         register(
-            id="CarLikeEnv-v0",
+            id="CarLikeEnv",
             entry_point=CarLikeEnvEE,
             kwargs={
                 'config': self.exp_config,
@@ -23,7 +23,7 @@ class CarLikeFactory:
 
     def register_environments_with_position_orientation_goals(self):
         register(
-            id="CarLikeEnv-v0",
+            id="CarLikeEnv",
             entry_point=CarLikeEnv,
             kwargs={
                 'config': self.exp_config,
@@ -34,7 +34,7 @@ class CarLikeFactory:
 
     def register_environments_with_position_orientation_velocity_goals(self):
         register(
-            id="CarLikeEnv_VG-v0",
+            id="CarLikeEnv_VG",
             entry_point=CarLikeEnv,
             kwargs={
                 'config': self.exp_config,

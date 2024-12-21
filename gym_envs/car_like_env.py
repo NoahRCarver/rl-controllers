@@ -1,6 +1,6 @@
 import numpy as np
 import os
-import gymnasium as gym
+import gym
 
 from utils import norm_angle_pi, LOSS_MODE_TYPES
 
@@ -183,7 +183,7 @@ class CarLikeEnv(gym.Env):
             assert goal.shape == (self.goal_dims, )
             self.goal = goal
 
-        return self._get_obs(), {} 
+        return self._get_obs()
 
     def _propagate_dynamics(self, state, action):
         # state: [x, y, theta, phi, v]
@@ -310,7 +310,7 @@ class CarLikeEnv(gym.Env):
         for _ in range(self.prop_steps):
             self.state = self._propagate_dynamics(self.state, applied_action)
             if self.return_full_trajectory:
-                current_traj.append(self._get_obs()["achieved_goal"])
+                current_traj.append(self._get_obs()["observation"])
 
         obs = self._get_obs()
 
@@ -328,7 +328,7 @@ class CarLikeEnv(gym.Env):
         truncated = self.steps >= self.max_steps
         reward = self.compute_reward(achieved_goal, self.goal, info)
 
-        return obs, reward, terminate, truncated, info
+        return obs, reward, terminate or truncated, info
 
 
 if __name__ == "__main__":

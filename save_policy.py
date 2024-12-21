@@ -5,7 +5,7 @@ from os import path
 
 import numpy as np
 import torch
-import gymnasium as gym
+import gym
 
 from gym_envs.factory import CarLikeFactory
 from utils import load_config, load_best_model, initialize_env
@@ -26,7 +26,7 @@ def main(model_name):
     policy = model.policy
     actor_model = torch.nn.Sequential(policy.actor.latent_pi, policy.actor.mu, torch.nn.Tanh())
 
-    example = torch.rand(1,(env.unwrapped.observation_space_dims))
+    example = torch.rand(1,(env.unwrapped.obs_dims+env.unwrapped.goal_dims))
 
     policy.net_args['observation_space']
     actor_model.eval()

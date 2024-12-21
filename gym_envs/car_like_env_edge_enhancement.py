@@ -1,6 +1,6 @@
 import numpy as np
 import os
-import gymnasium as gym
+import gym
 
 from utils import norm_angle_pi, LOSS_MODE_TYPES
 
