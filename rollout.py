@@ -1,7 +1,7 @@
 import os
 import argparse
 import math
-import gym
+import gymnasium as gym
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import Circle
@@ -15,7 +15,7 @@ argparser = argparse.ArgumentParser()
 argparser.add_argument('--no_velocity_goals', default=False, action='store_true')
 argparser.add_argument('--train_config', type=str, default="analytical_mushr")
 argparser.add_argument('--alg', choices=['PPO', "HER_SAC", "BangBang"], type=str, default="HER_SAC")
-argparser.add_argument('--model_path', type=str, default='trained_models/latest1/best/best_model')
+argparser.add_argument('--model_path', type=str, default='trained_models/latest/best/best_model')
 argparser.add_argument('--plan_file', type=str, default='plan.txt')
 argparser.add_argument('--traj_file', type=str, default='simulated_traj.txt')
 argparser.add_argument('--plot', action='store_true')
@@ -95,7 +95,7 @@ def rollout(args):
     done = False
     # Enter the goal here.
     #{"start":[0., 0., 0., 0., 0.],"goal":[7.5, -7.5, np.pi/2, 0.]})
-    obs = env.reset(options = {"start":args.start,"goal":args.goal})
+    obs, info = env.reset(options = {"start":args.start,"goal":args.goal})
     print(obs)
     traj = [obs['observation']]
     goal = obs['desired_goal']
@@ -106,7 +106,8 @@ def rollout(args):
         action, _ = model.predict(obs, deterministic=True)
         action_with_time = np.hstack([action, 1.0])
         plan.append(action_with_time)
-        obs, reward, done, info = env.step(action)
+        obs, reward, done, other_done, info = env.step(action)
+        done = done or other_done
         traj.append(info['traj'])
 
         timestep += 1
@@ -181,7 +182,7 @@ if __name__ == '__main__':
     #           [-3.51021, -0.149177, -1.81628, 0],
     #           [-8.9859, 5.95172, 0.702144, 0]])
     # N = len(nodes)
-    N = 10
+    N = 100
 
     for i in range(N):
         # for j in range(N):
@@ -195,9 +196,9 @@ if __name__ == '__main__':
         args.img_file =  f'random_img_{i}.png'
         args.start = None #np.append(nodes[i],0.0)
         args.goal = [0., 0., 0., 0.] #nodes[j]
-        args.plot = True
-        args.save_plan = True
-        args.save_traj = True
+        args.plot = False
+        args.save_plan = False
+        args.save_traj = False
         args.max_steps = 150
 
         results.append(np.array(rollout(args)))

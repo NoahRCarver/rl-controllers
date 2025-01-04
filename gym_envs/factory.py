@@ -2,7 +2,7 @@ import os
 
 from gym_envs.car_like_env import CarLikeEnv
 from gym_envs.car_like_env_edge_enhancement import CarLikeEnvEE
-from gym.envs.registration import register
+from gymnasium.envs.registration import register
 
 class CarLikeFactory:
     def __init__(self, exp_config, return_full_trajectory=False):

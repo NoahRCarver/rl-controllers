@@ -3,7 +3,7 @@ from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 
 import numpy as np
-import gym
+import gymnasium as gym
 
 def norm_angle_pi(angle):
 

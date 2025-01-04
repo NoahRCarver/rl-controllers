@@ -1,5 +1,5 @@
   {
-  "env_name": "CarLikeEnv_VG-v0",
+  "env_name": "CarLikeEnv_VG",
 
   # Environment Setup Configuration:
   "dt": 0.1,
@@ -28,7 +28,7 @@
   ],
 
   # Training Configuration:
-  "num_steps": 1e7,
+  "num_steps": 3e6,
   "alg": "HER_SAC",
   "seed": 0, # Possible Values: Numerical Values, "random",
 
