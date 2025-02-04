@@ -1,5 +1,5 @@
   {
-  "env_name": "CarLikeEnv_VG",
+  "env_name": "CarLikeEnv_VG_ZG",
 
   # Environment Setup Configuration:
   "dt": 0.1,
@@ -31,6 +31,7 @@
   "num_steps": 5e6,
   "alg": "HER_SAC",
   "seed": 0, # Possible Values: Numerical Values, "random",
+  "model_uses_alt_env": False,
 
   # geometry Configuration
   "geometry": False,
@@ -39,7 +40,5 @@
   "edge_enhancement": False,
 
 
-  # Roadmap Configuration
-  "epsilon": 10,
-  "max_rollout_steps_in_construction": 150
+
 }

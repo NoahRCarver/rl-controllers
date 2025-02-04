@@ -31,10 +31,16 @@
   "num_steps": 3e6,
   "alg": "HER_SAC",
   "seed": 0, # Possible Values: Numerical Values, "random",
+  "model_uses_alt_env": True,
+  "model_env_config": "analytical_mushr_zero_goal",
 
   # geometry Configuration
   "geometry": False,
 
   # edge_enhancement config
-  "edge_enhancement": False
+  "edge_enhancement": False,
+
+    # Roadmap Configuration
+  "epsilon": 10,
+  "max_rollout_steps_in_construction": 150
 }

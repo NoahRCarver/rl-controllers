@@ -43,3 +43,15 @@ class CarLikeFactory:
                 'return_dict_obs': self.return_dict_obs,
             }
         )
+        
+    def register_environments_with_position_orientation_velocity_zero_goals(self):
+        register(
+            id="CarLikeEnv_VG_ZG",
+            entry_point=CarLikeEnv,
+            kwargs={
+                'config': self.exp_config,
+                'has_velocity_goals': True,
+                'return_full_trajectory': self.return_full_trajectory,
+                'return_dict_obs': self.return_dict_obs,
+            }
+        )

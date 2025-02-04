@@ -20,6 +20,7 @@ class CarLikeEnv(gym.Env):
         self.return_dict_obs = return_dict_obs
 
         # Copy values from Config
+        self.name = config['env_name']
         self.max_steps = config['max_steps']
         self.prop_steps = config['prop_steps']
         self.env_limit = config['env_limit']
@@ -182,6 +183,8 @@ class CarLikeEnv(gym.Env):
             goal = np.array(options["goal"])
             assert goal.shape == (self.goal_dims, )
             self.goal = goal
+
+
         info = {}
         return self._get_obs(), info
 

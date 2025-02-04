@@ -11,11 +11,21 @@ from gym_envs.factory import CarLikeFactory
 
 class ReachabilityRoadmap(Roadmap):
 
-    def __init__(self, config, env: gym.Env, controller):
+    def __init__(self, config, env: gym.Env, controller, ctrl_env: gym.Env):
 
         self.controller = controller
         self.e = config["epsilon"]
         self.max_steps_c = config["max_rollout_steps_in_construction"]
+        if ctrl_env != None:
+            self.ctrl_env = ctrl_env
+            self.is_ctrl_env = True
+            #TODO: assert action spaces are same
+        else:
+            self.ctrl_env = env
+            self.is_ctrl_env = False
+
+        print("env: ",env.observation_space)
+        print("ctrl_env: ", ctrl_env.observation_space)
         super().__init__(env,config)
 
     #build roadmap with termination parameter max_ssa - after max_ssa consecutive failed additions, terminate
@@ -27,7 +37,10 @@ class ReachabilityRoadmap(Roadmap):
         self.component_count = 0
         self.condensation_graph_edges = {}
         while(steps < term_override and stepsSinceAdd < max_ssa):
-            sample = self.env.observation_space.sample()
+            sample = self.env.observation_space.sample()['observation']
+
+            print("sample: ", sample)
+
             self.nodes[self.node_count] = sample
 
             ### START: Get indices of arrivals/departures
@@ -38,7 +51,6 @@ class ReachabilityRoadmap(Roadmap):
             c_dep = {}
             c_merge = {}
             if len(self.components)>0:
-                print(self.components)
                 for c_indx , c in self.components.items():
                     a = False
                     d = False
@@ -138,15 +150,21 @@ class ReachabilityRoadmap(Roadmap):
         return False
 
     def _controller_rollout(self, start_indx, targ_indx, max_steps):
-        obs, info = self.env.reset(options = {"start":self.nodes[start_indx],"goal":self.nodes[targ_indx]})
+        print("q:\tstart: ", self.nodes[start_indx], ";\n\tgoal: ", self.nodes[targ_indx][:-1] )
+        obs, info = self.env.reset(options = {"start":self.nodes[start_indx],"goal":self.nodes[targ_indx][:-1]})
         traj = [obs['observation']]
         goal = obs['desired_goal']
-        start = obs['achieved_goal']
+        start = obs['observation']
+
         plan = []
         timestep = 0
         done = False
         while (not done) and timestep < max_steps:
-            action, _ = self.controller.predict(obs, deterministic=True)
+            ctrl_obs = obs
+            if self.is_ctrl_env:
+                ctrl_obs = self._transform_obs(obs) #transform observation to controller obs
+
+            action, _ = self.controller.predict(ctrl_obs, deterministic=True)
             obs, reward, done, trunc, info = self.env.step(action)
             traj.append(info['traj'])
             #TODO: fix done check.
@@ -155,16 +173,30 @@ class ReachabilityRoadmap(Roadmap):
 
         return done
     
+    def _transform_obs(self, obs, method = "zero_goal"):
+        new_obs = {}
+        x, y, theta, v, phi = np.copy(obs['observation'])
+        gx, gy, gt, gv = obs['desired_goal']
+        if method == "zero_goal":
+            c, s = np.cos(-gt), np.sin(-gt )
+            x-=gx
+            y-=gy
+            tx,ty = c*x-s*y, s*x + c*y
+            x, y = tx,ty
+            theta = theta - gt
+            new_obs['observation'] = [x, y, theta, v, phi]
+            new_obs['achieved_goal'] = [0, 0, 0, v]
+            new_obs['desired_goal'] = [0, 0, 0, gv]
+        return new_obs
+     
+    
 
 argparser = argparse.ArgumentParser()
 
 argparser.add_argument('--no_velocity_goals', default=False, action='store_true')
-argparser.add_argument('--train_config', type=str, default="analytical_mushr_zero_goal")
+argparser.add_argument('--train_config', type=str, default="analytical_mushr")
 argparser.add_argument('--alg', choices=['PPO', "HER_SAC", "BangBang"], type=str, default="HER_SAC")
 argparser.add_argument('--model_path', type=str, default=os.path.dirname(__file__).removesuffix("Roadmap")+'trained_models/latest/best/best_model')
-argparser.add_argument('--plan_file', type=str, default='plan.txt')
-argparser.add_argument('--traj_file', type=str, default='simulated_traj.txt')
-argparser.add_argument('--plot', action='store_true')
 argparser.add_argument('--max_steps', type=int, default=1e10)
 
 
@@ -174,9 +206,20 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     exp_config_fpath = os.path.join(os.path.dirname(__file__).removesuffix("/Roadmap"), 'configs', f'{args.train_config}.txt')
-
-    with open(exp_config_fpath) as f:
+    print(exp_config_fpath)
+    with open(exp_config_fpath, 'r') as f:
         config = eval(f.read())
+        f.close()
+    print(config)
+    
+    if(config["model_uses_alt_env"]):
+        model_env_config_fpath = os.path.join(os.path.dirname(__file__).removesuffix("/Roadmap"), 'configs', f'{config["model_env_config"]}.txt')
+        print(model_env_config_fpath)
+        with open(model_env_config_fpath, 'r') as f2:
+            model_env_config = eval(f2.read())
+        print(model_env_config)
+
+        
 
     #print('Args', args)
     #print('\nConfig', config)
@@ -196,10 +239,21 @@ if __name__ == '__main__':
 
     env = gym.make(env_name)
 
+    
+    if(config["model_uses_alt_env"]):
+        
+        env_factory_2 = CarLikeFactory(exp_config=model_env_config, return_full_trajectory=True)
+
+        env_factory_2.register_environments_with_position_orientation_velocity_zero_goals()
+
+        model_env = gym.make(model_env_config['env_name'])
+    else:
+        model_env = env
+
     if args.alg == 'HER_SAC':
         from stable_baselines3 import SAC
-        model = SAC.load(args.model_path, env=env)
+        model = SAC.load(args.model_path, env=model_env)
 
 
-    roadmap = ReachabilityRoadmap(config=config, env=env, controller=model)
+    roadmap = ReachabilityRoadmap(config=config, env=env, controller=model, ctrl_env=model_env)
     roadmap.build(10)
