@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import gymnasium as gym
+import geom_utils
 
 from utils import norm_angle_pi, LOSS_MODE_TYPES
 
@@ -30,6 +31,7 @@ class CarLikeEnv(gym.Env):
         self.velocity_limits = config['velocity_limits']
         self.steering_angle_limits = config['steering_angle_limits']
         self.acceleration_limits = config['acceleration_limits']
+        self.has_geometry = config['geometry']
 
         self._process_loss_mode(config)
         self._process_distance_threshold(config)
@@ -52,6 +54,8 @@ class CarLikeEnv(gym.Env):
                 "achieved_goal": gym.spaces.Box(low=self.achieved_goal_limit[:, 0], high=self.achieved_goal_limit[:, 1]),
                 "desired_goal": gym.spaces.Box(low=self.goal_limit[:, 0], high=self.goal_limit[:, 1], shape=(self.goal_dims,))
             })
+        if self.has_geometry:
+            self.load_geometry(config)
 
     def _get_obs(self):
         if not self.return_dict_obs:
@@ -171,6 +175,7 @@ class CarLikeEnv(gym.Env):
 
         if options == None or options["start"] is None:
             self.state = np.random.uniform(self.start_limit[:, 0], self.start_limit[:, 1], size=(self.obs_dims,))
+            while
         else:
             state = np.array(options["start"])
             assert state.shape == (self.obs_dims, )
@@ -308,10 +313,13 @@ class CarLikeEnv(gym.Env):
         self.steps += 1
 
         applied_action = self.get_applied_action(action)
-
+        collision = False
         current_traj = []
         for _ in range(self.prop_steps):
             self.state = self._propagate_dynamics(self.state, applied_action)
+
+            collision = collision or self.pt_collision_check(np.array(self.state[:2]))
+
             if self.return_full_trajectory:
                 current_traj.append(self._get_obs()["observation"])
 
@@ -328,11 +336,32 @@ class CarLikeEnv(gym.Env):
         }
 
         terminate = info["is_success"]
-        truncated = self.steps >= self.max_steps
+        truncated = self.steps >= self.max_steps or collision
         reward = self.compute_reward(achieved_goal, self.goal, info)
 
         return obs, reward, terminate, truncated, info
 
+    def load_geometry(self,config):
+        import yaml
+        self.obstacles = []
+        path = os.path.join(os.path.dirname(__file__), f'env_geometries/{config["geometry_yml"]}.yaml')
+        with open(path) as stream:
+            try:
+                geom = yaml.safe_load(stream)
+                for obj in geom['environment']['geometries']:
+                    c = np.array(obj['config']['position'][:2])
+                    w = obj['collision_geometry']['dims'][0]
+                    h = obj['collision_geometry']['dims'][1]
+                    self.obstacles.append((c,w,h))
+            except yaml.YAMLError as exc:
+                print(exc)
+
+    def pt_collision_check(self, pt):
+        if self.has_geometry:
+            for obj in self.obstacles:
+                if(geom_utils.point_to_rectangle_distance(pt,*obj) == 0):
+                    return True
+        return False
 
 if __name__ == "__main__":
     with open(os.path.join(os.path.dirname(__file__), "config/car_like.txt")) as f:

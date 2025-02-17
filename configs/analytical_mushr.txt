@@ -5,8 +5,8 @@
   "dt": 0.1,
   "max_steps": 150,
   "prop_steps": 3,
-  "velocity_limits": [-0.2, 0.7],
-  "acceleration_limits": [-1, 1],
+  "velocity_limits": [-0.3, 1],
+  "acceleration_limits": [-0.3, 0.3],
   "steering_angle_limits": [-0.523, 0.523],
   "env_limit": 11.0,
 
@@ -36,6 +36,7 @@
 
   # geometry Configuration
   "geometry": False,
+  "geometry_yml": "bar",
 
   # edge_enhancement config
   "edge_enhancement": False,

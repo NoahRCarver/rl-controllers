@@ -36,20 +36,21 @@ class ReachabilityRoadmap(Roadmap):
         self.components = {}
         self.component_count = 0
         self.condensation_graph_edges = {}
-        while(steps < term_override and stepsSinceAdd < max_ssa):
+        num_UCS = 0
+        while(steps < term_override and stepsSinceAdd < max_ssa-num_UCS):
             sample = self.env.observation_space.sample()['observation']
 
-            print("sample: ", sample)
+            #print("sample: ", sample)
 
             self.nodes[self.node_count] = sample
 
             ### START: Get indices of arrivals/departures
-            arrivals = {}
-            departures = {}
+            arrivals = set()
+            departures = set()
             #managing component handling.
-            c_arr = {}
-            c_dep = {}
-            c_merge = {}
+            c_arr = set()
+            c_dep = set()
+            c_merge = set()
             if len(self.components)>0:
                 for c_indx , c in self.components.items():
                     a = False
@@ -81,13 +82,13 @@ class ReachabilityRoadmap(Roadmap):
                 new_c_indx = self.component_count
                 self.component_count += 1
                 self.components[new_c_indx] = {sample_indx}
-                self.condensation_graph_edges[new_c_indx] = []
+                self.condensation_graph_edges[new_c_indx] = set()
                 
                 # add base graph edges
                 for a in arrivals:
-                    self.edges[a].add(sample_indx)
+                    self.edges[a].append(sample_indx)
                 for d in departures:
-                    self.edges[sample_indx].add(d)
+                    self.edges[sample_indx].append(d)
 
                 # add condensation graph edges
                 for c_a in c_arr:
@@ -95,62 +96,68 @@ class ReachabilityRoadmap(Roadmap):
                 for c_d in c_dep:
                     self.condensation_graph_edges[new_c_indx].add(c_d)
                 for c_m in c_merge:
-                    self.merge_components(c_m,new_c_indx, fcc_cleanup=False)
+                    self.merge_components(new_c_indx,c_m, fcc_cleanup=False)
                 if(len(c_merge)>0):
                     self.fully_connected_cleanup()
             steps += 1
+            num_UCS = len([x for x in self.components.keys() if len(self.condensation_graph_edges[x])== 0])
+            print("[update] step: ", steps, ", ssa: ", stepsSinceAdd, ", num_ucs: ", num_UCS)
         return
     
     def merge_components(self, c1, c2, fcc_cleanup = True):
+        print("merge ",c1," and ", c2, " in ")
+        print(self.condensation_graph_edges)
+        print(self.components)
         #merge nodes
         for n in self.components[c2]:
             self.components[c1].add(n)
         #merge edges
-        for e in self.condensation_graph_edges:
-            if c2 in e:
-                for i in range(len(e)):
-                    if e[i] == c2:
-                        e[i] = c1
+        
+        for s,e in self.condensation_graph_edges.items():
+            if (s == c1 and c2 in e):
+                e.remove(c2)
+            if(s != c1 and s!= c2):
+                if c2 in e:
+                    e.remove(c2)
+                    e.add(c1)
         #remove c2
         self.components.pop(c2)
+        self.condensation_graph_edges.pop(c2)
         #cleanup fcc loops created by merge
         if(fcc_cleanup):
             self.fully_connected_cleanup()
-        
-    
+          
     def fully_connected_cleanup(self):
         merges = {}
         for c1 in self.components:
             merges[c1] = []
             for c2 in self.components:
-                if c1 != c2 and c2 not in merges.keys:
+                if c1 != c2 and c2 not in merges.keys():
                     if( self.check_connectivity(c1,c2) and self.check_connectivity(c2,c1)):
-                        merges[c1].push(c2)
-        for base, mergeset in merges:
-            for merge in mergeset:
-                self.merge_components(base, merge, fcc_cleanup=False)
-        
+                        merges[c1].append(c2)
+        for base in sorted(merges.keys()):
+            for merge in merges[base]:
+                self.merge_components( base, merge, fcc_cleanup=False)
 
     #perform dfs on component graph to find path from index d to a
     def check_connectivity(self, a, d):
         s = []
-        visited = {}
-        s.push(d)
+        visited = set()
+        s.append(d)
         visited.add(d)
         while len(s) > 0:
-            c = s.peek()
-            s.pop
+            c = s.pop()
             if c == a:
                 return True
             if len(self.condensation_graph_edges[c]) > 0:
                 for e in self.condensation_graph_edges[c]:
                     if e not in visited:
-                        s.push(e)
+                        s.append(e)
                         visited.add(e)
         return False
 
     def _controller_rollout(self, start_indx, targ_indx, max_steps):
-        print("q:\tstart: ", self.nodes[start_indx], ";\n\tgoal: ", self.nodes[targ_indx][:-1] )
+        #print("q:\tstart: ", self.nodes[start_indx], ";\n\tgoal: ", self.nodes[targ_indx][:-1] )
         obs, info = self.env.reset(options = {"start":self.nodes[start_indx],"goal":self.nodes[targ_indx][:-1]})
         traj = [obs['observation']]
         goal = obs['desired_goal']
@@ -159,7 +166,8 @@ class ReachabilityRoadmap(Roadmap):
         plan = []
         timestep = 0
         done = False
-        while (not done) and timestep < max_steps:
+        trunc = False
+        while not(done or trunc) and timestep < max_steps:
             ctrl_obs = obs
             if self.is_ctrl_env:
                 ctrl_obs = self._transform_obs(obs) #transform observation to controller obs
@@ -167,10 +175,7 @@ class ReachabilityRoadmap(Roadmap):
             action, _ = self.controller.predict(ctrl_obs, deterministic=True)
             obs, reward, done, trunc, info = self.env.step(action)
             traj.append(info['traj'])
-            #TODO: fix done check.
             timestep += 1
-            done = done or trunc
-
         return done
     
     def _transform_obs(self, obs, method = "zero_goal"):
@@ -189,7 +194,7 @@ class ReachabilityRoadmap(Roadmap):
             new_obs['desired_goal'] = [0, 0, 0, gv]
         return new_obs
      
-    
+     
 
 argparser = argparse.ArgumentParser()
 
