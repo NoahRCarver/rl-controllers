@@ -6,6 +6,7 @@ sys.path.append('../')
 #from stable_baselines3.common import BaseAlgorithm
 from roadmap import Roadmap
 import argparse
+from gym_envs.car_like_env import CarLikeEnv
 from gym_envs.factory import CarLikeFactory
 
 
@@ -26,20 +27,26 @@ class ReachabilityRoadmap(Roadmap):
 
         print("env: ",env.observation_space)
         print("ctrl_env: ", ctrl_env.observation_space)
+        self.uenv = env.unwrapped
         super().__init__(env,config)
 
     #build roadmap with termination parameter max_ssa - after max_ssa consecutive failed additions, terminate
     #forces termination after term_override steps
     def build(self, max_ssa, term_override = 1e9):
+
         steps = 0
         stepsSinceAdd = 0
         self.components = {}
         self.component_count = 0
         self.condensation_graph_edges = {}
         num_UCS = 0
-        while(steps < term_override and stepsSinceAdd < max_ssa-num_UCS):
-            sample = self.env.observation_space.sample()['observation']
 
+    
+        while(steps < term_override and stepsSinceAdd < max_ssa-num_UCS):
+            sample = np.random.uniform(self.uenv.start_limit[:, 0], self.uenv.start_limit[:, 1], size=(self.uenv.obs_dims,))
+            while self.env.unwrapped.pt_collision_check(sample[:2]):
+                sample = np.random.uniform(self.uenv.start_limit[:, 0], self.uenv.start_limit[:, 1], size=(self.uenv.obs_dims,))
+                
             #print("sample: ", sample)
 
             self.nodes[self.node_count] = sample
@@ -56,10 +63,12 @@ class ReachabilityRoadmap(Roadmap):
                     a = False
                     d = False
                     for indx in c:
-                        if(self._controller_rollout(self.node_count,indx,self.max_steps_c)):
+                        dep_success,_ = self._controller_rollout(self.node_count,indx,self.max_steps_c)
+                        arr_success,_ = self._controller_rollout(indx,self.node_count,self.max_steps_c)
+                        if(arr_success):
                             a = True
                             arrivals.add(indx)
-                        if (self._controller_rollout(indx,self.node_count,self.max_steps_c)):
+                        if (dep_success):
                             d = True
                             departures.add(indx)
                     if a and d:
@@ -69,11 +78,22 @@ class ReachabilityRoadmap(Roadmap):
                     elif d:
                         c_dep.add(c_indx)
             ### END get indices
+            thief_caught = False
+            
+            if( len(c_merge) == 1 ):
+               #todo:check if all arrivals and departures are in cmerge's a's and d's
+               pass
+            elif(len(c_merge) == 0):
+                #todo: check if all a's arrive at all d's on comp_graph
 
-            if(len(c_merge) == 1 and len(c_arr)+len(c_dep) <= 1):
-                stepsSinceAdd += 1
+                #If A = nullset, its a guard.
+                #if D = nullset, its a thief and is caught
                 pass
+            raise NotImplementedError()
+            if(thief_caught): # todo: better comp_graph update check
+                stepsSinceAdd += 1
             else:
+                stepsSinceAdd = 0
                 # Add node as new component
                 sample_indx = self.node_count
                 self.node_count += 1
@@ -102,12 +122,44 @@ class ReachabilityRoadmap(Roadmap):
             steps += 1
             num_UCS = len([x for x in self.components.keys() if len(self.condensation_graph_edges[x])== 0])
             print("[update] step: ", steps, ", ssa: ", stepsSinceAdd, ", num_ucs: ", num_UCS)
+
+        print("nodes: ", self.nodes)
+        print("edges: ", self.edges)
+        print("components: ", self.components)
         return
     
+    def save_roadmap(self, roadmap_outdir):
+
+
+        os.makedirs(os.path.join(roadmap_outdir,"trajs"), exist_ok=True)
+
+        with open(os.path.join(roadmap_outdir,"nodes.txt"),'w+') as node_f:
+            for index,pt in self.nodes.items():
+                node_f.write(f"{index}, {','.join(pt.astype(str))}\n")
+
+        with open(os.path.join(roadmap_outdir,"components.txt"),'w+') as comp_f:
+            for index,comp in self.components.items():
+                comp_f.write(f"{index}, {','.join(str(e) for e in comp)}\n")
+
+        edge_number = 0
+        with open(os.path.join(roadmap_outdir,"edges.txt"),'w+') as edge_f:
+            for start_index,end_indices in self.edges.items():
+                for end_index in end_indices:
+                    edge_f.write(f"{edge_number}, {start_index}, {end_index}\n")
+
+                    #make traj file
+                    success, traj = self._controller_rollout(start_index, end_index,self.max_steps_c)
+                    if not success:
+                        print("SOMETHING IS VERY VERY WRONG")
+                    with open(os.path.join(roadmap_outdir,"trajs", f"traj_{edge_number}.txt"),'w+') as traj_f:
+                        for pt in traj:
+                            traj_f.write(f"{','.join(pt.astype(str))}\n")
+                    edge_number += 1
+    
     def merge_components(self, c1, c2, fcc_cleanup = True):
-        print("merge ",c1," and ", c2, " in ")
-        print(self.condensation_graph_edges)
-        print(self.components)
+        print("merge components ",c1," and ", c2)
+        #print(self.condensation_graph_edges)
+        #print(self.components)
         #merge nodes
         for n in self.components[c2]:
             self.components[c1].add(n)
@@ -128,16 +180,23 @@ class ReachabilityRoadmap(Roadmap):
             self.fully_connected_cleanup()
           
     def fully_connected_cleanup(self):
+        
         merges = {}
+        clean_trigger = False
         for c1 in self.components:
             merges[c1] = []
             for c2 in self.components:
                 if c1 != c2 and c2 not in merges.keys():
                     if( self.check_connectivity(c1,c2) and self.check_connectivity(c2,c1)):
                         merges[c1].append(c2)
-        for base in sorted(merges.keys()):
-            for merge in merges[base]:
-                self.merge_components( base, merge, fcc_cleanup=False)
+                        clean_trigger=True
+        if clean_trigger:
+            print("Cleanup")
+            for base in sorted(merges.keys()):
+                if base in self.components.keys():
+                    for merge in merges[base]:
+                        if merge in self.components.keys():
+                            self.merge_components( base, merge, fcc_cleanup=False)
 
     #perform dfs on component graph to find path from index d to a
     def check_connectivity(self, a, d):
@@ -174,9 +233,9 @@ class ReachabilityRoadmap(Roadmap):
 
             action, _ = self.controller.predict(ctrl_obs, deterministic=True)
             obs, reward, done, trunc, info = self.env.step(action)
-            traj.append(info['traj'])
+            traj.extend(info['traj'])
             timestep += 1
-        return done
+        return done, traj
     
     def _transform_obs(self, obs, method = "zero_goal"):
         new_obs = {}
@@ -203,6 +262,7 @@ argparser.add_argument('--train_config', type=str, default="analytical_mushr")
 argparser.add_argument('--alg', choices=['PPO', "HER_SAC", "BangBang"], type=str, default="HER_SAC")
 argparser.add_argument('--model_path', type=str, default=os.path.dirname(__file__).removesuffix("Roadmap")+'trained_models/latest/best/best_model')
 argparser.add_argument('--max_steps', type=int, default=1e10)
+argparser.add_argument('--output', type=str, default="roadmap_files/latest")
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -214,7 +274,6 @@ if __name__ == '__main__':
     print(exp_config_fpath)
     with open(exp_config_fpath, 'r') as f:
         config = eval(f.read())
-        f.close()
     print(config)
     
     if(config["model_uses_alt_env"]):
@@ -261,4 +320,15 @@ if __name__ == '__main__':
 
 
     roadmap = ReachabilityRoadmap(config=config, env=env, controller=model, ctrl_env=model_env)
-    roadmap.build(10)
+    roadmap.build(10, term_override= 30)
+
+    
+    os.makedirs(os.path.join(args.output), exist_ok = True)
+    roadmap_dir = os.path.join(os.path.dirname(__file__),args.output)
+
+    roadmap.save_roadmap(roadmap_dir)
+    #output files
+
+
+
+    #testing

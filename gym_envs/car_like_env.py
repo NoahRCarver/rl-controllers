@@ -175,10 +175,12 @@ class CarLikeEnv(gym.Env):
 
         if options == None or options["start"] is None:
             self.state = np.random.uniform(self.start_limit[:, 0], self.start_limit[:, 1], size=(self.obs_dims,))
-            while
+            while self.pt_collision_check(np.array(self.state[:2])):
+                self.state = np.random.uniform(self.start_limit[:, 0], self.start_limit[:, 1], size=(self.obs_dims,))
         else:
             state = np.array(options["start"])
             assert state.shape == (self.obs_dims, )
+            assert self.pt_collision_check(np.array(self.state[:2]))
             self.state = state
         
 
