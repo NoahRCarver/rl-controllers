@@ -42,7 +42,7 @@ class ReachabilityRoadmap(Roadmap):
         num_UCS = 0
 
     
-        while(steps < term_override and stepsSinceAdd < max_ssa-num_UCS):
+        while(steps < term_override and stepsSinceAdd < max_ssa):
             sample = np.random.uniform(self.uenv.start_limit[:, 0], self.uenv.start_limit[:, 1], size=(self.uenv.obs_dims,))
             while self.env.unwrapped.pt_collision_check(sample[:2]):
                 sample = np.random.uniform(self.uenv.start_limit[:, 0], self.uenv.start_limit[:, 1], size=(self.uenv.obs_dims,))
@@ -81,15 +81,25 @@ class ReachabilityRoadmap(Roadmap):
             thief_caught = False
             
             if( len(c_merge) == 1 ):
-               #todo:check if all arrivals and departures are in cmerge's a's and d's
-               pass
-            elif(len(c_merge) == 0):
-                #todo: check if all a's arrive at all d's on comp_graph
+                thief_caught = True 
 
-                #If A = nullset, its a guard.
-                #if D = nullset, its a thief and is caught
-                pass
-            raise NotImplementedError()
+                for c in c_merge:
+                    for a in c_arr:
+                        if c not in self.condensation_graph_edges[a]:
+                            thief_caught = False
+                    for d in c_dep:
+                        if d not in self.condensation_graph_edges[c]:
+                            thief_caught = False
+            elif(len(c_merge) == 0):
+                if(len(c_arr) > 0):#If A = nullset, its a guard.
+                    if(len(c_dep) == 0):#if D = nullset, its a thief and is caught
+                        thief_caught = True
+                    else:
+                        thief_caught=True  #check if all a's arrive at all d's on comp_graph
+                        for a in c_arr:
+                            for d in c_dep:
+                                if d not in self.condensation_graph_edges[a]:
+                                    thief_caught=False
             if(thief_caught): # todo: better comp_graph update check
                 stepsSinceAdd += 1
             else:
@@ -320,7 +330,7 @@ if __name__ == '__main__':
 
 
     roadmap = ReachabilityRoadmap(config=config, env=env, controller=model, ctrl_env=model_env)
-    roadmap.build(10, term_override= 30)
+    roadmap.build(10)
 
     
     os.makedirs(os.path.join(args.output), exist_ok = True)
