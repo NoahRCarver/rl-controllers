@@ -139,7 +139,7 @@ class ReachabilityRoadmap(Roadmap):
         return
     
     def save_roadmap(self, roadmap_outdir):
-
+        
 
         os.makedirs(os.path.join(roadmap_outdir,"trajs"), exist_ok=True)
 
@@ -346,7 +346,58 @@ class ReachabilityRoadmap(Roadmap):
             if not trial_fail: exec_fail = False
         if exec_fail: return -1
         return 0
+    
+    def build_from_file(self, roadmap_indir):
+        ##clear self.nodes, edges, components, component_edges, comp count, nodecount
+        self.nodes = {}
+        self.edges = {}
+        self.node_count = 0
+        self.components = {}
+        self.component_count = 0
+        self.condensation_graph_edges = {}
+        #import nodes
+        nodearr = np.loadtxt(os.path.join(roadmap_indir,"nodes.txt"), delimiter=",")
+        for nodeline in nodearr:
+            self.nodes[int(nodeline[0])] = nodeline[1:]
+            self.node_count = int(nodeline[0])
+        print("nodes: ", self.nodes)
         
+        #import components
+        with open(os.path.join(roadmap_indir,"components.txt"), 'r') as compfile:
+            # Read each line in the file
+            for line in compfile:
+                comparr = [int(x) for x in line.split(",")]
+                self.components[comparr[0]] = set(comparr)
+                self.component_count = comparr[0]
+        print("components: ", self.components)
+
+        #import edges  
+        with open(os.path.join(roadmap_indir,"edges.txt"), 'r') as edgefile:
+            # Read each line in the file
+            for line in edgefile:
+                edgeline = [int(x) for x in line.split(",")]
+                if edgeline[1] not in self.edges.keys():
+                    self.edges[edgeline[1]] = set()
+                self.edges[int(edgeline[1])].add(int(edgeline[2]))
+        print("edges: ", self.edges)
+
+        #resolve component edges
+        for start_n in self.edges.keys():
+            s_comp = -1
+            for i, comp in self.components.items():
+                if start_n in comp:
+                    s_comp = i
+            if s_comp == -1: raise Exception("bad rm input")
+            for end_n in self.edges[start_n]:
+                e_comp = -1
+                for i, comp in self.components.items():
+                    if end_n in comp:
+                        e_comp = i
+                if e_comp == -1: raise Exception("bad rm input")
+
+                if(s_comp not in self.condensation_graph_edges.keys()): self.condensation_graph_edges[s_comp] = set()
+                if(s_comp != e_comp): self.condensation_graph_edges[s_comp].add(e_comp)
+
         
 
 argparser = argparse.ArgumentParser()
@@ -357,6 +408,7 @@ argparser.add_argument('--alg', choices=['PPO', "HER_SAC", "BangBang"], type=str
 argparser.add_argument('--model_path', type=str, default=os.path.dirname(__file__).removesuffix("Roadmap")+'trained_models/latest/best/best_model')
 argparser.add_argument('--max_steps', type=int, default=1e10)
 argparser.add_argument('--output', type=str, default="roadmap_files/latest")
+argparser.add_argument('--input', type=str, default="roadmap_files/n5")
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -409,27 +461,32 @@ if __name__ == '__main__':
 
 
     roadmap = ReachabilityRoadmap(config=config, env=env, controller=model, ctrl_env=model_env)
-    roadmap.build(5)
+
+    roadmap_indir = os.path.join(os.path.dirname(__file__),args.input)
+    roadmap.build_from_file(roadmap_indir)
 
     
-    os.makedirs(os.path.join(args.output), exist_ok = True)
-    roadmap_dir = os.path.join(os.path.dirname(__file__),args.output)
+    # os.makedirs(os.path.join(args.output), exist_ok = True)
+    # roadmap_dir = os.path.join(os.path.dirname(__file__),args.output)
 
-    roadmap.save_roadmap(roadmap_dir)
+    #roadmap.save_roadmap(roadmap_dir)
     #output files
     num_plan_fail = 0
     num_exec_fail = 0
     for i in range(100):
+        
         start = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
         while roadmap.env.unwrapped.pt_collision_check(start[:2]):
             start = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
         goal = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
         while roadmap.env.unwrapped.pt_collision_check(goal[:2]):
             goal = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
+            
+        print("Start Test #",i, ": from (",start,") to (",goal,")")
 
         result = roadmap.query_roadmap(start,goal)
 
         if result == -2: num_plan_fail = num_plan_fail + 1
         elif result == -1: num_exec_fail = num_exec_fail + 1 
 
-    #testing
+    # #testing

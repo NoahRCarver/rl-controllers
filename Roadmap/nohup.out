@@ -2,3 +2,287 @@
   logger.warn("A Box observation space maximum and minimum values are equal.")
 /home/noah/anaconda3/lib/python3.11/site-packages/gymnasium/utils/passive_env_checker.py:158: UserWarning: [33mWARN: The obs returned by the `step()` method is not within the observation space.[0m
   logger.warn(f"{pre} is not within the observation space.")
+/home/noah/rl-controllers/configs/analytical_mushr.txt
+{'env_name': 'CarLikeEnv_VG', 'dt': 0.1, 'max_steps': 150, 'prop_steps': 3, 'velocity_limits': [-0.3, 1], 'acceleration_limits': [-0.3, 0.3], 'steering_angle_limits': [-0.523, 0.523], 'env_limit': 10.0, 'distance_threshold': [0.5, 0.25, 0.3], 'loss_mode': 'combine_all_dist', 'goal_limit': [['-env_limit', 'env_limit'], ['-env_limit', 'env_limit'], ['-pi', 'pi'], ['low_vel', 'high_vel']], 'start_limit': [['-env_limit', 'env_limit'], ['-env_limit', 'env_limit'], ['-pi', 'pi'], ['low_vel', 'high_vel'], [0.0, 0.0]], 'num_steps': 3000000.0, 'alg': 'HER_SAC', 'seed': 0, 'model_uses_alt_env': True, 'model_env_config': 'analytical_mushr_zero_goal', 'geometry': True, 'geometry_yml': 'bar', 'edge_enhancement': False, 'epsilon': 10, 'max_rollout_steps_in_construction': 150}
+/home/noah/rl-controllers/configs/analytical_mushr_zero_goal.txt
+{'env_name': 'CarLikeEnv_VG_ZG', 'dt': 0.1, 'max_steps': 150, 'prop_steps': 3, 'velocity_limits': [-0.3, 1], 'acceleration_limits': [-0.3, 0.3], 'steering_angle_limits': [-0.523, 0.523], 'env_limit': 11.0, 'distance_threshold': [0.5, 0.25, 0.3], 'loss_mode': 'combine_all_dist', 'goal_limit': [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0], ['low_vel', 'high_vel']], 'start_limit': [['-env_limit', 'env_limit'], ['-env_limit', 'env_limit'], ['-pi', 'pi'], ['low_vel', 'high_vel'], [0.0, 0.0]], 'num_steps': 5000000.0, 'alg': 'HER_SAC', 'seed': 0, 'model_uses_alt_env': False, 'geometry': False, 'edge_enhancement': False}
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+env:  Dict('achieved_goal': Box([-10.        -10.         -3.1415925  -0.3      ], [10.        10.         3.1415927  1.       ], (4,), float32), 'desired_goal': Box([-10.        -10.         -3.1415925  -0.3      ], [10.        10.         3.1415927  1.       ], (4,), float32), 'observation': Box(-inf, inf, (5,), float32))
+ctrl_env:  Dict('achieved_goal': Box([ 0.   0.   0.  -0.3], [0. 0. 0. 1.], (4,), float32), 'desired_goal': Box([ 0.   0.   0.  -0.3], [0. 0. 0. 1.], (4,), float32), 'observation': Box(-inf, inf, (5,), float32))
+[update] step:  1 , ssa:  0 , num_ucs:  1
+[update] step:  2 , ssa:  0 , num_ucs:  2
+[update] step:  3 , ssa:  0 , num_ucs:  3
+[update] step:  4 , ssa:  0 , num_ucs:  4
+[update] step:  5 , ssa:  0 , num_ucs:  5
+[update] step:  6 , ssa:  0 , num_ucs:  6
+[update] step:  7 , ssa:  0 , num_ucs:  7
+[update] step:  8 , ssa:  1 , num_ucs:  7
+[update] step:  9 , ssa:  0 , num_ucs:  6
+[update] step:  10 , ssa:  1 , num_ucs:  6
+[update] step:  11 , ssa:  2 , num_ucs:  6
+[update] step:  12 , ssa:  0 , num_ucs:  6
+[update] step:  13 , ssa:  0 , num_ucs:  6
+[update] step:  14 , ssa:  0 , num_ucs:  7
+[update] step:  15 , ssa:  0 , num_ucs:  7
+[update] step:  16 , ssa:  1 , num_ucs:  7
+[update] step:  17 , ssa:  2 , num_ucs:  7
+[update] step:  18 , ssa:  0 , num_ucs:  8
+[update] step:  19 , ssa:  0 , num_ucs:  9
+[update] step:  20 , ssa:  1 , num_ucs:  9
+[update] step:  21 , ssa:  2 , num_ucs:  9
+[update] step:  22 , ssa:  3 , num_ucs:  9
+[update] step:  23 , ssa:  0 , num_ucs:  10
+[update] step:  24 , ssa:  0 , num_ucs:  11
+[update] step:  25 , ssa:  0 , num_ucs:  11
+[update] step:  26 , ssa:  1 , num_ucs:  11
+[update] step:  27 , ssa:  0 , num_ucs:  12
+[update] step:  28 , ssa:  1 , num_ucs:  12
+[update] step:  29 , ssa:  2 , num_ucs:  12
+[update] step:  30 , ssa:  0 , num_ucs:  12
+[update] step:  31 , ssa:  1 , num_ucs:  12
+[update] step:  32 , ssa:  0 , num_ucs:  13
+[update] step:  33 , ssa:  1 , num_ucs:  13
+[update] step:  34 , ssa:  2 , num_ucs:  13
+merge components  20  and  8
+merge components  20  and  7
+Cleanup
+merge components  0  and  18
+merge components  0  and  20
+[update] step:  35 , ssa:  0 , num_ucs:  13
+[update] step:  36 , ssa:  0 , num_ucs:  14
+[update] step:  37 , ssa:  1 , num_ucs:  14
+[update] step:  38 , ssa:  2 , num_ucs:  14
+[update] step:  39 , ssa:  3 , num_ucs:  14
+[update] step:  40 , ssa:  0 , num_ucs:  15
+[update] step:  41 , ssa:  1 , num_ucs:  15
+[update] step:  42 , ssa:  2 , num_ucs:  15
+[update] step:  43 , ssa:  0 , num_ucs:  15
+[update] step:  44 , ssa:  1 , num_ucs:  15
+[update] step:  45 , ssa:  2 , num_ucs:  15
+[update] step:  46 , ssa:  3 , num_ucs:  15
+[update] step:  47 , ssa:  4 , num_ucs:  15
+[update] step:  48 , ssa:  0 , num_ucs:  15
+[update] step:  49 , ssa:  1 , num_ucs:  15
+[update] step:  50 , ssa:  2 , num_ucs:  15
+[update] step:  51 , ssa:  0 , num_ucs:  14
+[update] step:  52 , ssa:  0 , num_ucs:  15
+[update] step:  53 , ssa:  0 , num_ucs:  16
+[update] step:  54 , ssa:  0 , num_ucs:  15
+[update] step:  55 , ssa:  0 , num_ucs:  14
+[update] step:  56 , ssa:  0 , num_ucs:  14
+[update] step:  57 , ssa:  0 , num_ucs:  14
+[update] step:  58 , ssa:  1 , num_ucs:  14
+[update] step:  59 , ssa:  0 , num_ucs:  13
+[update] step:  60 , ssa:  0 , num_ucs:  13
+[update] step:  61 , ssa:  0 , num_ucs:  14
+[update] step:  62 , ssa:  1 , num_ucs:  14
+[update] step:  63 , ssa:  2 , num_ucs:  14
+[update] step:  64 , ssa:  0 , num_ucs:  13
+merge components  36  and  0
+[update] step:  65 , ssa:  0 , num_ucs:  12
+[update] step:  66 , ssa:  0 , num_ucs:  12
+merge components  38  and  4
+[update] step:  67 , ssa:  0 , num_ucs:  11
+merge components  39  and  1
+[update] step:  68 , ssa:  0 , num_ucs:  11
+[update] step:  69 , ssa:  0 , num_ucs:  7
+[update] step:  70 , ssa:  0 , num_ucs:  8
+[update] step:  71 , ssa:  1 , num_ucs:  8
+merge components  42  and  17
+[update] step:  72 , ssa:  0 , num_ucs:  7
+[update] step:  73 , ssa:  0 , num_ucs:  7
+merge components  44  and  26
+[update] step:  74 , ssa:  0 , num_ucs:  5
+[update] step:  75 , ssa:  0 , num_ucs:  5
+[update] step:  76 , ssa:  0 , num_ucs:  5
+[update] step:  77 , ssa:  1 , num_ucs:  5
+[update] step:  78 , ssa:  0 , num_ucs:  5
+merge components  48  and  36
+Cleanup
+merge components  3  and  23
+merge components  3  and  32
+merge components  3  and  48
+[update] step:  79 , ssa:  0 , num_ucs:  5
+[update] step:  80 , ssa:  0 , num_ucs:  5
+[update] step:  81 , ssa:  0 , num_ucs:  6
+merge components  51  and  3
+Cleanup
+merge components  29  and  33
+merge components  29  and  51
+[update] step:  82 , ssa:  0 , num_ucs:  6
+[update] step:  83 , ssa:  1 , num_ucs:  6
+[update] step:  84 , ssa:  0 , num_ucs:  5
+merge components  53  and  29
+Cleanup
+merge components  5  and  12
+merge components  5  and  14
+merge components  5  and  38
+merge components  5  and  40
+merge components  5  and  42
+merge components  5  and  44
+merge components  5  and  45
+merge components  5  and  52
+merge components  5  and  53
+[update] step:  85 , ssa:  0 , num_ucs:  4
+[update] step:  86 , ssa:  0 , num_ucs:  4
+[update] step:  87 , ssa:  1 , num_ucs:  4
+merge components  55  and  5
+Cleanup
+merge components  47  and  55
+[update] step:  88 , ssa:  0 , num_ucs:  4
+[update] step:  89 , ssa:  1 , num_ucs:  4
+[update] step:  90 , ssa:  0 , num_ucs:  4
+[update] step:  91 , ssa:  1 , num_ucs:  4
+[update] step:  92 , ssa:  0 , num_ucs:  4
+[update] step:  93 , ssa:  1 , num_ucs:  4
+merge components  58  and  47
+Cleanup
+merge components  46  and  58
+[update] step:  94 , ssa:  0 , num_ucs:  4
+[update] step:  95 , ssa:  0 , num_ucs:  4
+[update] step:  96 , ssa:  0 , num_ucs:  4
+[update] step:  97 , ssa:  0 , num_ucs:  4
+[update] step:  98 , ssa:  0 , num_ucs:  3
+[update] step:  99 , ssa:  1 , num_ucs:  3
+[update] step:  100 , ssa:  0 , num_ucs:  4
+[update] step:  101 , ssa:  1 , num_ucs:  4
+[update] step:  102 , ssa:  2 , num_ucs:  4
+[update] step:  103 , ssa:  3 , num_ucs:  4
+[update] step:  104 , ssa:  4 , num_ucs:  4
+[update] step:  105 , ssa:  0 , num_ucs:  4
+[update] step:  106 , ssa:  1 , num_ucs:  4
+merge components  65  and  16
+merge components  65  and  31
+Cleanup
+merge components  30  and  46
+merge components  30  and  65
+[update] step:  107 , ssa:  0 , num_ucs:  4
+[update] step:  108 , ssa:  1 , num_ucs:  4
+[update] step:  109 , ssa:  0 , num_ucs:  4
+[update] step:  110 , ssa:  0 , num_ucs:  4
+[update] step:  111 , ssa:  0 , num_ucs:  3
+[update] step:  112 , ssa:  0 , num_ucs:  4
+[update] step:  113 , ssa:  0 , num_ucs:  4
+[update] step:  114 , ssa:  0 , num_ucs:  4
+merge components  72  and  66
+merge components  72  and  30
+Cleanup
+merge components  25  and  37
+merge components  25  and  71
+[update] step:  115 , ssa:  0 , num_ucs:  5
+[update] step:  116 , ssa:  1 , num_ucs:  5
+[update] step:  117 , ssa:  2 , num_ucs:  5
+merge components  73  and  72
+merge components  73  and  15
+[update] step:  118 , ssa:  0 , num_ucs:  4
+merge components  74  and  73
+Cleanup
+merge components  6  and  70
+merge components  6  and  74
+[update] step:  119 , ssa:  0 , num_ucs:  4
+[update] step:  120 , ssa:  1 , num_ucs:  4
+merge components  75  and  6
+[update] step:  121 , ssa:  0 , num_ucs:  4
+merge components  76  and  75
+merge components  76  and  67
+[update] step:  122 , ssa:  0 , num_ucs:  4
+[update] step:  123 , ssa:  0 , num_ucs:  4
+[update] step:  124 , ssa:  1 , num_ucs:  4
+merge components  78  and  68
+[update] step:  125 , ssa:  0 , num_ucs:  4
+[update] step:  126 , ssa:  0 , num_ucs:  4
+[update] step:  127 , ssa:  1 , num_ucs:  4
+merge components  80  and  76
+Cleanup
+merge components  60  and  80
+[update] step:  128 , ssa:  0 , num_ucs:  5
+[update] step:  129 , ssa:  0 , num_ucs:  6
+[update] step:  130 , ssa:  1 , num_ucs:  6
+merge components  82  and  25
+[update] step:  131 , ssa:  0 , num_ucs:  6
+merge components  83  and  60
+Cleanup
+merge components  49  and  83
+[update] step:  132 , ssa:  0 , num_ucs:  6
+[update] step:  133 , ssa:  0 , num_ucs:  6
+[update] step:  134 , ssa:  1 , num_ucs:  6
+[update] step:  135 , ssa:  2 , num_ucs:  6
+[update] step:  136 , ssa:  0 , num_ucs:  6
+[update] step:  137 , ssa:  1 , num_ucs:  6
+[update] step:  138 , ssa:  0 , num_ucs:  6
+[update] step:  139 , ssa:  0 , num_ucs:  6
+merge components  88  and  49
+merge components  88  and  78
+[update] step:  140 , ssa:  0 , num_ucs:  4
+[update] step:  141 , ssa:  1 , num_ucs:  4
+merge components  89  and  88
+merge components  89  and  59
+[update] step:  142 , ssa:  0 , num_ucs:  4
+merge components  90  and  89
+Cleanup
+merge components  62  and  90
+[update] step:  143 , ssa:  0 , num_ucs:  4
+[update] step:  144 , ssa:  0 , num_ucs:  4
+[update] step:  145 , ssa:  1 , num_ucs:  4
+[update] step:  146 , ssa:  2 , num_ucs:  4
+[update] step:  147 , ssa:  3 , num_ucs:  4
+[update] step:  148 , ssa:  0 , num_ucs:  4
+merge components  93  and  62
+Cleanup
+merge components  22  and  93
+[update] step:  149 , ssa:  0 , num_ucs:  3
+[update] step:  150 , ssa:  0 , num_ucs:  3
+[update] step:  151 , ssa:  1 , num_ucs:  3
+[update] step:  152 , ssa:  2 , num_ucs:  3
+[update] step:  153 , ssa:  3 , num_ucs:  3
+[update] step:  154 , ssa:  0 , num_ucs:  3
+[update] step:  155 , ssa:  1 , num_ucs:  3
+merge components  96  and  22
+Cleanup
+merge components  34  and  96
+[update] step:  156 , ssa:  0 , num_ucs:  3
+[update] step:  157 , ssa:  1 , num_ucs:  3
+[update] step:  158 , ssa:  2 , num_ucs:  3
+[update] step:  159 , ssa:  3 , num_ucs:  3
+[update] step:  160 , ssa:  4 , num_ucs:  3
+[update] step:  161 , ssa:  5 , num_ucs:  3
+nodes:  {0: array([-8.17447180e+00,  2.90542185e+00,  6.47967139e-01, -2.71224582e-03,
+        0.00000000e+00]), 1: array([-1.19931947,  8.52814615, -1.8459874 , -0.26231959,  0.        ]), 2: array([ 8.99713303, -5.99280847, -2.62026456,  0.21200064,  0.        ]), 3: array([-5.30742074,  1.2722569 ,  2.0411611 , -0.26618277,  0.        ]), 4: array([4.3477949 , 4.23490015, 1.76503845, 0.50312619, 0.        ]), 5: array([ 2.1234873 , -6.25636685,  2.10125233,  0.08823179,  0.        ]), 6: array([-7.32483797, -8.18031812, -0.48347533,  0.98058106,  0.        ]), 7: array([-3.51532339, -0.51839486,  0.12322358,  0.8682216 ,  0.        ]), 8: array([-6.34057097, -0.89028876,  0.63203996,  0.68054633,  0.        ]), 9: array([-0.33053346,  7.65028329,  1.71562742, -0.23470704,  0.        ]), 10: array([ 2.57398231,  7.57834754, -1.73476162,  0.45454225,  0.        ]), 11: array([ 1.88489787, -2.86041078,  0.07319539,  0.69752895,  0.        ]), 12: array([ 6.10535993,  9.54394607, -0.45292857, -0.07115266,  0.        ]), 13: array([ 8.22890449, -5.87551921, -1.96387341,  0.57721048,  0.        ]), 14: array([ 3.17622877, -1.38901883, -2.6333716 ,  0.71736805,  0.        ]), 15: array([ 3.81770597, -5.58224225, -0.97767418,  0.97378104,  0.        ]), 16: array([-6.6223462 , -8.89603166,  0.49108874, -0.05129271,  0.        ]), 17: array([ 9.29237094, -8.32144934,  1.68349858,  0.08866017,  0.        ]), 18: array([-8.45144372,  0.04543184,  1.63687941,  0.6395115 ,  0.        ]), 19: array([2.74329296, 3.54845137, 0.3356729 , 0.3250315 , 0.        ]), 20: array([-9.17755583, -1.25836337, -2.50921899, -0.13888347,  0.        ]), 21: array([9.3289758 , 1.63034969, 2.34611926, 0.56835107, 0.        ]), 22: array([ 2.80045876, -1.379667  ,  0.61827006,  0.41506847,  0.        ]), 23: array([-5.01594334, -5.18155165,  2.33317216,  0.9927614 ,  0.        ]), 24: array([ 6.12766284, -0.12696298,  2.76719851,  0.65964533,  0.        ]), 25: array([ 8.58477858, -1.19006512, -1.27485297,  0.41088161,  0.        ]), 26: array([6.2199319 , 8.16198897, 2.1022032 , 0.73655882, 0.        ]), 27: array([-9.78252614,  5.80572322, -2.68537525,  0.50973418,  0.        ]), 28: array([-2.40687931,  6.85677254,  3.08173024, -0.04512428,  0.        ]), 29: array([-4.06914641, -4.78416966,  1.57582141, -0.11550252,  0.        ]), 30: array([-7.33891646, -7.64017888,  0.26341064,  0.43085491,  0.        ]), 31: array([-9.30291265, -5.57228477, -1.3857788 ,  0.95700557,  0.        ]), 32: array([-2.13450579, -1.84383127,  2.039442  ,  0.4784044 ,  0.        ]), 33: array([-3.62347019, -3.87422308,  0.37531389,  0.8149404 ,  0.        ]), 34: array([9.48274438, 9.27775806, 2.00220601, 0.17657405, 0.        ]), 35: array([ 7.10534579, -6.22813818,  0.32138766,  0.45614932,  0.        ]), 36: array([-8.32081338,  1.35508204, -1.41596464,  0.14578807,  0.        ]), 37: array([ 5.67845274,  0.49331263, -2.69298965,  0.59262124,  0.        ]), 38: array([ 3.73344506,  1.8825365 , -1.56785541,  0.65469266,  0.        ]), 39: array([-2.30165962,  6.55768336, -2.07821335,  0.67805403,  0.        ]), 40: array([7.39263799, 6.11345673, 1.55157011, 0.89280898, 0.        ]), 41: array([-9.19157966, -8.58584869,  2.96368426,  0.25560848,  0.        ]), 42: array([ 8.71760240e+00, -3.90450592e+00,  2.25128530e+00,  1.24313737e-03,
+        0.00000000e+00]), 43: array([ 9.54627831, -0.20320386, -3.08934811, -0.04121224,  0.        ]), 44: array([5.97936805, 6.82420407, 0.85278138, 0.16593326, 0.        ]), 45: array([-0.94408178,  7.99316836, -0.22150789,  0.86493666,  0.        ]), 46: array([-2.13047834,  5.26908922,  1.81409942,  0.60092224,  0.        ]), 47: array([-1.08674205,  4.49119517,  1.6149889 , -0.15789631,  0.        ]), 48: array([-3.4875497 , -3.45301096, -1.31706817,  0.03835005,  0.        ]), 49: array([-4.14732627, -7.69052909, -1.6192265 ,  0.56529412,  0.        ]), 50: array([ 4.05651731, -9.5953584 ,  3.13406631,  0.57623509,  0.        ]), 51: array([-5.87358897, -4.63718089, -0.42284588,  0.53094303,  0.        ]), 52: array([5.3958372 , 3.77127892, 2.53839067, 0.87884033, 0.        ]), 53: array([ 2.12978769, -7.31055035,  0.52189677,  0.24164732,  0.        ]), 54: array([-7.77958523, -8.12637505,  0.0805211 ,  0.52964109,  0.        ]), 55: array([-5.85645874,  4.52430113,  0.58712144,  0.2473578 ,  0.        ]), 56: array([-8.21653281,  7.7360798 , -0.79797997,  0.55936279,  0.        ]), 57: array([-8.20570974, -8.58991589,  2.39437482,  0.25010636,  0.        ]), 58: array([-2.70484314,  2.86043782,  1.07439928,  0.96135432,  0.        ]), 59: array([9.18068989, 8.21953341, 0.0943594 , 0.77001648, 0.        ]), 60: array([-7.50167012,  5.66197355, -0.90594484,  0.75316889,  0.        ]), 61: array([-8.69261275, -3.85881412,  0.49467176,  0.72770191,  0.        ]), 62: array([-2.76896545, -7.43516768,  3.04510631, -0.20511841,  0.        ]), 63: array([ 6.0553957 , -9.67333796, -3.11653031,  0.44054652,  0.        ]), 64: array([ 9.72422088, -2.02997742,  2.35440158,  0.39490206,  0.        ]), 65: array([-9.65330497, -6.90458218, -0.45825328,  0.86458087,  0.        ]), 66: array([-7.14049471,  7.35956799, -2.83492624,  0.70117274,  0.        ]), 67: array([-6.67497435,  1.96907966,  0.27948747,  0.66682102,  0.        ]), 68: array([ 4.7033444 , -6.926202  , -1.75078988, -0.28237932,  0.        ]), 69: array([ 1.15163612,  3.09342915, -3.13724719,  0.41936905,  0.        ]), 70: array([-2.75547741, -3.43811188, -2.87051264,  0.91314865,  0.        ]), 71: array([7.49638239, 0.68047164, 2.49916394, 0.78109331, 0.        ]), 72: array([-4.96677613,  8.59520302,  0.9194634 ,  0.16090451,  0.        ]), 73: array([ 3.72712612, -8.45194551, -0.98668594, -0.15715001,  0.        ]), 74: array([-3.34799593, -5.5032606 , -2.00212449, -0.22120871,  0.        ]), 75: array([ 3.22707221,  0.78142751, -1.75622639,  0.13359284,  0.        ]), 76: array([-9.86532599,  4.76422033, -1.43359169,  0.15982013,  0.        ]), 77: array([-6.18334596,  2.71893953, -2.57163676,  0.99562831,  0.        ]), 78: array([ 8.79784868, -7.67046616, -0.02908509,  0.69169808,  0.        ]), 79: array([7.40848458, 5.30557882, 3.08522534, 0.31465169, 0.        ]), 80: array([-5.87093154,  7.913939  ,  3.09501743,  0.52793784,  0.        ]), 81: array([-1.6697155 , -9.95248069, -2.99934418, -0.19025942,  0.        ]), 82: array([6.67372257, 1.22167774, 2.95363123, 0.37843938, 0.        ]), 83: array([-4.67231422, -6.91836378,  2.94042879,  0.99708853,  0.        ]), 84: array([-4.33134035, -9.59593897,  2.28132231, -0.19046104,  0.        ]), 85: array([-3.63749673,  9.1636283 , -2.75644943,  0.51577464,  0.        ]), 86: array([8.68309172, 8.4354485 , 2.87175862, 0.34550848, 0.        ]), 87: array([8.41357732, 2.19578209, 2.91598252, 0.49118982, 0.        ]), 88: array([ 5.48666907, -8.13943223, -1.08241811,  0.2892047 ,  0.        ]), 89: array([7.60844168, 7.41327359, 1.02622755, 0.10855312, 0.        ]), 90: array([-2.26216461, -8.68379382, -0.78894041, -0.01688107,  0.        ]), 91: array([-7.66579646, -9.35796468,  1.24293844,  0.79158618,  0.        ]), 92: array([-4.10271323,  0.00657212, -2.39276833,  0.36060838,  0.        ]), 93: array([ 2.15691379, -4.56713912, -1.02076043,  0.89353717,  0.        ]), 94: array([0.89918543, 6.63237096, 1.36045702, 0.4296917 , 0.        ]), 95: array([ 9.31137011, -2.344665  , -1.85672993,  0.7294152 ,  0.        ]), 96: array([ 7.47727283,  7.99661679,  2.47280521, -0.18298595,  0.        ]), 97: array([-5.64325885, -8.69005672, -1.84848368,  0.84455652,  0.        ])}
+edges:  {0: [20, 48, 55, 76, 90], 1: [36, 39, 45, 48], 2: [73, 89], 3: [7, 36, 55, 76, 90], 4: [38, 45, 88, 89], 5: [44, 48, 75], 6: [29, 53, 65, 90], 7: [0, 16, 20, 58, 90], 8: [7, 18, 20, 32, 36, 55, 74, 76, 90], 9: [0, 45, 75], 10: [44, 45, 52, 73, 88, 89], 11: [5, 40, 48, 75, 88], 12: [52, 75], 13: [42, 75, 78, 89], 14: [40, 68, 73, 75, 88, 89, 93], 15: [35, 73, 75, 88, 89, 90], 16: [6, 29, 53, 58, 65, 90], 17: [40, 42, 78, 89], 18: [0, 36, 48, 51, 55, 72, 76, 90], 19: [28, 44, 73, 88, 89], 20: [8, 18, 7, 36, 55, 72, 74, 76, 90], 21: [25, 40, 42, 52, 87, 88, 96], 22: [40, 48, 52, 73, 89], 23: [7, 36, 72, 76, 83], 24: [17, 14, 42, 52, 73, 88, 89, 93, 96], 25: [24, 17, 52, 71, 73, 75, 88, 89], 26: [36, 44, 48, 52, 75], 27: [], 28: [0, 20, 36, 80], 29: [23, 32, 36, 53, 76, 83], 30: [29, 36, 51, 53, 90], 31: [16, 30, 36, 48, 54, 65, 90], 32: [3, 23, 51, 58, 74, 90], 33: [32, 29, 23, 36, 48, 58], 34: [40, 44, 89], 35: [24, 42, 52, 89, 93], 36: [20, 7, 55, 76, 90], 37: [25, 14, 40, 52, 73, 88, 89, 93], 38: [4, 14, 40, 42, 45, 73, 75, 88, 89, 93], 39: [0, 1, 36, 20, 28, 45, 48, 80], 40: [26, 12, 75, 96], 41: [53, 54], 42: [40, 17, 52, 75, 89], 43: [40, 17, 42, 71, 73, 82, 88, 89, 95], 44: [26, 36, 48, 52], 45: [36, 75], 46: [0, 36, 44, 48, 75, 80, 89], 47: [0, 45, 80], 48: [32, 36, 7, 53, 74, 90], 49: [33, 36, 29, 53, 65], 50: [62, 75, 93], 51: [48, 33, 36, 23, 53, 65, 90], 52: [40, 45, 38, 75, 88, 89], 53: [48, 5, 75, 90, 93], 54: [53, 51, 29, 30, 65, 90], 55: [0, 20, 36, 47, 72, 76, 80, 90], 56: [20, 45, 36, 72, 76, 90], 57: [41, 36, 7, 72, 90], 58: [0, 46, 47, 80], 59: [40, 34, 44, 52, 89], 60: [48, 20, 7, 72, 76, 90], 61: [18, 36, 53, 55, 72, 74, 76, 90], 62: [29, 31, 72, 93], 63: [88], 64: [40, 17, 52, 73, 82, 88, 89], 65: [16, 30, 31, 72, 90], 66: [36, 48, 20, 27, 60, 72, 76], 67: [48, 76, 90], 68: [35, 75, 78, 88, 89], 69: [], 70: [32, 48, 90], 71: [37, 40, 42, 17, 52, 82, 88, 89, 93, 96], 72: [0, 66], 73: [48, 15, 75, 89, 90], 74: [36, 70, 6, 7, 48, 53, 90], 75: [40, 73, 45, 88, 89, 93], 76: [67, 36, 7, 45, 48, 20, 55], 77: [48, 20, 7, 90], 78: [68, 89], 79: [75, 52, 88, 96], 80: [48, 66, 60, 36], 81: [93], 82: [17, 42, 52, 37, 88, 89, 93], 83: [36, 7, 72, 74, 16, 49, 90], 84: [16, 65, 36, 29], 85: [0, 36, 72, 75, 76, 45, 48, 20, 60], 86: [36, 40, 75, 44, 59], 87: [37, 42, 79, 52, 25, 88], 88: [75, 5, 78, 89], 89: [75, 59, 36, 52, 96], 90: [36, 7, 73, 48, 53, 29, 62], 91: [65, 7, 41, 53, 57, 90, 29], 92: [0, 7, 74, 48, 20, 90], 93: [68, 73, 75, 15, 22, 90], 94: [48, 75, 36, 45], 95: [64, 2, 73, 42, 17, 88], 96: [34, 36, 40, 75, 52, 89, 26]}
+components:  {2: {2}, 9: {9}, 10: {10}, 11: {11}, 13: {13}, 19: {19}, 21: {21}, 24: {24}, 27: {27}, 28: {28}, 34: {0, 3, 4, 5, 6, 7, 8, 12, 14, 15, 16, 17, 18, 20, 22, 23, 26, 29, 30, 31, 32, 33, 34, 36, 38, 40, 42, 44, 45, 46, 47, 48, 49, 51, 52, 53, 55, 58, 59, 60, 62, 65, 66, 67, 68, 70, 72, 73, 74, 75, 76, 78, 80, 83, 88, 89, 90, 93, 96}, 35: {35}, 39: {1, 39}, 41: {41}, 43: {43}, 50: {50}, 54: {54}, 56: {56}, 57: {57}, 61: {61}, 63: {63}, 64: {64}, 69: {69}, 77: {77}, 79: {79}, 81: {81}, 82: {25, 82, 37, 71}, 84: {84}, 85: {85}, 86: {86}, 87: {87}, 91: {91}, 92: {92}, 94: {94}, 95: {95}}
+Traceback (most recent call last):
+  File "/home/noah/rl-controllers/Roadmap/reachability_roadmap.py", line 430, in <module>
+    
+  File "/home/noah/rl-controllers/Roadmap/reachability_roadmap.py", line 341, in query_roadmap
+    done, traj = self._query_rollout(cur,subgoal,self.max_steps_c)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/rl-controllers/Roadmap/reachability_roadmap.py", line 286, in _query_rollout
+    obs, reward, done, trunc, info = self.env.step(action)
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/anaconda3/lib/python3.11/site-packages/gymnasium/wrappers/common.py", line 393, in step
+    return super().step(action)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/anaconda3/lib/python3.11/site-packages/gymnasium/core.py", line 322, in step
+    return self.env.step(action)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/anaconda3/lib/python3.11/site-packages/gymnasium/wrappers/common.py", line 285, in step
+    return self.env.step(action)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/rl-controllers/Roadmap/../gym_envs/car_like_env.py", line 323, in step
+    collision = collision or self.pt_collision_check(np.array(self.state[:2]))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/rl-controllers/Roadmap/../gym_envs/car_like_env.py", line 364, in pt_collision_check
+    if(geom_utils.point_to_rectangle_distance(pt,*obj) == 0):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/rl-controllers/Roadmap/../geom_utils.py", line 35, in point_to_rectangle_distance
+    d2 = point_to_segment_distance(p, a2, a3)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/rl-controllers/Roadmap/../geom_utils.py", line 20, in point_to_segment_distance
+    cp = closest_point_on_segment(p, a, b)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/noah/rl-controllers/Roadmap/../geom_utils.py", line 14, in closest_point_on_segment
+    t_opt = pa.dot(ba) / lsqr
+            ^^^^^^^^^^
+KeyboardInterrupt
