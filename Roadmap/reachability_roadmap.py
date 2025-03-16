@@ -377,11 +377,6 @@ if __name__ == '__main__':
             model_env_config = eval(f2.read())
         print(model_env_config)
 
-        
-
-    #print('Args', args)
-    #print('\nConfig', config)
-    #print('\n')
 
     config['alg'] = args.alg
 
@@ -422,7 +417,19 @@ if __name__ == '__main__':
 
     roadmap.save_roadmap(roadmap_dir)
     #output files
+    num_plan_fail = 0
+    num_exec_fail = 0
+    for i in range(100):
+        start = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
+        while roadmap.env.unwrapped.pt_collision_check(start[:2]):
+            start = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
+        goal = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
+        while roadmap.env.unwrapped.pt_collision_check(goal[:2]):
+            goal = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
 
+        result = roadmap.query_roadmap(start,goal)
 
+        if result == -2: num_plan_fail = num_plan_fail + 1
+        elif result == -1: num_exec_fail = num_exec_fail + 1 
 
     #testing
