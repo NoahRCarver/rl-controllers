@@ -224,6 +224,25 @@ class ReachabilityRoadmap(Roadmap):
                         s.append(e)
                         visited.add(e)
         return False
+    
+    def bfs_plan(self, d, a):
+        s = []
+        visited = set()
+        s.append([d])
+        visited.add(d)
+        while len(s) > 0:
+            path = s.pop()
+            n = path[-1]
+            if n == a:
+                return path
+            if len(self.edges[n]) > 0:
+                for e in self.edges[n]:
+                    if e not in visited:
+                        new_path = list(path)
+                        new_path.append(e)
+                        s.append(new_path)
+                        visited.add(e)
+        return None
 
     def _controller_rollout(self, start_indx, targ_indx, max_steps):
         #print("q:\tstart: ", self.nodes[start_indx], ";\n\tgoal: ", self.nodes[targ_indx][:-1] )
@@ -247,6 +266,28 @@ class ReachabilityRoadmap(Roadmap):
             timestep += 1
         return done, traj
     
+    def _query_rollout(self, start , targ_indx, max_steps):
+        #print("q:\tstart: ", self.nodes[start_indx], ";\n\tgoal: ", self.nodes[targ_indx][:-1] )
+        obs, info = self.env.reset(options = {"start":start,"goal":self.nodes[targ_indx][:-1]})
+        traj = [obs['observation']]
+        goal = obs['desired_goal']
+        start = obs['observation']
+
+        plan = []
+        timestep = 0
+        done = False
+        trunc = False
+        while not(done or trunc) and timestep < max_steps:
+            ctrl_obs = obs
+            if self.is_ctrl_env:
+                ctrl_obs = self._transform_obs(obs) #transform observation to controller obs
+
+            action, _ = self.controller.predict(ctrl_obs, deterministic=True)
+            obs, reward, done, trunc, info = self.env.step(action)
+            traj.extend(info['traj'])
+            timestep += 1
+        return done, traj
+
     def _transform_obs(self, obs, method = "zero_goal"):
         new_obs = {}
         x, y, theta, v, phi = np.copy(obs['observation'])
@@ -263,7 +304,50 @@ class ReachabilityRoadmap(Roadmap):
             new_obs['desired_goal'] = [0, 0, 0, gv]
         return new_obs
      
-     
+    def query_roadmap(self, start, goal):
+        start_indx = self.node_count
+        self.nodes[start_indx] = start
+        goal_indx = self.node_count+1
+        self.nodes[goal_indx] = goal
+
+        arrivals_to_goal = {}
+        departures_from_start = {}
+        for c_indx, c in self.components.items():
+            arrivals_to_goal[c_indx] = set()
+            departures_from_start[c_indx] = set()
+            for indx in c:
+                dep_success,_ = self._controller_rollout(start_indx,indx,self.max_steps_c)
+                arr_success,_ = self._controller_rollout(indx,goal_indx,self.max_steps_c)
+                if(arr_success):
+                    arrivals_to_goal[c_indx].add(indx)
+                if (dep_success):
+                    departures_from_start[c_indx].add(indx)
+        plans = set()
+
+        for s_c_indx in departures_from_start.keys():
+            for g_c_indx in arrivals_to_goal.keys():
+                if self.check_connectivity(g_c_indx, s_c_indx):
+                    for second in departures_from_start[s_c_indx]:
+                        for penult in arrivals_to_goal[g_c_indx]:
+                            plans.add(self.bfs_plan(second,penult))
+        if len(plans) == 0:
+            return -2 #plan failure
+        
+        exec_fail = True
+        for plan in plans:
+            cur = start
+            trial_fail = False
+            for subgoal in plan:
+                done, traj = self._query_rollout(cur,subgoal,self.max_steps_c)
+                if not done: 
+                    trial_fail = True
+                    break
+                cur = traj[-1]
+            if not trial_fail: exec_fail = False
+        if exec_fail: return -1
+        return 0
+        
+        
 
 argparser = argparse.ArgumentParser()
 
