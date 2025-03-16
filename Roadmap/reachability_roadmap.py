@@ -322,14 +322,14 @@ class ReachabilityRoadmap(Roadmap):
                     arrivals_to_goal[c_indx].add(indx)
                 if (dep_success):
                     departures_from_start[c_indx].add(indx)
-        plans = set()
+        plans = []
 
         for s_c_indx in departures_from_start.keys():
             for g_c_indx in arrivals_to_goal.keys():
                 if self.check_connectivity(g_c_indx, s_c_indx):
                     for second in departures_from_start[s_c_indx]:
                         for penult in arrivals_to_goal[g_c_indx]:
-                            plans.add(self.bfs_plan(second,penult))
+                            plans.append(self.bfs_plan(second,penult))
         if len(plans) == 0:
             return -2 #plan failure
         
@@ -409,7 +409,7 @@ if __name__ == '__main__':
 
 
     roadmap = ReachabilityRoadmap(config=config, env=env, controller=model, ctrl_env=model_env)
-    roadmap.build(10)
+    roadmap.build(5)
 
     
     os.makedirs(os.path.join(args.output), exist_ok = True)

@@ -1,0 +1,1132 @@
+/home/noah/anaconda3/lib/python3.11/site-packages/gymnasium/utils/passive_env_checker.py:35: UserWarning: [33mWARN: A Box observation space maximum and minimum values are equal.[0m
+  logger.warn("A Box observation space maximum and minimum values are equal.")
+/home/noah/rl-controllers/configs/analytical_mushr.txt
+{'env_name': 'CarLikeEnv_VG', 'dt': 0.1, 'max_steps': 150, 'prop_steps': 3, 'velocity_limits': [-0.3, 1], 'acceleration_limits': [-0.3, 0.3], 'steering_angle_limits': [-0.523, 0.523], 'env_limit': 10.0, 'distance_threshold': [0.5, 0.25, 0.3], 'loss_mode': 'combine_all_dist', 'goal_limit': [['-env_limit', 'env_limit'], ['-env_limit', 'env_limit'], ['-pi', 'pi'], ['low_vel', 'high_vel']], 'start_limit': [['-env_limit', 'env_limit'], ['-env_limit', 'env_limit'], ['-pi', 'pi'], ['low_vel', 'high_vel'], [0.0, 0.0]], 'num_steps': 3000000.0, 'alg': 'HER_SAC', 'seed': 0, 'model_uses_alt_env': True, 'model_env_config': 'analytical_mushr_zero_goal', 'geometry': True, 'geometry_yml': 'bar', 'edge_enhancement': False, 'epsilon': 10, 'max_rollout_steps_in_construction': 150}
+/home/noah/rl-controllers/configs/analytical_mushr_zero_goal.txt
+{'env_name': 'CarLikeEnv_VG_ZG', 'dt': 0.1, 'max_steps': 150, 'prop_steps': 3, 'velocity_limits': [-0.3, 1], 'acceleration_limits': [-0.3, 0.3], 'steering_angle_limits': [-0.523, 0.523], 'env_limit': 11.0, 'distance_threshold': [0.5, 0.25, 0.3], 'loss_mode': 'combine_all_dist', 'goal_limit': [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0], ['low_vel', 'high_vel']], 'start_limit': [['-env_limit', 'env_limit'], ['-env_limit', 'env_limit'], ['-pi', 'pi'], ['low_vel', 'high_vel'], [0.0, 0.0]], 'num_steps': 5000000.0, 'alg': 'HER_SAC', 'seed': 0, 'model_uses_alt_env': False, 'geometry': False, 'edge_enhancement': False}
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+env:  Dict('achieved_goal': Box([-10.        -10.         -3.1415925  -0.3      ], [10.        10.         3.1415927  1.       ], (4,), float32), 'desired_goal': Box([-10.        -10.         -3.1415925  -0.3      ], [10.        10.         3.1415927  1.       ], (4,), float32), 'observation': Box(-inf, inf, (5,), float32))
+ctrl_env:  Dict('achieved_goal': Box([ 0.   0.   0.  -0.3], [0. 0. 0. 1.], (4,), float32), 'desired_goal': Box([ 0.   0.   0.  -0.3], [0. 0. 0. 1.], (4,), float32), 'observation': Box(-inf, inf, (5,), float32))
+[update] step:  1 , ssa:  0 , num_ucs:  1
+[update] step:  2 , ssa:  0 , num_ucs:  2
+[update] step:  3 , ssa:  0 , num_ucs:  3
+[update] step:  4 , ssa:  0 , num_ucs:  4
+[update] step:  5 , ssa:  0 , num_ucs:  5
+[update] step:  6 , ssa:  0 , num_ucs:  6
+merge components  6  and  3
+[update] step:  7 , ssa:  0 , num_ucs:  4
+[update] step:  8 , ssa:  0 , num_ucs:  4
+[update] step:  9 , ssa:  0 , num_ucs:  5
+[update] step:  10 , ssa:  0 , num_ucs:  5
+[update] step:  11 , ssa:  0 , num_ucs:  5
+[update] step:  12 , ssa:  0 , num_ucs:  4
+[update] step:  13 , ssa:  1 , num_ucs:  4
+[update] step:  14 , ssa:  0 , num_ucs:  5
+[update] step:  15 , ssa:  1 , num_ucs:  5
+[update] step:  16 , ssa:  2 , num_ucs:  5
+[update] step:  17 , ssa:  3 , num_ucs:  5
+[update] step:  18 , ssa:  0 , num_ucs:  3
+[update] step:  19 , ssa:  0 , num_ucs:  3
+[update] step:  20 , ssa:  0 , num_ucs:  3
+[update] step:  21 , ssa:  0 , num_ucs:  3
+[update] step:  22 , ssa:  0 , num_ucs:  3
+[update] step:  23 , ssa:  0 , num_ucs:  3
+[update] step:  24 , ssa:  0 , num_ucs:  3
+[update] step:  25 , ssa:  1 , num_ucs:  3
+[update] step:  26 , ssa:  2 , num_ucs:  3
+[update] step:  27 , ssa:  0 , num_ucs:  4
+[update] step:  28 , ssa:  0 , num_ucs:  5
+merge components  22  and  6
+[update] step:  29 , ssa:  0 , num_ucs:  4
+merge components  23  and  0
+Cleanup
+merge components  7  and  11
+merge components  7  and  19
+merge components  7  and  23
+[update] step:  30 , ssa:  0 , num_ucs:  4
+[update] step:  31 , ssa:  0 , num_ucs:  4
+[update] step:  32 , ssa:  0 , num_ucs:  5
+[update] step:  33 , ssa:  1 , num_ucs:  5
+[update] step:  34 , ssa:  0 , num_ucs:  4
+[update] step:  35 , ssa:  0 , num_ucs:  4
+[update] step:  36 , ssa:  0 , num_ucs:  4
+[update] step:  37 , ssa:  0 , num_ucs:  4
+[update] step:  38 , ssa:  1 , num_ucs:  4
+[update] step:  39 , ssa:  2 , num_ucs:  4
+[update] step:  40 , ssa:  3 , num_ucs:  4
+merge components  30  and  13
+[update] step:  41 , ssa:  0 , num_ucs:  3
+[update] step:  42 , ssa:  0 , num_ucs:  3
+merge components  32  and  31
+merge components  32  and  7
+[update] step:  43 , ssa:  0 , num_ucs:  3
+[update] step:  44 , ssa:  1 , num_ucs:  3
+[update] step:  45 , ssa:  2 , num_ucs:  3
+[update] step:  46 , ssa:  0 , num_ucs:  3
+merge components  34  and  22
+[update] step:  47 , ssa:  0 , num_ucs:  3
+merge components  35  and  32
+Cleanup
+merge components  26  and  29
+merge components  26  and  34
+merge components  26  and  35
+[update] step:  48 , ssa:  0 , num_ucs:  2
+[update] step:  49 , ssa:  1 , num_ucs:  2
+[update] step:  50 , ssa:  0 , num_ucs:  2
+merge components  37  and  30
+[update] step:  51 , ssa:  0 , num_ucs:  2
+[update] step:  52 , ssa:  1 , num_ucs:  2
+[update] step:  53 , ssa:  2 , num_ucs:  2
+[update] step:  54 , ssa:  0 , num_ucs:  2
+[update] step:  55 , ssa:  0 , num_ucs:  2
+merge components  40  and  26
+[update] step:  56 , ssa:  0 , num_ucs:  2
+[update] step:  57 , ssa:  1 , num_ucs:  2
+[update] step:  58 , ssa:  2 , num_ucs:  2
+[update] step:  59 , ssa:  0 , num_ucs:  2
+[update] step:  60 , ssa:  0 , num_ucs:  2
+merge components  43  and  40
+Cleanup
+merge components  37  and  43
+[update] step:  61 , ssa:  0 , num_ucs:  2
+[update] step:  62 , ssa:  1 , num_ucs:  2
+merge components  44  and  37
+Cleanup
+merge components  8  and  16
+merge components  8  and  44
+[update] step:  63 , ssa:  0 , num_ucs:  2
+[update] step:  64 , ssa:  1 , num_ucs:  2
+[update] step:  65 , ssa:  2 , num_ucs:  2
+merge components  45  and  8
+Cleanup
+merge components  42  and  45
+[update] step:  66 , ssa:  0 , num_ucs:  2
+[update] step:  67 , ssa:  1 , num_ucs:  2
+[update] step:  68 , ssa:  2 , num_ucs:  2
+merge components  46  and  10
+merge components  46  and  42
+Cleanup
+merge components  25  and  46
+[update] step:  69 , ssa:  0 , num_ucs:  2
+[update] step:  70 , ssa:  1 , num_ucs:  2
+[update] step:  71 , ssa:  2 , num_ucs:  2
+[update] step:  72 , ssa:  0 , num_ucs:  2
+[update] step:  73 , ssa:  1 , num_ucs:  2
+[update] step:  74 , ssa:  2 , num_ucs:  2
+merge components  48  and  25
+[update] step:  75 , ssa:  0 , num_ucs:  1
+[update] step:  76 , ssa:  1 , num_ucs:  1
+[update] step:  77 , ssa:  2 , num_ucs:  1
+[update] step:  78 , ssa:  3 , num_ucs:  1
+merge components  49  and  48
+Cleanup
+merge components  27  and  49
+[update] step:  79 , ssa:  0 , num_ucs:  2
+[update] step:  80 , ssa:  0 , num_ucs:  2
+[update] step:  81 , ssa:  1 , num_ucs:  2
+[update] step:  82 , ssa:  2 , num_ucs:  2
+[update] step:  83 , ssa:  3 , num_ucs:  2
+[update] step:  84 , ssa:  4 , num_ucs:  2
+merge components  51  and  27
+Cleanup
+merge components  24  and  28
+merge components  24  and  51
+[update] step:  85 , ssa:  0 , num_ucs:  2
+[update] step:  86 , ssa:  1 , num_ucs:  2
+[update] step:  87 , ssa:  2 , num_ucs:  2
+[update] step:  88 , ssa:  3 , num_ucs:  2
+[update] step:  89 , ssa:  4 , num_ucs:  2
+[update] step:  90 , ssa:  5 , num_ucs:  2
+[update] step:  91 , ssa:  0 , num_ucs:  2
+merge components  53  and  24
+Cleanup
+merge components  1  and  53
+[update] step:  92 , ssa:  0 , num_ucs:  2
+[update] step:  93 , ssa:  1 , num_ucs:  2
+merge components  54  and  1
+merge components  54  and  4
+[update] step:  94 , ssa:  0 , num_ucs:  2
+[update] step:  95 , ssa:  1 , num_ucs:  2
+[update] step:  96 , ssa:  0 , num_ucs:  2
+[update] step:  97 , ssa:  1 , num_ucs:  2
+[update] step:  98 , ssa:  2 , num_ucs:  2
+[update] step:  99 , ssa:  3 , num_ucs:  2
+[update] step:  100 , ssa:  0 , num_ucs:  2
+[update] step:  101 , ssa:  1 , num_ucs:  2
+[update] step:  102 , ssa:  0 , num_ucs:  2
+[update] step:  103 , ssa:  0 , num_ucs:  2
+[update] step:  104 , ssa:  1 , num_ucs:  2
+[update] step:  105 , ssa:  2 , num_ucs:  2
+[update] step:  106 , ssa:  3 , num_ucs:  2
+[update] step:  107 , ssa:  4 , num_ucs:  2
+[update] step:  108 , ssa:  0 , num_ucs:  2
+[update] step:  109 , ssa:  1 , num_ucs:  2
+merge components  60  and  38
+[update] step:  110 , ssa:  0 , num_ucs:  2
+[update] step:  111 , ssa:  1 , num_ucs:  2
+[update] step:  112 , ssa:  0 , num_ucs:  2
+[update] step:  113 , ssa:  1 , num_ucs:  2
+[update] step:  114 , ssa:  2 , num_ucs:  2
+[update] step:  115 , ssa:  3 , num_ucs:  2
+[update] step:  116 , ssa:  4 , num_ucs:  2
+[update] step:  117 , ssa:  0 , num_ucs:  2
+[update] step:  118 , ssa:  0 , num_ucs:  2
+merge components  64  and  54
+Cleanup
+merge components  33  and  64
+[update] step:  119 , ssa:  0 , num_ucs:  2
+[update] step:  120 , ssa:  1 , num_ucs:  2
+[update] step:  121 , ssa:  2 , num_ucs:  2
+[update] step:  122 , ssa:  3 , num_ucs:  2
+merge components  65  and  33
+Cleanup
+merge components  18  and  65
+[update] step:  123 , ssa:  0 , num_ucs:  2
+[update] step:  124 , ssa:  1 , num_ucs:  2
+[update] step:  125 , ssa:  2 , num_ucs:  2
+[update] step:  126 , ssa:  3 , num_ucs:  2
+[update] step:  127 , ssa:  0 , num_ucs:  2
+[update] step:  128 , ssa:  1 , num_ucs:  2
+[update] step:  129 , ssa:  2 , num_ucs:  2
+[update] step:  130 , ssa:  0 , num_ucs:  2
+[update] step:  131 , ssa:  0 , num_ucs:  2
+[update] step:  132 , ssa:  1 , num_ucs:  2
+merge components  69  and  18
+[update] step:  133 , ssa:  0 , num_ucs:  1
+merge components  70  and  69
+Cleanup
+merge components  47  and  50
+merge components  47  and  60
+merge components  47  and  70
+[update] step:  134 , ssa:  0 , num_ucs:  2
+[update] step:  135 , ssa:  1 , num_ucs:  2
+[update] step:  136 , ssa:  2 , num_ucs:  2
+[update] step:  137 , ssa:  3 , num_ucs:  2
+[update] step:  138 , ssa:  4 , num_ucs:  2
+[update] step:  139 , ssa:  0 , num_ucs:  2
+[update] step:  140 , ssa:  0 , num_ucs:  2
+[update] step:  141 , ssa:  1 , num_ucs:  2
+[update] step:  142 , ssa:  0 , num_ucs:  2
+[update] step:  143 , ssa:  0 , num_ucs:  2
+[update] step:  144 , ssa:  1 , num_ucs:  2
+[update] step:  145 , ssa:  0 , num_ucs:  2
+[update] step:  146 , ssa:  0 , num_ucs:  2
+[update] step:  147 , ssa:  1 , num_ucs:  2
+[update] step:  148 , ssa:  2 , num_ucs:  2
+[update] step:  149 , ssa:  3 , num_ucs:  2
+merge components  77  and  47
+Cleanup
+merge components  2  and  77
+[update] step:  150 , ssa:  0 , num_ucs:  2
+[update] step:  151 , ssa:  0 , num_ucs:  2
+[update] step:  152 , ssa:  1 , num_ucs:  2
+[update] step:  153 , ssa:  2 , num_ucs:  2
+[update] step:  154 , ssa:  3 , num_ucs:  2
+[update] step:  155 , ssa:  0 , num_ucs:  2
+merge components  80  and  2
+Cleanup
+merge components  9  and  39
+merge components  9  and  80
+[update] step:  156 , ssa:  0 , num_ucs:  2
+[update] step:  157 , ssa:  1 , num_ucs:  2
+[update] step:  158 , ssa:  2 , num_ucs:  2
+[update] step:  159 , ssa:  0 , num_ucs:  3
+[update] step:  160 , ssa:  0 , num_ucs:  4
+[update] step:  161 , ssa:  0 , num_ucs:  4
+merge components  84  and  9
+merge components  84  and  58
+[update] step:  162 , ssa:  0 , num_ucs:  4
+[update] step:  163 , ssa:  0 , num_ucs:  4
+[update] step:  164 , ssa:  1 , num_ucs:  4
+[update] step:  165 , ssa:  2 , num_ucs:  4
+[update] step:  166 , ssa:  0 , num_ucs:  4
+[update] step:  167 , ssa:  1 , num_ucs:  4
+[update] step:  168 , ssa:  0 , num_ucs:  4
+[update] step:  169 , ssa:  1 , num_ucs:  4
+merge components  88  and  84
+Cleanup
+merge components  5  and  14
+merge components  5  and  67
+merge components  5  and  86
+merge components  5  and  88
+[update] step:  170 , ssa:  0 , num_ucs:  4
+[update] step:  171 , ssa:  1 , num_ucs:  4
+[update] step:  172 , ssa:  2 , num_ucs:  4
+merge components  89  and  75
+merge components  89  and  85
+merge components  89  and  5
+[update] step:  173 , ssa:  0 , num_ucs:  4
+merge components  90  and  89
+Cleanup
+merge components  72  and  90
+[update] step:  174 , ssa:  0 , num_ucs:  4
+[update] step:  175 , ssa:  1 , num_ucs:  4
+[update] step:  176 , ssa:  0 , num_ucs:  4
+[update] step:  177 , ssa:  1 , num_ucs:  4
+[update] step:  178 , ssa:  0 , num_ucs:  4
+[update] step:  179 , ssa:  1 , num_ucs:  4
+[update] step:  180 , ssa:  0 , num_ucs:  4
+[update] step:  181 , ssa:  1 , num_ucs:  4
+[update] step:  182 , ssa:  2 , num_ucs:  4
+[update] step:  183 , ssa:  3 , num_ucs:  4
+[update] step:  184 , ssa:  4 , num_ucs:  4
+merge components  94  and  72
+merge components  94  and  52
+[update] step:  185 , ssa:  0 , num_ucs:  4
+[update] step:  186 , ssa:  1 , num_ucs:  4
+[update] step:  187 , ssa:  2 , num_ucs:  4
+[update] step:  188 , ssa:  3 , num_ucs:  4
+[update] step:  189 , ssa:  0 , num_ucs:  4
+[update] step:  190 , ssa:  1 , num_ucs:  4
+[update] step:  191 , ssa:  2 , num_ucs:  4
+[update] step:  192 , ssa:  3 , num_ucs:  4
+[update] step:  193 , ssa:  4 , num_ucs:  4
+[update] step:  194 , ssa:  0 , num_ucs:  4
+merge components  97  and  94
+Cleanup
+merge components  12  and  97
+[update] step:  195 , ssa:  0 , num_ucs:  4
+[update] step:  196 , ssa:  1 , num_ucs:  4
+[update] step:  197 , ssa:  2 , num_ucs:  4
+merge components  98  and  12
+[update] step:  198 , ssa:  0 , num_ucs:  4
+[update] step:  199 , ssa:  1 , num_ucs:  4
+[update] step:  200 , ssa:  2 , num_ucs:  4
+[update] step:  201 , ssa:  3 , num_ucs:  4
+[update] step:  202 , ssa:  4 , num_ucs:  4
+merge components  99  and  98
+[update] step:  203 , ssa:  0 , num_ucs:  3
+[update] step:  204 , ssa:  0 , num_ucs:  3
+[update] step:  205 , ssa:  0 , num_ucs:  3
+[update] step:  206 , ssa:  1 , num_ucs:  3
+[update] step:  207 , ssa:  0 , num_ucs:  3
+[update] step:  208 , ssa:  1 , num_ucs:  3
+[update] step:  209 , ssa:  2 , num_ucs:  3
+merge components  103  and  99
+Cleanup
+merge components  21  and  36
+merge components  21  and  71
+merge components  21  and  74
+merge components  21  and  91
+merge components  21  and  103
+[update] step:  210 , ssa:  0 , num_ucs:  4
+merge components  104  and  21
+Cleanup
+merge components  57  and  104
+[update] step:  211 , ssa:  0 , num_ucs:  4
+[update] step:  212 , ssa:  1 , num_ucs:  4
+[update] step:  213 , ssa:  2 , num_ucs:  4
+[update] step:  214 , ssa:  3 , num_ucs:  4
+[update] step:  215 , ssa:  4 , num_ucs:  4
+merge components  105  and  57
+Cleanup
+merge components  87  and  105
+[update] step:  216 , ssa:  0 , num_ucs:  4
+[update] step:  217 , ssa:  1 , num_ucs:  4
+[update] step:  218 , ssa:  2 , num_ucs:  4
+[update] step:  219 , ssa:  3 , num_ucs:  4
+merge components  106  and  87
+[update] step:  220 , ssa:  0 , num_ucs:  3
+[update] step:  221 , ssa:  0 , num_ucs:  3
+[update] step:  222 , ssa:  0 , num_ucs:  3
+[update] step:  223 , ssa:  1 , num_ucs:  3
+[update] step:  224 , ssa:  2 , num_ucs:  3
+[update] step:  225 , ssa:  3 , num_ucs:  3
+[update] step:  226 , ssa:  4 , num_ucs:  3
+merge components  109  and  106
+Cleanup
+merge components  62  and  109
+[update] step:  227 , ssa:  0 , num_ucs:  4
+[update] step:  228 , ssa:  1 , num_ucs:  4
+[update] step:  229 , ssa:  2 , num_ucs:  4
+[update] step:  230 , ssa:  3 , num_ucs:  4
+[update] step:  231 , ssa:  4 , num_ucs:  4
+[update] step:  232 , ssa:  5 , num_ucs:  4
+[update] step:  233 , ssa:  6 , num_ucs:  4
+[update] step:  234 , ssa:  7 , num_ucs:  4
+[update] step:  235 , ssa:  8 , num_ucs:  4
+[update] step:  236 , ssa:  0 , num_ucs:  4
+[update] step:  237 , ssa:  1 , num_ucs:  4
+[update] step:  238 , ssa:  2 , num_ucs:  4
+[update] step:  239 , ssa:  0 , num_ucs:  4
+[update] step:  240 , ssa:  1 , num_ucs:  4
+[update] step:  241 , ssa:  2 , num_ucs:  4
+[update] step:  242 , ssa:  3 , num_ucs:  4
+[update] step:  243 , ssa:  4 , num_ucs:  4
+[update] step:  244 , ssa:  5 , num_ucs:  4
+[update] step:  245 , ssa:  6 , num_ucs:  4
+[update] step:  246 , ssa:  7 , num_ucs:  4
+[update] step:  247 , ssa:  8 , num_ucs:  4
+merge components  112  and  62
+[update] step:  248 , ssa:  0 , num_ucs:  3
+[update] step:  249 , ssa:  0 , num_ucs:  3
+[update] step:  250 , ssa:  0 , num_ucs:  3
+[update] step:  251 , ssa:  1 , num_ucs:  3
+[update] step:  252 , ssa:  0 , num_ucs:  3
+[update] step:  253 , ssa:  1 , num_ucs:  3
+[update] step:  254 , ssa:  2 , num_ucs:  3
+[update] step:  255 , ssa:  3 , num_ucs:  3
+merge components  116  and  112
+[update] step:  256 , ssa:  0 , num_ucs:  4
+merge components  117  and  116
+[update] step:  257 , ssa:  0 , num_ucs:  3
+[update] step:  258 , ssa:  1 , num_ucs:  3
+[update] step:  259 , ssa:  2 , num_ucs:  3
+[update] step:  260 , ssa:  3 , num_ucs:  3
+[update] step:  261 , ssa:  4 , num_ucs:  3
+[update] step:  262 , ssa:  5 , num_ucs:  3
+[update] step:  263 , ssa:  6 , num_ucs:  3
+[update] step:  264 , ssa:  7 , num_ucs:  3
+[update] step:  265 , ssa:  8 , num_ucs:  3
+[update] step:  266 , ssa:  9 , num_ucs:  3
+[update] step:  267 , ssa:  0 , num_ucs:  3
+[update] step:  268 , ssa:  1 , num_ucs:  3
+[update] step:  269 , ssa:  2 , num_ucs:  3
+[update] step:  270 , ssa:  3 , num_ucs:  3
+[update] step:  271 , ssa:  4 , num_ucs:  3
+[update] step:  272 , ssa:  5 , num_ucs:  3
+[update] step:  273 , ssa:  6 , num_ucs:  3
+[update] step:  274 , ssa:  7 , num_ucs:  3
+[update] step:  275 , ssa:  8 , num_ucs:  3
+[update] step:  276 , ssa:  9 , num_ucs:  3
+[update] step:  277 , ssa:  10 , num_ucs:  3
+[update] step:  278 , ssa:  0 , num_ucs:  3
+[update] step:  279 , ssa:  1 , num_ucs:  3
+[update] step:  280 , ssa:  2 , num_ucs:  3
+merge components  120  and  117
+merge components  120  and  118
+[update] step:  281 , ssa:  0 , num_ucs:  4
+[update] step:  282 , ssa:  1 , num_ucs:  4
+merge components  121  and  120
+Cleanup
+merge components  76  and  121
+[update] step:  283 , ssa:  0 , num_ucs:  4
+[update] step:  284 , ssa:  1 , num_ucs:  4
+[update] step:  285 , ssa:  0 , num_ucs:  4
+[update] step:  286 , ssa:  1 , num_ucs:  4
+[update] step:  287 , ssa:  2 , num_ucs:  4
+[update] step:  288 , ssa:  3 , num_ucs:  4
+[update] step:  289 , ssa:  4 , num_ucs:  4
+[update] step:  290 , ssa:  5 , num_ucs:  4
+[update] step:  291 , ssa:  6 , num_ucs:  4
+[update] step:  292 , ssa:  0 , num_ucs:  4
+[update] step:  293 , ssa:  1 , num_ucs:  4
+[update] step:  294 , ssa:  2 , num_ucs:  4
+[update] step:  295 , ssa:  3 , num_ucs:  4
+[update] step:  296 , ssa:  4 , num_ucs:  4
+merge components  124  and  76
+[update] step:  297 , ssa:  0 , num_ucs:  3
+[update] step:  298 , ssa:  1 , num_ucs:  3
+[update] step:  299 , ssa:  0 , num_ucs:  3
+merge components  126  and  124
+Cleanup
+merge components  41  and  126
+[update] step:  300 , ssa:  0 , num_ucs:  4
+[update] step:  301 , ssa:  1 , num_ucs:  4
+[update] step:  302 , ssa:  2 , num_ucs:  4
+[update] step:  303 , ssa:  0 , num_ucs:  4
+[update] step:  304 , ssa:  1 , num_ucs:  4
+[update] step:  305 , ssa:  2 , num_ucs:  4
+[update] step:  306 , ssa:  3 , num_ucs:  4
+[update] step:  307 , ssa:  4 , num_ucs:  4
+[update] step:  308 , ssa:  5 , num_ucs:  4
+[update] step:  309 , ssa:  0 , num_ucs:  5
+merge components  129  and  41
+Cleanup
+merge components  113  and  129
+[update] step:  310 , ssa:  0 , num_ucs:  4
+[update] step:  311 , ssa:  0 , num_ucs:  4
+[update] step:  312 , ssa:  1 , num_ucs:  4
+merge components  131  and  113
+Cleanup
+merge components  56  and  131
+[update] step:  313 , ssa:  0 , num_ucs:  5
+[update] step:  314 , ssa:  1 , num_ucs:  5
+[update] step:  315 , ssa:  0 , num_ucs:  5
+[update] step:  316 , ssa:  1 , num_ucs:  5
+[update] step:  317 , ssa:  0 , num_ucs:  5
+[update] step:  318 , ssa:  1 , num_ucs:  5
+merge components  134  and  56
+Cleanup
+merge components  107  and  134
+[update] step:  319 , ssa:  0 , num_ucs:  5
+[update] step:  320 , ssa:  1 , num_ucs:  5
+[update] step:  321 , ssa:  2 , num_ucs:  5
+[update] step:  322 , ssa:  3 , num_ucs:  5
+[update] step:  323 , ssa:  4 , num_ucs:  5
+[update] step:  324 , ssa:  5 , num_ucs:  5
+[update] step:  325 , ssa:  6 , num_ucs:  5
+[update] step:  326 , ssa:  7 , num_ucs:  5
+[update] step:  327 , ssa:  8 , num_ucs:  5
+[update] step:  328 , ssa:  9 , num_ucs:  5
+[update] step:  329 , ssa:  10 , num_ucs:  5
+[update] step:  330 , ssa:  11 , num_ucs:  5
+merge components  135  and  107
+Cleanup
+merge components  83  and  135
+[update] step:  331 , ssa:  0 , num_ucs:  5
+merge components  136  and  83
+Cleanup
+merge components  73  and  136
+[update] step:  332 , ssa:  0 , num_ucs:  5
+[update] step:  333 , ssa:  1 , num_ucs:  5
+[update] step:  334 , ssa:  2 , num_ucs:  5
+merge components  137  and  73
+[update] step:  335 , ssa:  0 , num_ucs:  4
+[update] step:  336 , ssa:  1 , num_ucs:  4
+[update] step:  337 , ssa:  2 , num_ucs:  4
+merge components  138  and  137
+[update] step:  338 , ssa:  0 , num_ucs:  4
+[update] step:  339 , ssa:  1 , num_ucs:  4
+[update] step:  340 , ssa:  2 , num_ucs:  4
+[update] step:  341 , ssa:  3 , num_ucs:  4
+[update] step:  342 , ssa:  4 , num_ucs:  4
+[update] step:  343 , ssa:  5 , num_ucs:  4
+[update] step:  344 , ssa:  6 , num_ucs:  4
+[update] step:  345 , ssa:  7 , num_ucs:  4
+[update] step:  346 , ssa:  8 , num_ucs:  4
+[update] step:  347 , ssa:  9 , num_ucs:  4
+[update] step:  348 , ssa:  10 , num_ucs:  4
+[update] step:  349 , ssa:  11 , num_ucs:  4
+[update] step:  350 , ssa:  12 , num_ucs:  4
+[update] step:  351 , ssa:  13 , num_ucs:  4
+[update] step:  352 , ssa:  14 , num_ucs:  4
+[update] step:  353 , ssa:  15 , num_ucs:  4
+[update] step:  354 , ssa:  16 , num_ucs:  4
+[update] step:  355 , ssa:  17 , num_ucs:  4
+[update] step:  356 , ssa:  0 , num_ucs:  4
+[update] step:  357 , ssa:  1 , num_ucs:  4
+[update] step:  358 , ssa:  0 , num_ucs:  4
+[update] step:  359 , ssa:  1 , num_ucs:  4
+[update] step:  360 , ssa:  2 , num_ucs:  4
+merge components  141  and  138
+[update] step:  361 , ssa:  0 , num_ucs:  3
+[update] step:  362 , ssa:  1 , num_ucs:  3
+[update] step:  363 , ssa:  0 , num_ucs:  3
+[update] step:  364 , ssa:  1 , num_ucs:  3
+[update] step:  365 , ssa:  2 , num_ucs:  3
+[update] step:  366 , ssa:  3 , num_ucs:  3
+merge components  143  and  141
+Cleanup
+merge components  66  and  108
+merge components  66  and  139
+merge components  66  and  143
+[update] step:  367 , ssa:  0 , num_ucs:  4
+[update] step:  368 , ssa:  1 , num_ucs:  4
+[update] step:  369 , ssa:  2 , num_ucs:  4
+[update] step:  370 , ssa:  3 , num_ucs:  4
+[update] step:  371 , ssa:  4 , num_ucs:  4
+[update] step:  372 , ssa:  5 , num_ucs:  4
+[update] step:  373 , ssa:  6 , num_ucs:  4
+[update] step:  374 , ssa:  7 , num_ucs:  4
+[update] step:  375 , ssa:  8 , num_ucs:  4
+merge components  144  and  66
+Cleanup
+merge components  111  and  144
+[update] step:  376 , ssa:  0 , num_ucs:  4
+[update] step:  377 , ssa:  1 , num_ucs:  4
+[update] step:  378 , ssa:  0 , num_ucs:  4
+[update] step:  379 , ssa:  1 , num_ucs:  4
+[update] step:  380 , ssa:  2 , num_ucs:  4
+merge components  146  and  111
+merge components  146  and  79
+[update] step:  381 , ssa:  0 , num_ucs:  4
+[update] step:  382 , ssa:  0 , num_ucs:  4
+[update] step:  383 , ssa:  1 , num_ucs:  4
+[update] step:  384 , ssa:  2 , num_ucs:  4
+merge components  148  and  146
+[update] step:  385 , ssa:  0 , num_ucs:  3
+[update] step:  386 , ssa:  0 , num_ucs:  3
+[update] step:  387 , ssa:  0 , num_ucs:  3
+[update] step:  388 , ssa:  1 , num_ucs:  3
+[update] step:  389 , ssa:  2 , num_ucs:  3
+[update] step:  390 , ssa:  0 , num_ucs:  3
+[update] step:  391 , ssa:  1 , num_ucs:  3
+[update] step:  392 , ssa:  2 , num_ucs:  3
+[update] step:  393 , ssa:  3 , num_ucs:  3
+[update] step:  394 , ssa:  4 , num_ucs:  3
+[update] step:  395 , ssa:  5 , num_ucs:  3
+[update] step:  396 , ssa:  0 , num_ucs:  3
+[update] step:  397 , ssa:  1 , num_ucs:  3
+[update] step:  398 , ssa:  2 , num_ucs:  3
+merge components  153  and  148
+Cleanup
+merge components  140  and  153
+[update] step:  399 , ssa:  0 , num_ucs:  4
+[update] step:  400 , ssa:  1 , num_ucs:  4
+[update] step:  401 , ssa:  2 , num_ucs:  4
+[update] step:  402 , ssa:  3 , num_ucs:  4
+[update] step:  403 , ssa:  4 , num_ucs:  4
+[update] step:  404 , ssa:  5 , num_ucs:  4
+[update] step:  405 , ssa:  6 , num_ucs:  4
+[update] step:  406 , ssa:  0 , num_ucs:  4
+[update] step:  407 , ssa:  1 , num_ucs:  4
+[update] step:  408 , ssa:  2 , num_ucs:  4
+merge components  155  and  140
+Cleanup
+merge components  128  and  155
+[update] step:  409 , ssa:  0 , num_ucs:  4
+[update] step:  410 , ssa:  1 , num_ucs:  4
+merge components  156  and  128
+Cleanup
+merge components  130  and  147
+merge components  130  and  152
+merge components  130  and  156
+[update] step:  411 , ssa:  0 , num_ucs:  4
+[update] step:  412 , ssa:  1 , num_ucs:  4
+[update] step:  413 , ssa:  2 , num_ucs:  4
+[update] step:  414 , ssa:  3 , num_ucs:  4
+[update] step:  415 , ssa:  4 , num_ucs:  4
+[update] step:  416 , ssa:  5 , num_ucs:  4
+merge components  157  and  130
+Cleanup
+merge components  68  and  157
+[update] step:  417 , ssa:  0 , num_ucs:  4
+[update] step:  418 , ssa:  1 , num_ucs:  4
+[update] step:  419 , ssa:  2 , num_ucs:  4
+merge components  158  and  68
+Cleanup
+merge components  78  and  125
+merge components  78  and  158
+[update] step:  420 , ssa:  0 , num_ucs:  4
+merge components  159  and  78
+Cleanup
+merge components  115  and  159
+[update] step:  421 , ssa:  0 , num_ucs:  4
+[update] step:  422 , ssa:  1 , num_ucs:  4
+[update] step:  423 , ssa:  2 , num_ucs:  4
+[update] step:  424 , ssa:  3 , num_ucs:  4
+[update] step:  425 , ssa:  4 , num_ucs:  4
+[update] step:  426 , ssa:  0 , num_ucs:  4
+[update] step:  427 , ssa:  1 , num_ucs:  4
+merge components  161  and  115
+Cleanup
+merge components  160  and  161
+[update] step:  428 , ssa:  0 , num_ucs:  4
+[update] step:  429 , ssa:  1 , num_ucs:  4
+[update] step:  430 , ssa:  2 , num_ucs:  4
+[update] step:  431 , ssa:  3 , num_ucs:  4
+[update] step:  432 , ssa:  4 , num_ucs:  4
+[update] step:  433 , ssa:  5 , num_ucs:  4
+[update] step:  434 , ssa:  6 , num_ucs:  4
+[update] step:  435 , ssa:  7 , num_ucs:  4
+[update] step:  436 , ssa:  8 , num_ucs:  4
+merge components  162  and  160
+Cleanup
+merge components  101  and  162
+[update] step:  437 , ssa:  0 , num_ucs:  4
+[update] step:  438 , ssa:  1 , num_ucs:  4
+[update] step:  439 , ssa:  2 , num_ucs:  4
+[update] step:  440 , ssa:  3 , num_ucs:  4
+[update] step:  441 , ssa:  4 , num_ucs:  4
+[update] step:  442 , ssa:  5 , num_ucs:  4
+[update] step:  443 , ssa:  6 , num_ucs:  4
+merge components  163  and  101
+[update] step:  444 , ssa:  0 , num_ucs:  3
+[update] step:  445 , ssa:  1 , num_ucs:  3
+[update] step:  446 , ssa:  2 , num_ucs:  3
+[update] step:  447 , ssa:  3 , num_ucs:  3
+merge components  164  and  163
+[update] step:  448 , ssa:  0 , num_ucs:  2
+[update] step:  449 , ssa:  0 , num_ucs:  2
+[update] step:  450 , ssa:  1 , num_ucs:  2
+[update] step:  451 , ssa:  2 , num_ucs:  2
+[update] step:  452 , ssa:  3 , num_ucs:  2
+[update] step:  453 , ssa:  4 , num_ucs:  2
+[update] step:  454 , ssa:  5 , num_ucs:  2
+[update] step:  455 , ssa:  6 , num_ucs:  2
+[update] step:  456 , ssa:  0 , num_ucs:  2
+[update] step:  457 , ssa:  1 , num_ucs:  2
+[update] step:  458 , ssa:  2 , num_ucs:  2
+[update] step:  459 , ssa:  3 , num_ucs:  2
+[update] step:  460 , ssa:  4 , num_ucs:  2
+[update] step:  461 , ssa:  0 , num_ucs:  2
+[update] step:  462 , ssa:  1 , num_ucs:  2
+[update] step:  463 , ssa:  2 , num_ucs:  2
+[update] step:  464 , ssa:  0 , num_ucs:  2
+[update] step:  465 , ssa:  1 , num_ucs:  2
+[update] step:  466 , ssa:  2 , num_ucs:  2
+[update] step:  467 , ssa:  0 , num_ucs:  2
+[update] step:  468 , ssa:  1 , num_ucs:  2
+merge components  170  and  164
+Cleanup
+merge components  167  and  170
+[update] step:  469 , ssa:  0 , num_ucs:  3
+[update] step:  470 , ssa:  1 , num_ucs:  3
+[update] step:  471 , ssa:  2 , num_ucs:  3
+[update] step:  472 , ssa:  0 , num_ucs:  3
+[update] step:  473 , ssa:  1 , num_ucs:  3
+merge components  172  and  167
+[update] step:  474 , ssa:  0 , num_ucs:  2
+[update] step:  475 , ssa:  1 , num_ucs:  2
+[update] step:  476 , ssa:  2 , num_ucs:  2
+[update] step:  477 , ssa:  3 , num_ucs:  2
+[update] step:  478 , ssa:  4 , num_ucs:  2
+[update] step:  479 , ssa:  5 , num_ucs:  2
+[update] step:  480 , ssa:  6 , num_ucs:  2
+[update] step:  481 , ssa:  7 , num_ucs:  2
+[update] step:  482 , ssa:  8 , num_ucs:  2
+merge components  173  and  172
+Cleanup
+merge components  119  and  173
+[update] step:  483 , ssa:  0 , num_ucs:  3
+merge components  174  and  119
+Cleanup
+merge components  59  and  174
+[update] step:  484 , ssa:  0 , num_ucs:  3
+[update] step:  485 , ssa:  1 , num_ucs:  3
+merge components  175  and  59
+[update] step:  486 , ssa:  0 , num_ucs:  2
+[update] step:  487 , ssa:  0 , num_ucs:  2
+[update] step:  488 , ssa:  1 , num_ucs:  2
+[update] step:  489 , ssa:  0 , num_ucs:  2
+[update] step:  490 , ssa:  1 , num_ucs:  2
+[update] step:  491 , ssa:  2 , num_ucs:  2
+[update] step:  492 , ssa:  3 , num_ucs:  2
+merge components  178  and  175
+Cleanup
+merge components  149  and  178
+[update] step:  493 , ssa:  0 , num_ucs:  3
+[update] step:  494 , ssa:  0 , num_ucs:  3
+[update] step:  495 , ssa:  1 , num_ucs:  3
+[update] step:  496 , ssa:  2 , num_ucs:  3
+[update] step:  497 , ssa:  3 , num_ucs:  3
+[update] step:  498 , ssa:  4 , num_ucs:  3
+[update] step:  499 , ssa:  5 , num_ucs:  3
+[update] step:  500 , ssa:  6 , num_ucs:  3
+[update] step:  501 , ssa:  7 , num_ucs:  3
+[update] step:  502 , ssa:  8 , num_ucs:  3
+[update] step:  503 , ssa:  9 , num_ucs:  3
+[update] step:  504 , ssa:  10 , num_ucs:  3
+[update] step:  505 , ssa:  11 , num_ucs:  3
+[update] step:  506 , ssa:  12 , num_ucs:  3
+[update] step:  507 , ssa:  13 , num_ucs:  3
+[update] step:  508 , ssa:  14 , num_ucs:  3
+[update] step:  509 , ssa:  15 , num_ucs:  3
+[update] step:  510 , ssa:  0 , num_ucs:  3
+[update] step:  511 , ssa:  1 , num_ucs:  3
+[update] step:  512 , ssa:  2 , num_ucs:  3
+[update] step:  513 , ssa:  3 , num_ucs:  3
+[update] step:  514 , ssa:  4 , num_ucs:  3
+[update] step:  515 , ssa:  5 , num_ucs:  3
+[update] step:  516 , ssa:  6 , num_ucs:  3
+[update] step:  517 , ssa:  7 , num_ucs:  3
+[update] step:  518 , ssa:  8 , num_ucs:  3
+[update] step:  519 , ssa:  9 , num_ucs:  3
+[update] step:  520 , ssa:  10 , num_ucs:  3
+merge components  181  and  149
+Cleanup
+merge components  61  and  181
+[update] step:  521 , ssa:  0 , num_ucs:  3
+merge components  182  and  61
+Cleanup
+merge components  169  and  182
+[update] step:  522 , ssa:  0 , num_ucs:  3
+[update] step:  523 , ssa:  1 , num_ucs:  3
+[update] step:  524 , ssa:  2 , num_ucs:  3
+[update] step:  525 , ssa:  3 , num_ucs:  3
+[update] step:  526 , ssa:  4 , num_ucs:  3
+[update] step:  527 , ssa:  5 , num_ucs:  3
+merge components  183  and  169
+Cleanup
+merge components  93  and  183
+[update] step:  528 , ssa:  0 , num_ucs:  3
+[update] step:  529 , ssa:  1 , num_ucs:  3
+[update] step:  530 , ssa:  2 , num_ucs:  3
+[update] step:  531 , ssa:  3 , num_ucs:  3
+merge components  184  and  93
+merge components  184  and  151
+[update] step:  532 , ssa:  0 , num_ucs:  3
+[update] step:  533 , ssa:  1 , num_ucs:  3
+merge components  185  and  184
+Cleanup
+merge components  165  and  185
+[update] step:  534 , ssa:  0 , num_ucs:  3
+[update] step:  535 , ssa:  1 , num_ucs:  3
+[update] step:  536 , ssa:  2 , num_ucs:  3
+[update] step:  537 , ssa:  3 , num_ucs:  3
+[update] step:  538 , ssa:  4 , num_ucs:  3
+[update] step:  539 , ssa:  5 , num_ucs:  3
+[update] step:  540 , ssa:  0 , num_ucs:  3
+[update] step:  541 , ssa:  1 , num_ucs:  3
+[update] step:  542 , ssa:  2 , num_ucs:  3
+[update] step:  543 , ssa:  0 , num_ucs:  3
+[update] step:  544 , ssa:  1 , num_ucs:  3
+[update] step:  545 , ssa:  2 , num_ucs:  3
+[update] step:  546 , ssa:  3 , num_ucs:  3
+[update] step:  547 , ssa:  0 , num_ucs:  3
+[update] step:  548 , ssa:  0 , num_ucs:  3
+[update] step:  549 , ssa:  1 , num_ucs:  3
+[update] step:  550 , ssa:  2 , num_ucs:  3
+[update] step:  551 , ssa:  3 , num_ucs:  3
+[update] step:  552 , ssa:  4 , num_ucs:  3
+[update] step:  553 , ssa:  5 , num_ucs:  3
+[update] step:  554 , ssa:  6 , num_ucs:  3
+[update] step:  555 , ssa:  7 , num_ucs:  3
+merge components  190  and  165
+merge components  190  and  189
+[update] step:  556 , ssa:  0 , num_ucs:  3
+[update] step:  557 , ssa:  1 , num_ucs:  3
+[update] step:  558 , ssa:  2 , num_ucs:  3
+[update] step:  559 , ssa:  0 , num_ucs:  3
+[update] step:  560 , ssa:  1 , num_ucs:  3
+[update] step:  561 , ssa:  2 , num_ucs:  3
+[update] step:  562 , ssa:  3 , num_ucs:  3
+[update] step:  563 , ssa:  4 , num_ucs:  3
+[update] step:  564 , ssa:  0 , num_ucs:  4
+[update] step:  565 , ssa:  1 , num_ucs:  4
+[update] step:  566 , ssa:  2 , num_ucs:  4
+[update] step:  567 , ssa:  3 , num_ucs:  4
+[update] step:  568 , ssa:  4 , num_ucs:  4
+[update] step:  569 , ssa:  5 , num_ucs:  4
+[update] step:  570 , ssa:  6 , num_ucs:  4
+[update] step:  571 , ssa:  7 , num_ucs:  4
+[update] step:  572 , ssa:  8 , num_ucs:  4
+merge components  193  and  190
+[update] step:  573 , ssa:  0 , num_ucs:  3
+[update] step:  574 , ssa:  1 , num_ucs:  3
+[update] step:  575 , ssa:  2 , num_ucs:  3
+[update] step:  576 , ssa:  3 , num_ucs:  3
+[update] step:  577 , ssa:  4 , num_ucs:  3
+[update] step:  578 , ssa:  5 , num_ucs:  3
+[update] step:  579 , ssa:  6 , num_ucs:  3
+[update] step:  580 , ssa:  7 , num_ucs:  3
+merge components  194  and  100
+[update] step:  581 , ssa:  0 , num_ucs:  3
+[update] step:  582 , ssa:  1 , num_ucs:  3
+[update] step:  583 , ssa:  2 , num_ucs:  3
+[update] step:  584 , ssa:  3 , num_ucs:  3
+[update] step:  585 , ssa:  4 , num_ucs:  3
+[update] step:  586 , ssa:  5 , num_ucs:  3
+[update] step:  587 , ssa:  6 , num_ucs:  3
+[update] step:  588 , ssa:  7 , num_ucs:  3
+[update] step:  589 , ssa:  8 , num_ucs:  3
+[update] step:  590 , ssa:  0 , num_ucs:  3
+[update] step:  591 , ssa:  1 , num_ucs:  3
+[update] step:  592 , ssa:  2 , num_ucs:  3
+[update] step:  593 , ssa:  3 , num_ucs:  3
+[update] step:  594 , ssa:  4 , num_ucs:  3
+[update] step:  595 , ssa:  5 , num_ucs:  3
+[update] step:  596 , ssa:  6 , num_ucs:  3
+[update] step:  597 , ssa:  7 , num_ucs:  3
+merge components  196  and  176
+merge components  196  and  193
+[update] step:  598 , ssa:  0 , num_ucs:  4
+[update] step:  599 , ssa:  1 , num_ucs:  4
+[update] step:  600 , ssa:  2 , num_ucs:  4
+[update] step:  601 , ssa:  3 , num_ucs:  4
+[update] step:  602 , ssa:  4 , num_ucs:  4
+[update] step:  603 , ssa:  5 , num_ucs:  4
+[update] step:  604 , ssa:  6 , num_ucs:  4
+[update] step:  605 , ssa:  7 , num_ucs:  4
+[update] step:  606 , ssa:  8 , num_ucs:  4
+[update] step:  607 , ssa:  9 , num_ucs:  4
+[update] step:  608 , ssa:  10 , num_ucs:  4
+[update] step:  609 , ssa:  11 , num_ucs:  4
+merge components  197  and  196
+Cleanup
+merge components  150  and  197
+[update] step:  610 , ssa:  0 , num_ucs:  4
+[update] step:  611 , ssa:  1 , num_ucs:  4
+[update] step:  612 , ssa:  2 , num_ucs:  4
+[update] step:  613 , ssa:  3 , num_ucs:  4
+merge components  198  and  150
+[update] step:  614 , ssa:  0 , num_ucs:  3
+[update] step:  615 , ssa:  1 , num_ucs:  3
+[update] step:  616 , ssa:  2 , num_ucs:  3
+[update] step:  617 , ssa:  3 , num_ucs:  3
+[update] step:  618 , ssa:  4 , num_ucs:  3
+[update] step:  619 , ssa:  5 , num_ucs:  3
+[update] step:  620 , ssa:  6 , num_ucs:  3
+[update] step:  621 , ssa:  7 , num_ucs:  3
+[update] step:  622 , ssa:  8 , num_ucs:  3
+[update] step:  623 , ssa:  9 , num_ucs:  3
+[update] step:  624 , ssa:  10 , num_ucs:  3
+[update] step:  625 , ssa:  11 , num_ucs:  3
+merge components  199  and  198
+Cleanup
+merge components  142  and  168
+merge components  142  and  199
+[update] step:  626 , ssa:  0 , num_ucs:  4
+[update] step:  627 , ssa:  1 , num_ucs:  4
+[update] step:  628 , ssa:  2 , num_ucs:  4
+[update] step:  629 , ssa:  3 , num_ucs:  4
+merge components  200  and  142
+Cleanup
+merge components  110  and  200
+[update] step:  630 , ssa:  0 , num_ucs:  4
+[update] step:  631 , ssa:  0 , num_ucs:  4
+[update] step:  632 , ssa:  1 , num_ucs:  4
+[update] step:  633 , ssa:  2 , num_ucs:  4
+[update] step:  634 , ssa:  3 , num_ucs:  4
+[update] step:  635 , ssa:  4 , num_ucs:  4
+[update] step:  636 , ssa:  5 , num_ucs:  4
+[update] step:  637 , ssa:  6 , num_ucs:  4
+[update] step:  638 , ssa:  7 , num_ucs:  4
+[update] step:  639 , ssa:  8 , num_ucs:  4
+[update] step:  640 , ssa:  9 , num_ucs:  4
+[update] step:  641 , ssa:  0 , num_ucs:  4
+merge components  203  and  110
+[update] step:  642 , ssa:  0 , num_ucs:  3
+[update] step:  643 , ssa:  0 , num_ucs:  3
+[update] step:  644 , ssa:  1 , num_ucs:  3
+merge components  205  and  203
+Cleanup
+merge components  179  and  205
+[update] step:  645 , ssa:  0 , num_ucs:  4
+[update] step:  646 , ssa:  1 , num_ucs:  4
+[update] step:  647 , ssa:  2 , num_ucs:  4
+[update] step:  648 , ssa:  3 , num_ucs:  4
+[update] step:  649 , ssa:  4 , num_ucs:  4
+[update] step:  650 , ssa:  5 , num_ucs:  4
+merge components  206  and  179
+Cleanup
+merge components  194  and  206
+[update] step:  651 , ssa:  0 , num_ucs:  4
+[update] step:  652 , ssa:  0 , num_ucs:  4
+[update] step:  653 , ssa:  1 , num_ucs:  4
+[update] step:  654 , ssa:  2 , num_ucs:  4
+[update] step:  655 , ssa:  3 , num_ucs:  4
+[update] step:  656 , ssa:  4 , num_ucs:  4
+[update] step:  657 , ssa:  5 , num_ucs:  4
+[update] step:  658 , ssa:  6 , num_ucs:  4
+[update] step:  659 , ssa:  7 , num_ucs:  4
+[update] step:  660 , ssa:  0 , num_ucs:  4
+[update] step:  661 , ssa:  1 , num_ucs:  4
+[update] step:  662 , ssa:  2 , num_ucs:  4
+[update] step:  663 , ssa:  0 , num_ucs:  4
+[update] step:  664 , ssa:  1 , num_ucs:  4
+[update] step:  665 , ssa:  0 , num_ucs:  4
+[update] step:  666 , ssa:  1 , num_ucs:  4
+[update] step:  667 , ssa:  2 , num_ucs:  4
+[update] step:  668 , ssa:  3 , num_ucs:  4
+[update] step:  669 , ssa:  4 , num_ucs:  4
+[update] step:  670 , ssa:  5 , num_ucs:  4
+[update] step:  671 , ssa:  6 , num_ucs:  4
+[update] step:  672 , ssa:  7 , num_ucs:  4
+[update] step:  673 , ssa:  8 , num_ucs:  4
+[update] step:  674 , ssa:  9 , num_ucs:  4
+[update] step:  675 , ssa:  0 , num_ucs:  4
+[update] step:  676 , ssa:  1 , num_ucs:  4
+[update] step:  677 , ssa:  2 , num_ucs:  4
+merge components  212  and  194
+Cleanup
+merge components  122  and  212
+[update] step:  678 , ssa:  0 , num_ucs:  4
+[update] step:  679 , ssa:  1 , num_ucs:  4
+merge components  213  and  122
+Cleanup
+merge components  177  and  213
+[update] step:  680 , ssa:  0 , num_ucs:  4
+[update] step:  681 , ssa:  1 , num_ucs:  4
+[update] step:  682 , ssa:  2 , num_ucs:  4
+[update] step:  683 , ssa:  3 , num_ucs:  4
+[update] step:  684 , ssa:  4 , num_ucs:  4
+[update] step:  685 , ssa:  5 , num_ucs:  4
+[update] step:  686 , ssa:  6 , num_ucs:  4
+[update] step:  687 , ssa:  7 , num_ucs:  4
+[update] step:  688 , ssa:  8 , num_ucs:  4
+[update] step:  689 , ssa:  9 , num_ucs:  4
+[update] step:  690 , ssa:  10 , num_ucs:  4
+merge components  214  and  177
+Cleanup
+merge components  195  and  214
+[update] step:  691 , ssa:  0 , num_ucs:  4
+[update] step:  692 , ssa:  1 , num_ucs:  4
+[update] step:  693 , ssa:  2 , num_ucs:  4
+[update] step:  694 , ssa:  3 , num_ucs:  4
+merge components  215  and  195
+[update] step:  695 , ssa:  0 , num_ucs:  3
+[update] step:  696 , ssa:  1 , num_ucs:  3
+[update] step:  697 , ssa:  2 , num_ucs:  3
+[update] step:  698 , ssa:  3 , num_ucs:  3
+[update] step:  699 , ssa:  4 , num_ucs:  3
+[update] step:  700 , ssa:  5 , num_ucs:  3
+[update] step:  701 , ssa:  6 , num_ucs:  3
+[update] step:  702 , ssa:  7 , num_ucs:  3
+[update] step:  703 , ssa:  8 , num_ucs:  3
+[update] step:  704 , ssa:  9 , num_ucs:  3
+[update] step:  705 , ssa:  10 , num_ucs:  3
+[update] step:  706 , ssa:  11 , num_ucs:  3
+[update] step:  707 , ssa:  12 , num_ucs:  3
+[update] step:  708 , ssa:  13 , num_ucs:  3
+[update] step:  709 , ssa:  14 , num_ucs:  3
+[update] step:  710 , ssa:  15 , num_ucs:  3
+[update] step:  711 , ssa:  16 , num_ucs:  3
+[update] step:  712 , ssa:  17 , num_ucs:  3
+[update] step:  713 , ssa:  18 , num_ucs:  3
+merge components  216  and  215
+Cleanup
+merge components  17  and  216
+[update] step:  714 , ssa:  0 , num_ucs:  4
+[update] step:  715 , ssa:  1 , num_ucs:  4
+[update] step:  716 , ssa:  0 , num_ucs:  4
+merge components  218  and  17
+[update] step:  717 , ssa:  0 , num_ucs:  3
+[update] step:  718 , ssa:  1 , num_ucs:  3
+[update] step:  719 , ssa:  2 , num_ucs:  3
+[update] step:  720 , ssa:  3 , num_ucs:  3
+[update] step:  721 , ssa:  4 , num_ucs:  3
+[update] step:  722 , ssa:  0 , num_ucs:  3
+[update] step:  723 , ssa:  1 , num_ucs:  3
+[update] step:  724 , ssa:  2 , num_ucs:  3
+[update] step:  725 , ssa:  3 , num_ucs:  3
+[update] step:  726 , ssa:  4 , num_ucs:  3
+[update] step:  727 , ssa:  5 , num_ucs:  3
+[update] step:  728 , ssa:  6 , num_ucs:  3
+[update] step:  729 , ssa:  7 , num_ucs:  3
+[update] step:  730 , ssa:  8 , num_ucs:  3
+[update] step:  731 , ssa:  9 , num_ucs:  3
+[update] step:  732 , ssa:  10 , num_ucs:  3
+[update] step:  733 , ssa:  11 , num_ucs:  3
+[update] step:  734 , ssa:  12 , num_ucs:  3
+[update] step:  735 , ssa:  13 , num_ucs:  3
+[update] step:  736 , ssa:  14 , num_ucs:  3
+[update] step:  737 , ssa:  15 , num_ucs:  3
+[update] step:  738 , ssa:  16 , num_ucs:  3
+[update] step:  739 , ssa:  0 , num_ucs:  3
+[update] step:  740 , ssa:  0 , num_ucs:  3
+[update] step:  741 , ssa:  1 , num_ucs:  3
+[update] step:  742 , ssa:  2 , num_ucs:  3
+[update] step:  743 , ssa:  3 , num_ucs:  3
+[update] step:  744 , ssa:  4 , num_ucs:  3
+[update] step:  745 , ssa:  5 , num_ucs:  3
+merge components  222  and  218
+Cleanup
+merge components  166  and  188
+merge components  166  and  222
+[update] step:  746 , ssa:  0 , num_ucs:  4
+[update] step:  747 , ssa:  1 , num_ucs:  4
+[update] step:  748 , ssa:  2 , num_ucs:  4
+[update] step:  749 , ssa:  3 , num_ucs:  4
+[update] step:  750 , ssa:  4 , num_ucs:  4
+[update] step:  751 , ssa:  5 , num_ucs:  4
+[update] step:  752 , ssa:  6 , num_ucs:  4
+[update] step:  753 , ssa:  7 , num_ucs:  4
+[update] step:  754 , ssa:  8 , num_ucs:  4
+[update] step:  755 , ssa:  9 , num_ucs:  4
+[update] step:  756 , ssa:  10 , num_ucs:  4
+[update] step:  757 , ssa:  11 , num_ucs:  4
+[update] step:  758 , ssa:  12 , num_ucs:  4
+merge components  223  and  166
+Cleanup
+merge components  191  and  223
+[update] step:  759 , ssa:  0 , num_ucs:  4
+[update] step:  760 , ssa:  1 , num_ucs:  4
+[update] step:  761 , ssa:  2 , num_ucs:  4
+[update] step:  762 , ssa:  3 , num_ucs:  4
+merge components  224  and  191
+Cleanup
+merge components  132  and  224
+[update] step:  763 , ssa:  0 , num_ucs:  4
+[update] step:  764 , ssa:  1 , num_ucs:  4
+[update] step:  765 , ssa:  2 , num_ucs:  4
+[update] step:  766 , ssa:  3 , num_ucs:  4
+[update] step:  767 , ssa:  4 , num_ucs:  4
+[update] step:  768 , ssa:  5 , num_ucs:  4
+[update] step:  769 , ssa:  6 , num_ucs:  4
+[update] step:  770 , ssa:  7 , num_ucs:  4
+[update] step:  771 , ssa:  8 , num_ucs:  4
+[update] step:  772 , ssa:  9 , num_ucs:  4
+[update] step:  773 , ssa:  10 , num_ucs:  4
+[update] step:  774 , ssa:  11 , num_ucs:  4
+merge components  225  and  132
+merge components  225  and  15
+[update] step:  775 , ssa:  0 , num_ucs:  4
+[update] step:  776 , ssa:  1 , num_ucs:  4
+[update] step:  777 , ssa:  2 , num_ucs:  4
+[update] step:  778 , ssa:  3 , num_ucs:  4
+[update] step:  779 , ssa:  4 , num_ucs:  4
+merge components  226  and  225
+[update] step:  780 , ssa:  0 , num_ucs:  3
+[update] step:  781 , ssa:  1 , num_ucs:  3
+[update] step:  782 , ssa:  2 , num_ucs:  3
+[update] step:  783 , ssa:  3 , num_ucs:  3
+[update] step:  784 , ssa:  4 , num_ucs:  3
+[update] step:  785 , ssa:  5 , num_ucs:  3
+merge components  227  and  226
+[update] step:  786 , ssa:  0 , num_ucs:  3
+[update] step:  787 , ssa:  1 , num_ucs:  3
+[update] step:  788 , ssa:  2 , num_ucs:  3
+[update] step:  789 , ssa:  3 , num_ucs:  3
+[update] step:  790 , ssa:  4 , num_ucs:  3
+[update] step:  791 , ssa:  5 , num_ucs:  3
+[update] step:  792 , ssa:  6 , num_ucs:  3
+merge components  228  and  227
+Cleanup
+merge components  211  and  228
+[update] step:  793 , ssa:  0 , num_ucs:  4
+[update] step:  794 , ssa:  1 , num_ucs:  4
+[update] step:  795 , ssa:  2 , num_ucs:  4
+merge components  229  and  211
+Cleanup
+merge components  217  and  229
+[update] step:  796 , ssa:  0 , num_ucs:  4
+[update] step:  797 , ssa:  1 , num_ucs:  4
+[update] step:  798 , ssa:  2 , num_ucs:  4
+[update] step:  799 , ssa:  3 , num_ucs:  4
+[update] step:  800 , ssa:  4 , num_ucs:  4
+[update] step:  801 , ssa:  5 , num_ucs:  4
+[update] step:  802 , ssa:  6 , num_ucs:  4
+[update] step:  803 , ssa:  7 , num_ucs:  4
+[update] step:  804 , ssa:  8 , num_ucs:  4
+[update] step:  805 , ssa:  9 , num_ucs:  4
+[update] step:  806 , ssa:  10 , num_ucs:  4
+[update] step:  807 , ssa:  0 , num_ucs:  4
+[update] step:  808 , ssa:  1 , num_ucs:  4
+[update] step:  809 , ssa:  2 , num_ucs:  4
+[update] step:  810 , ssa:  3 , num_ucs:  4
+[update] step:  811 , ssa:  4 , num_ucs:  4
+[update] step:  812 , ssa:  5 , num_ucs:  4
+[update] step:  813 , ssa:  6 , num_ucs:  4
+[update] step:  814 , ssa:  7 , num_ucs:  4
+[update] step:  815 , ssa:  8 , num_ucs:  4
+[update] step:  816 , ssa:  0 , num_ucs:  4
+[update] step:  817 , ssa:  1 , num_ucs:  4
+[update] step:  818 , ssa:  2 , num_ucs:  4
+[update] step:  819 , ssa:  3 , num_ucs:  4
+[update] step:  820 , ssa:  4 , num_ucs:  4
+[update] step:  821 , ssa:  5 , num_ucs:  4
+[update] step:  822 , ssa:  6 , num_ucs:  4
+[update] step:  823 , ssa:  7 , num_ucs:  4
+[update] step:  824 , ssa:  8 , num_ucs:  4
+[update] step:  825 , ssa:  9 , num_ucs:  4
+[update] step:  826 , ssa:  10 , num_ucs:  4
+[update] step:  827 , ssa:  11 , num_ucs:  4
+[update] step:  828 , ssa:  12 , num_ucs:  4
+[update] step:  829 , ssa:  13 , num_ucs:  4
+[update] step:  830 , ssa:  14 , num_ucs:  4
+[update] step:  831 , ssa:  15 , num_ucs:  4
+[update] step:  832 , ssa:  16 , num_ucs:  4
+[update] step:  833 , ssa:  17 , num_ucs:  4
+[update] step:  834 , ssa:  18 , num_ucs:  4
+[update] step:  835 , ssa:  19 , num_ucs:  4
+[update] step:  836 , ssa:  0 , num_ucs:  4
+[update] step:  837 , ssa:  0 , num_ucs:  4
+[update] step:  838 , ssa:  0 , num_ucs:  4
+[update] step:  839 , ssa:  1 , num_ucs:  4
+[update] step:  840 , ssa:  2 , num_ucs:  4
+[update] step:  841 , ssa:  3 , num_ucs:  4
+[update] step:  842 , ssa:  4 , num_ucs:  4
+[update] step:  843 , ssa:  5 , num_ucs:  4
+[update] step:  844 , ssa:  6 , num_ucs:  4
+[update] step:  845 , ssa:  7 , num_ucs:  4
+[update] step:  846 , ssa:  8 , num_ucs:  4
+[update] step:  847 , ssa:  9 , num_ucs:  4
+[update] step:  848 , ssa:  10 , num_ucs:  4
+[update] step:  849 , ssa:  11 , num_ucs:  4
+[update] step:  850 , ssa:  12 , num_ucs:  4
+[update] step:  851 , ssa:  13 , num_ucs:  4
+[update] step:  852 , ssa:  14 , num_ucs:  4
+[update] step:  853 , ssa:  15 , num_ucs:  4
+[update] step:  854 , ssa:  16 , num_ucs:  4
+[update] step:  855 , ssa:  17 , num_ucs:  4
+[update] step:  856 , ssa:  18 , num_ucs:  4
+[update] step:  857 , ssa:  19 , num_ucs:  4
+[update] step:  858 , ssa:  20 , num_ucs:  4
+nodes:  {0: array([7.73187692, 5.13707754, 0.62816059, 0.12036319, 0.        ]), 1: array([-3.23970964, -7.15247396, -2.47092158,  0.25416647,  0.        ]), 2: array([-8.07508058,  1.83719878,  2.07146507,  0.69403038,  0.        ]), 3: array([-5.30133616, -5.91531259, -0.07171785,  0.15528554,  0.        ]), 4: array([ 1.39246336,  6.14162034,  1.37587667, -0.21126012,  0.        ]), 5: array([-3.91636757, -6.75293426, -1.96709401, -0.21780881,  0.        ]), 6: array([-4.26012136, -3.90603292,  1.94000533,  0.21586961,  0.        ]), 7: array([4.61482404, 1.75822713, 2.47851616, 0.43314837, 0.        ]), 8: array([-3.35291375,  6.97949165,  0.67180936,  0.83241559,  0.        ]), 9: array([ 6.49395542,  1.36310218, -2.85207073,  0.35621383,  0.        ]), 10: array([-2.18114134, -4.87688938,  2.53868514,  0.91161173,  0.        ]), 11: array([ 1.489734  , -2.49520655, -2.35001755,  0.274901  ,  0.        ]), 12: array([-9.26330596,  5.37243302,  1.67504589,  0.68723916,  0.        ]), 13: array([-8.07945645,  4.2728071 ,  0.50565992,  0.17045942,  0.        ]), 14: array([-1.20633859,  4.41068435, -1.80910336,  0.71805552,  0.        ]), 15: array([9.22863986, 9.10736473, 2.69649542, 0.50981876, 0.        ]), 16: array([ 2.51947544,  5.46935395, -1.4910395 , -0.22759695,  0.        ]), 17: array([ 3.20589547, -9.6280827 ,  0.62026104,  0.66921998,  0.        ]), 18: array([-3.80019631,  9.11240855, -0.44916213,  0.73594109,  0.        ]), 19: array([ 4.06068583, -4.39194454,  1.69680947, -0.13267835,  0.        ]), 20: array([-9.75595613,  4.82947055,  2.87841771,  0.70538462,  0.        ]), 21: array([-9.55859008,  0.46123501, -2.46924209,  0.99371139,  0.        ]), 22: array([-7.8929577 ,  0.93779558,  1.14846921, -0.24161767,  0.        ]), 23: array([2.5753969 , 5.36394219, 0.9067493 , 0.91670623, 0.        ]), 24: array([ 8.91824974, -3.28849756, -1.92098564,  0.51536876,  0.        ]), 25: array([-3.42403439,  3.60290771,  1.60918622,  0.98105755,  0.        ]), 26: array([-4.4004693 ,  1.77232319,  0.36931185,  0.30628139,  0.        ]), 27: array([ 7.30826367, -6.84078896, -0.4658582 ,  0.37867919,  0.        ]), 28: array([ 9.40340346, -1.89258087,  1.42816503,  0.9864348 ,  0.        ]), 29: array([-8.71028173,  4.66523054, -1.28522122,  0.20929251,  0.        ]), 30: array([-9.34135723,  3.65306934,  0.35995297,  0.01303229,  0.        ]), 31: array([ 6.39253662, -1.7900201 ,  2.99196454,  0.03679718,  0.        ]), 32: array([ 7.48260746, -4.6637569 ,  0.76665151,  0.11622125,  0.        ]), 33: array([4.41840659, 3.71203021, 1.62836139, 0.48890197, 0.        ]), 34: array([-0.14438565, -8.75070351, -0.50860218, -0.17970161,  0.        ]), 35: array([5.95705512, 9.3011096 , 2.14648931, 0.43608976, 0.        ]), 36: array([-6.35890763, -1.27910897,  0.06550905,  0.54186323,  0.        ]), 37: array([-5.77776248,  8.24570531, -0.46046281, -0.12004502,  0.        ]), 38: array([-6.2901636 , -4.69484227,  0.28404558,  0.30845752,  0.        ]), 39: array([9.39914002, 2.79337497, 2.538513  , 0.51709395, 0.        ]), 40: array([-8.11942046,  7.13328509, -0.94271017, -0.25255595,  0.        ]), 41: array([ 9.55758868, -5.7580224 ,  2.54478423,  0.38530954,  0.        ]), 42: array([-6.78812323, -7.75085278, -2.55085261,  0.66300381,  0.        ]), 43: array([-9.360018  ,  4.56689952, -1.65572558,  0.04923334,  0.        ]), 44: array([5.05024586, 3.70785019, 1.42217473, 0.93154817, 0.        ]), 45: array([-6.00825943, -4.52501132,  2.45895514, -0.24631523,  0.        ]), 46: array([-3.32983723,  3.40936246,  0.46729676, -0.14787658,  0.        ]), 47: array([-5.93020107, -6.79380097,  0.44278212,  0.37913467,  0.        ]), 48: array([-7.66463551,  2.3035675 ,  1.83882713,  0.37695527,  0.        ]), 49: array([ 6.82216998,  1.00158894, -1.23499165,  0.33797234,  0.        ]), 50: array([-8.46485327, -5.6302135 , -2.31905326,  0.36855728,  0.        ]), 51: array([ 9.8457481 , -3.73394643,  0.98411444, -0.20197097,  0.        ]), 52: array([ 2.29775745,  7.45356368, -1.80623757, -0.2450199 ,  0.        ]), 53: array([ 8.95320709, -1.69574238, -2.04689095,  0.64887195,  0.        ]), 54: array([1.64844867, 1.09954657, 0.66625302, 0.11000189, 0.        ]), 55: array([ 8.14455787, -9.55563958,  2.11503637,  0.43431112,  0.        ]), 56: array([-6.26118865,  8.68950557,  0.30761186,  0.44777362,  0.        ]), 57: array([-8.71252328, -2.76646854, -2.63469423,  0.76609536,  0.        ]), 58: array([-1.92743421,  6.12136343, -0.99587018,  0.64452662,  0.        ]), 59: array([ 5.4405341 , -5.61403469, -3.08475011,  0.34840079,  0.        ]), 60: array([-9.83478686, -4.86835856, -1.02844073,  0.20362729,  0.        ]), 61: array([ 9.7963976 ,  6.72878316, -2.07053396, -0.1469003 ,  0.        ]), 62: array([-9.21689315, -8.44587614,  1.86893339, -0.26931215,  0.        ]), 63: array([-5.21069736, -9.99844745,  1.19034098,  0.69558077,  0.        ]), 64: array([ 4.12087681,  3.89005709, -2.78025335,  0.889827  ,  0.        ]), 65: array([-6.77326543,  9.78663238, -0.45292996,  0.82821707,  0.        ]), 66: array([ 6.84401551, -8.34136864,  0.41222686,  0.39587537,  0.        ]), 67: array([-1.93537021,  0.0727589 , -2.88588893,  0.79145695,  0.        ]), 68: array([-3.95960882, -8.15095662, -2.9774097 ,  0.38351416,  0.        ]), 69: array([-8.36145366,  4.41721492, -1.1527794 ,  0.68606092,  0.        ]), 70: array([-4.62188889, -4.52205779,  0.75969158,  0.96031993,  0.        ]), 71: array([-3.62886162, -0.47446332,  2.60232201, -0.25692462,  0.        ]), 72: array([-1.51398472, -4.99725762, -1.31522631,  0.53064301,  0.        ]), 73: array([ 9.21004483, -8.44027362, -3.06362191,  0.75260137,  0.        ]), 74: array([-6.98897142,  1.61225095,  1.49712847,  0.48986461,  0.        ]), 75: array([-2.41425979,  2.91910663, -0.79707418,  0.68309984,  0.        ]), 76: array([6.51742673, 8.46744956, 0.68587579, 0.99412158, 0.        ]), 77: array([-5.13016166,  1.04132677,  0.29988868,  0.90648137,  0.        ]), 78: array([ 1.50567642, -4.78595409, -0.78567025,  0.41940235,  0.        ]), 79: array([ 4.97681275,  4.57520654,  2.70723006, -0.26528857,  0.        ]), 80: array([ 8.67494615,  2.16777572, -0.67574892,  0.39237154,  0.        ]), 81: array([ 7.58663914, -9.56912164, -2.94184348,  0.99053675,  0.        ]), 82: array([-9.9770009 ,  6.30696029,  0.44817584, -0.27811015,  0.        ]), 83: array([-9.3067572 ,  7.99659093, -2.86152863, -0.03515647,  0.        ]), 84: array([-0.28948857,  7.92305406, -3.05425745,  0.06309788,  0.        ]), 85: array([-2.62600329,  2.66908617, -1.76713708,  0.3783794 ,  0.        ]), 86: array([-2.0378297 , -0.36706345, -1.95225558,  0.20932774,  0.        ]), 87: array([ 7.1381825 ,  2.29317741, -1.04158876,  0.6860019 ,  0.        ]), 88: array([-6.2043009 ,  3.76617438,  1.43944543,  0.37574527,  0.        ]), 89: array([-3.79569242,  5.8546365 , -2.21908706,  0.14609294,  0.        ]), 90: array([-2.95692456, -5.39300049, -0.71398881, -0.23474951,  0.        ]), 91: array([-3.98601046,  1.97730904,  2.81018572,  0.72179732,  0.        ]), 92: array([ 7.65310894, -9.92466629,  1.134428  ,  0.57009653,  0.        ]), 93: array([-7.37755418, -9.44887568,  2.89705058,  0.78233966,  0.        ]), 94: array([ 2.38507703,  7.04335762, -0.65147119, -0.14456404,  0.        ]), 95: array([-9.70500534, -4.12601862, -0.54029937,  0.23428554,  0.        ]), 96: array([ 0.80064096, -9.65168026,  2.14161494,  0.6190165 ,  0.        ]), 97: array([-9.28292618,  2.62925941, -2.23717482,  0.46996436,  0.        ]), 98: array([-1.7449871 , -7.00715709, -0.80032816, -0.02029422,  0.        ]), 99: array([-9.65755556,  3.38541508, -2.19429915,  0.81418603,  0.        ]), 100: array([-0.10498003,  8.50768362, -1.3209181 , -0.25817411,  0.        ]), 101: array([ 8.06613513,  4.54141106, -2.28509058,  0.41478309,  0.        ]), 102: array([ 2.80901867, -9.87791524,  1.12611133,  0.73686503,  0.        ]), 103: array([-4.27270184,  0.12124043, -1.60748391, -0.28396804,  0.        ]), 104: array([-6.26037653, -1.39606565,  2.00771274,  0.72394924,  0.        ]), 105: array([ 4.88208539, -2.31976627,  2.63295636,  0.01500426,  0.        ]), 106: array([-8.46777256,  4.18267685, -2.48101591,  0.2541941 ,  0.        ]), 107: array([-3.00623687, -0.68169515,  2.74290812,  0.40750538,  0.        ]), 108: array([-2.58799864, -8.57102779,  2.72955121,  0.71844914,  0.        ]), 109: array([-8.26185980e+00, -6.62178465e+00,  3.14527183e-03,  8.36953259e-01,
+        0.00000000e+00]), 110: array([ 9.60448106,  0.43459517, -2.40410397,  0.25556847,  0.        ]), 111: array([-9.9019177 ,  5.45349056,  1.20744127,  0.69415306,  0.        ]), 112: array([-8.48424706,  3.47931821,  1.11339254,  0.01249751,  0.        ]), 113: array([-9.65934145,  6.29825768,  0.4441046 ,  0.6377324 ,  0.        ]), 114: array([-0.23183266,  9.04404048, -1.0111916 , -0.19742058,  0.        ]), 115: array([-2.30751273, -9.36655312, -2.73812853,  0.5872861 ,  0.        ]), 116: array([-2.89713382, -4.39905896,  2.58993129,  0.23106943,  0.        ]), 117: array([-6.02192069,  3.23087546, -1.35880142, -0.18402354,  0.        ]), 118: array([4.69006236, 0.66110434, 0.25965335, 0.36019424, 0.        ]), 119: array([ 7.28785262,  9.81577115,  2.01236343, -0.23300001,  0.        ]), 120: array([ 3.23324072, -0.98288532,  1.37837695,  0.82914165,  0.        ]), 121: array([5.86734262, 6.31074556, 1.26729173, 0.77611268, 0.        ]), 122: array([ 2.73168195, -4.57305735, -2.70563736,  0.99564664,  0.        ]), 123: array([-9.2833014 , -3.05687847,  0.32878637,  0.64671704,  0.        ]), 124: array([-9.69721729,  6.45499366,  0.9496085 , -0.08066712,  0.        ]), 125: array([ 3.71445676, -6.6478152 , -1.28645234,  0.78399819,  0.        ]), 126: array([ 9.13684007, -6.61923282,  0.4034132 ,  0.7166903 ,  0.        ]), 127: array([-2.51012004,  1.94901707, -2.98407963, -0.17023759,  0.        ]), 128: array([ 0.68814345, -9.18584793, -2.01735093,  0.74899581,  0.        ]), 129: array([-9.74446623,  6.40587429,  0.83279354, -0.05480189,  0.        ]), 130: array([ 7.81178927,  9.97888967, -0.79218896,  0.16472011,  0.        ]), 131: array([-8.16330424,  6.45268407, -0.32379308,  0.6094984 ,  0.        ]), 132: array([-7.18421373,  7.97510377, -3.13298957,  0.81617876,  0.        ]), 133: array([-5.50454172,  9.60754182, -2.73734163,  0.44860221,  0.        ]), 134: array([-4.30771549, -2.80140328, -0.09814058, -0.17192829,  0.        ]), 135: array([-3.41157537,  9.07762231,  1.77408534,  0.55983169,  0.        ]), 136: array([ 9.15711263, -8.92097405, -1.58202791, -0.27843919,  0.        ]), 137: array([-9.71818743,  3.33947409, -1.66182272,  0.81417587,  0.        ]), 138: array([-4.26777536, -8.54795981,  1.9106785 ,  0.88185427,  0.        ]), 139: array([-2.37264268, -9.74601951,  0.46175521,  0.02361123,  0.        ]), 140: array([ 5.85496378, -0.75772878, -2.18399586,  0.72692024,  0.        ]), 141: array([-7.65912707,  7.18269698,  1.89153285,  0.83282192,  0.        ]), 142: array([ 8.7574734 , -4.40852487, -2.92509457,  0.35942196,  0.        ]), 143: array([-3.99066139, -4.88643018,  0.93877738,  0.785872  ,  0.        ]), 144: array([-7.40350179,  2.28906435, -0.78495102, -0.08255276,  0.        ]), 145: array([-9.77500906, -1.07838775, -1.06779863,  0.76551796,  0.        ]), 146: array([ 8.90505181e+00,  3.64141722e+00,  2.38057306e+00, -5.95911250e-03,
+        0.00000000e+00]), 147: array([ 6.67063689,  3.43747478, -1.01130738,  0.70084668,  0.        ]), 148: array([-7.9252982 ,  2.83839479,  0.14090146,  0.60059646,  0.        ]), 149: array([ 2.41173739,  2.46262342,  0.42307574, -0.10680326,  0.        ]), 150: array([ 5.71364655,  8.86613993, -0.2705188 ,  0.56574177,  0.        ]), 151: array([ 1.90286514, -0.37694594,  0.6051619 ,  0.56746834,  0.        ]), 152: array([ 6.57587484,  5.73074423, -2.97571765, -0.09657134,  0.        ]), 153: array([ 6.65410201,  0.1403165 , -2.64843838, -0.16969234,  0.        ]), 154: array([-9.77491362,  8.04040382,  0.29408929,  0.46072   ,  0.        ]), 155: array([ 1.76592245, -8.78791396,  1.08067624, -0.23086515,  0.        ]), 156: array([8.12556287, 3.11818177, 2.45845404, 0.18848101, 0.        ]), 157: array([-1.96610422, -7.8039584 ,  2.94708498,  0.71130538,  0.        ]), 158: array([ 1.36071739, -4.65307266, -1.47015552, -0.16709394,  0.        ]), 159: array([-1.22072227, -9.5188745 ,  1.50009789,  0.86671216,  0.        ]), 160: array([-5.50064333, -2.4659692 , -1.38724859,  0.70790551,  0.        ]), 161: array([-8.84467113, -2.68099538,  0.87807569,  0.80809016,  0.        ]), 162: array([ 7.94750441,  7.71623157, -1.63031505,  0.78066374,  0.        ]), 163: array([ 9.83701408, -6.10846473, -3.06323992,  0.18406361,  0.        ]), 164: array([-8.17039644,  6.92107718, -0.7070716 ,  0.68162279,  0.        ]), 165: array([-4.32012331,  9.03495549, -1.15667855, -0.22328963,  0.        ]), 166: array([ 9.54272548, -5.05543232, -2.81742778,  0.73115982,  0.        ]), 167: array([ 0.99499233,  9.59975512, -1.10394449,  0.81551086,  0.        ]), 168: array([ 9.81140876, -1.84279719,  2.87679966,  0.6358541 ,  0.        ]), 169: array([3.98583169, 0.48997994, 1.32320483, 0.72230687, 0.        ]), 170: array([ 1.14117679,  6.43861531, -1.38462069,  0.13168602,  0.        ]), 171: array([ 5.21652542, -9.69303833,  2.12706803,  0.5201875 ,  0.        ]), 172: array([-8.25953347,  6.95853369,  2.27735666,  0.49287953,  0.        ]), 173: array([ 6.63863048,  9.78173104, -2.85381536, -0.27807188,  0.        ]), 174: array([ 6.71157548, -2.34812447, -1.32213979,  0.6444377 ,  0.        ]), 175: array([-4.28258132,  1.82492883, -0.40376897,  0.25257823,  0.        ]), 176: array([-0.75538766,  9.51710013, -2.95687918,  0.4712661 ,  0.        ]), 177: array([ 0.0849487 ,  7.07091834,  1.88622249, -0.13701542,  0.        ]), 178: array([ 4.64437174,  0.31175918, -0.81076417, -0.09773431,  0.        ]), 179: array([6.86581326, 8.22621686, 0.0526969 , 0.5331353 , 0.        ]), 180: array([ 1.18909969, -2.21061123,  0.60050374,  0.671321  ,  0.        ]), 181: array([ 9.82479272,  8.39814742, -1.43582847,  0.59094517,  0.        ]), 182: array([ 4.23551183, -2.14102411,  0.77830961,  0.63967612,  0.        ]), 183: array([-6.82255032, -9.58107669, -2.72582913, -0.2876202 ,  0.        ]), 184: array([ 1.49033337, -0.93709446,  1.28977318,  0.94871527,  0.        ]), 185: array([-4.74050628,  9.45933839, -1.1992519 ,  0.45487477,  0.        ]), 186: array([-8.48633559, -9.31795927,  1.44837549,  0.33116667,  0.        ]), 187: array([-1.01627179, -5.02652065, -2.01390833,  0.30054632,  0.        ]), 188: array([ 9.53414657, -4.92562061,  2.70306431,  0.71804855,  0.        ]), 189: array([9.82356071, 6.34974279, 2.95668945, 0.71077502, 0.        ]), 190: array([ 9.17624149,  6.32203851, -1.32706301,  0.20487864,  0.        ]), 191: array([ 8.41426865,  7.03957479, -2.59634789,  0.81618884,  0.        ]), 192: array([ 9.92329111,  5.95622935, -0.1442238 ,  0.98999208,  0.        ]), 193: array([-7.95511878,  7.0473583 ,  2.127782  ,  0.75377803,  0.        ]), 194: array([-1.18591232,  9.7282652 , -0.76759813, -0.06046061,  0.        ]), 195: array([-0.02230715, -6.94534361, -0.56120579,  0.77231328,  0.        ]), 196: array([-0.51846319,  9.37082517,  2.92986606,  0.65603479,  0.        ]), 197: array([ 3.93241003,  2.88825621,  0.23846197, -0.22828196,  0.        ]), 198: array([-4.587219  ,  2.64102603,  1.3046323 ,  0.76943189,  0.        ]), 199: array([ 9.31887516, -1.10097046, -2.26796331,  0.24003542,  0.        ]), 200: array([ 9.16629101,  3.47271572, -2.25176966,  0.4187645 ,  0.        ]), 201: array([-2.53849751, -7.09507383,  1.1122474 , -0.2673419 ,  0.        ]), 202: array([-1.43268772,  1.98113469, -3.0327623 , -0.19754274,  0.        ]), 203: array([-7.21881481,  3.51319684,  0.70022612,  0.76000945,  0.        ]), 204: array([-9.6191839 , -6.03939582, -0.04471116,  0.70297836,  0.        ]), 205: array([ 6.79232084,  8.25108081, -1.02691784, -0.15839067,  0.        ]), 206: array([-1.93945271,  6.44241911, -1.84455679,  0.2582648 ,  0.        ]), 207: array([ 1.1590986 ,  3.9698218 , -0.02357841,  0.75435554,  0.        ]), 208: array([-1.02666799, -6.01264097, -3.14079814,  0.68420129,  0.        ]), 209: array([ 7.46888037,  9.5028245 , -2.74078826,  0.39078157,  0.        ]), 210: array([-2.20199739,  5.49570727,  3.12451755,  0.64843239,  0.        ]), 211: array([ 9.73751785,  1.36882242, -2.74867124,  0.75704561,  0.        ]), 212: array([ 2.60314699, -5.67739065, -0.92011183, -0.23451381,  0.        ]), 213: array([ 4.34737363,  5.27180595, -1.74225619, -0.08662907,  0.        ]), 214: array([-2.36489189, -7.16673402, -0.05295833,  0.62882513,  0.        ]), 215: array([-8.3963575 ,  4.08610537,  2.05095559,  0.10858989,  0.        ]), 216: array([ 3.2963083 , -9.01079903, -2.51904526,  0.38103268,  0.        ]), 217: array([ 3.47675689, -5.56412219, -2.81184385,  0.68282073,  0.        ]), 218: array([-6.53214233,  2.91434279,  0.7484659 ,  0.25580406,  0.        ]), 219: array([-5.12889207,  3.62210446,  3.096775  , -0.27592654,  0.        ]), 220: array([-9.55763543, -8.29955114, -0.76129801,  0.31862481,  0.        ]), 221: array([-8.96653892,  9.0247156 , -1.7621129 ,  0.5917495 ,  0.        ]), 222: array([ 2.7350294 , -6.84127089, -0.99829891,  0.70683559,  0.        ]), 223: array([ 5.07469594, -0.40673817,  0.37809548,  0.36798793,  0.        ]), 224: array([-4.71543749,  7.53611348,  1.43646414,  0.67466191,  0.        ]), 225: array([ 8.73140255,  8.66741181, -0.4002036 ,  0.92287594,  0.        ]), 226: array([-8.85174215,  1.66453256,  0.74199941, -0.29231558,  0.        ]), 227: array([-8.11862842,  7.19978794,  3.03791309,  0.25654455,  0.        ]), 228: array([ 3.34046863, -4.79677361, -1.08856304,  0.70839569,  0.        ]), 229: array([ 4.70785644, -3.54549549, -1.56736928,  0.49940149,  0.        ]), 230: array([ 6.06752277, -8.69820026, -2.81005047,  0.81243351,  0.        ]), 231: array([-6.51988097,  9.11142255, -1.40563318,  0.23117599,  0.        ]), 232: array([ 6.71335767, -8.69202368, -2.67688194,  0.73186035,  0.        ]), 233: array([ 8.87348387, -7.9612408 , -1.0153561 ,  0.99996787,  0.        ]), 234: array([ 9.79549072, -0.69710333, -2.21542549,  0.26990595,  0.        ]), 235: array([-7.62702708, -8.25984581,  0.8174583 ,  0.52932985,  0.        ])}
+edges:  {0: [23, 44, 54, 121, 170], 1: [6, 34, 161], 2: [13, 43, 112, 226], 3: [6, 22, 26, 34, 46, 70, 98, 104, 143, 215], 4: [11, 49, 54, 196], 5: [6, 22, 34, 46, 70, 77, 214, 218], 6: [3, 22, 29, 46, 70, 89, 104, 138, 215, 218], 7: [0, 35, 54, 64, 158, 170, 196], 8: [13, 16, 29, 30, 43, 49, 69, 94, 112, 117, 135, 175], 9: [0, 11, 54, 173, 174], 10: [3, 34, 46, 70, 98, 116, 138, 214, 215], 11: [0, 19, 105, 120, 182, 184, 228], 12: [37, 112, 117, 215, 226], 13: [12, 30, 40, 98, 112, 134, 141, 172, 178, 193, 218, 227], 14: [8, 13, 30, 46, 84, 86, 98], 15: [0, 43, 49, 89, 146, 158, 162, 190, 206, 213, 225], 16: [0, 11, 23, 178, 196], 17: [0, 19, 32, 51, 139, 159, 163], 18: [16, 13, 29, 30, 43, 49, 94, 112, 141, 206, 226], 19: [0, 7, 32, 98, 159, 170, 182, 223], 20: [], 21: [26, 43, 46, 77, 98, 112, 175, 215, 218], 22: [2, 3, 13, 26, 34, 43, 46, 48, 70, 77, 88, 203, 215, 218], 23: [0, 11, 49, 54, 158, 170, 196], 24: [0, 31, 44, 51, 126], 25: [30, 49, 84, 89, 94, 97, 98, 112, 178, 227], 26: [25, 20, 34, 43, 84, 89, 98], 27: [0, 44, 51, 98, 105, 126, 136, 159], 28: [24, 27, 11, 32, 44, 53, 158, 228], 29: [26, 13, 34, 37, 40, 46, 65, 69, 77, 88, 98, 103, 141, 144, 172, 175, 193, 218], 30: [20, 12, 13, 37, 46, 124, 129, 134, 141, 172, 175, 178, 193, 218, 227], 31: [0, 27, 32, 44, 51, 54, 80, 158, 170], 32: [0, 31, 44, 51, 98, 105, 159], 33: [8, 35, 54, 156, 170, 178, 196], 34: [32, 0, 3, 6, 45, 51, 70, 98, 138, 155, 157], 35: [0, 29, 43, 89, 117, 146, 170, 206, 213], 36: [2, 34, 5, 13, 26, 30, 43, 46, 48, 74, 89, 98, 198, 215, 218], 37: [30, 46, 49, 65, 98, 106, 112, 117, 135, 175], 38: [34, 36, 6, 22, 26, 43, 46, 60, 90, 98, 104, 109, 138, 215, 218], 39: [9, 11, 49, 54, 120, 146, 153, 158, 178], 40: [26, 46, 106, 117, 141, 144, 164, 175, 224], 41: [31, 44, 105], 42: [34, 26, 70, 98, 134, 215], 43: [34, 40, 13, 20, 26, 30, 46, 77, 97, 98, 99, 137, 144, 148, 172, 175, 203, 218], 44: [8, 35, 23, 54, 146, 158, 178, 196], 45: [34, 6, 42, 43, 22, 26, 46, 89, 134, 215], 46: [10, 43, 16, 25, 30, 77, 84, 89, 94, 227], 47: [34, 6, 42, 46, 26, 70, 98, 116, 143, 159, 215], 48: [43, 20, 30, 215], 49: [0, 11, 44, 23, 27, 51, 54, 64, 156, 170], 50: [34, 3, 38, 46, 47, 26, 90, 98, 109, 134, 215], 51: [0, 32, 44, 28, 31, 98], 52: [0, 11, 94, 158, 178, 196], 53: [24, 1, 27, 28, 120, 158], 54: [0, 4, 7, 170, 178, 197], 55: [51, 19, 105, 163], 56: [13, 46, 49, 18, 30, 65, 106, 112, 141, 175], 57: [34, 3, 5, 38, 43, 46, 50, 22, 26, 89, 90, 98, 134, 183, 215, 218, 226], 58: [8, 13, 14, 30, 84, 98], 59: [0, 32, 44, 51, 27, 105, 136, 159, 216], 60: [34, 3, 38, 46, 47, 22, 26, 90, 98, 134, 161, 215], 61: [49, 64, 80, 152, 158, 178, 200], 62: [6, 98, 215], 63: [32, 34, 6, 109, 134, 138, 183, 215], 64: [0, 33, 11, 121, 158, 178, 196, 213], 65: [46, 49, 18, 30, 98, 106, 112, 117, 144, 175], 66: [0, 51, 32, 19, 98, 105, 126, 159, 163], 67: [34, 5, 89, 98, 215], 68: [34, 6, 138, 161], 69: [65, 34, 46, 20, 26, 84, 98, 103, 141, 144, 172, 175, 193, 218, 227], 70: [32, 34, 6, 46, 50, 22, 89, 104, 215, 218], 71: [2, 34, 6, 10, 43, 46, 77, 89, 98, 103, 116, 161, 215, 227], 72: [32, 34, 5, 77, 161], 73: [51, 19, 216], 74: [43, 21, 46, 77, 89, 98, 175, 215, 218, 227], 75: [34, 43, 13, 25, 30, 84, 86, 89, 94, 98], 76: [64, 43, 54, 89, 117, 146, 170, 173, 206, 225], 77: [2, 34, 50, 25, 26, 84, 88, 89, 98, 215], 78: [0, 32, 66, 51, 19, 120, 125, 182, 212], 79: [32, 64, 44, 54, 23, 146, 158, 170, 178, 196, 225], 80: [39, 44, 49, 54, 23, 146, 158, 170, 225], 81: [163], 82: [], 83: [37, 69, 43, 56, 29, 117, 131], 84: [69, 43, 16, 58, 29, 89, 106, 117, 144, 175, 196, 206], 85: [34, 8, 43, 13, 84, 30, 86, 89, 94, 98, 134], 86: [34, 67, 84, 5, 89, 98], 87: [0, 11, 44, 54, 23, 146, 170, 199, 225], 88: [43, 77, 46, 14, 30, 141, 193, 227], 89: [75, 13, 16, 84, 85, 26, 30, 94, 98, 106, 112, 117, 135, 141, 144, 175], 90: [32, 34, 70, 72, 10, 43, 77, 98, 116, 134, 215, 218], 91: [34, 36, 71, 10, 77, 84, 88, 89, 98, 112, 134, 215, 227], 92: [51, 19, 55, 105, 159, 163], 93: [62, 98, 215], 94: [0, 43, 11, 44, 52, 135, 158, 178, 196], 95: [34, 3, 5, 38, 90, 43, 46, 21, 22, 26, 98, 134, 215, 218], 96: [0, 10, 51, 98, 108, 139], 97: [34, 43, 12, 77, 46, 48, 88, 26, 98, 103, 203, 215, 218], 98: [32, 34, 3, 6, 70, 45, 161], 99: [34, 43, 12, 46, 50, 20, 103, 148, 203, 215, 218], 100: [16, 11, 94, 178, 194, 196, 213], 101: [64, 9, 11, 80, 49, 146, 153, 158, 178, 225], 102: [0, 32, 6, 51, 19, 139, 157, 163], 103: [89, 34, 3, 98, 5, 43, 12, 13, 84, 25, 91, 30, 134], 104: [34, 98, 43, 13, 46, 89, 30, 57, 112, 215], 105: [0, 32, 98, 44, 51, 54, 87, 158, 170, 174], 106: [65, 34, 97, 58, 98, 103, 77, 46, 50, 20, 21, 84, 88, 26, 29, 112, 144, 175, 203, 215, 218], 107: [34, 98, 71, 103, 10, 77, 46, 89, 30, 116, 144, 161, 215, 227], 108: [66, 116], 109: [34, 3, 98, 90, 6, 46, 47, 26, 60, 62, 134, 138, 215], 110: [24, 11, 53, 229], 111: [37, 113, 117, 124, 129], 112: [99, 37, 43, 13, 20, 134, 141, 172, 215, 218, 227], 113: [82, 37, 46, 117, 131, 175, 227], 114: [16, 11, 100, 94, 170, 178, 213], 115: [98, 3, 183], 116: [3, 70, 72, 10, 46, 50, 138, 175, 215], 117: [89, 34, 98, 103, 46, 20, 84, 25, 26, 134, 175, 224, 227], 118: [32, 33, 7, 44, 54, 27, 120, 158, 170, 173], 119: [0, 49, 54, 89, 146, 206, 213], 120: [0, 105, 11, 44, 118, 87, 170, 184], 121: [0, 64, 35, 76, 54, 23, 146, 162, 173, 178, 196], 122: [0, 32, 51, 19, 54, 125, 222], 123: [34, 3, 98, 5, 38, 43, 46, 48, 112, 22, 26, 134, 161, 175, 215, 218, 226], 124: [117, 82, 37, 129, 227], 125: [0, 32, 66, 44, 19, 51, 27, 136, 216], 126: [41, 44, 105], 127: [98], 128: [138], 129: [37, 46, 113, 82, 117, 124, 175, 227], 130: [64, 49, 80, 152, 158, 178, 181, 190], 131: [98, 46, 49, 82, 117, 56, 141, 144, 175, 193, 224, 227], 132: [65, 106, 43, 117, 29, 141, 175], 133: [37, 106, 43, 112, 49, 83, 117, 29, 227], 134: [34, 98, 5, 103, 43, 107, 109, 46, 116, 86, 89, 60, 161, 215], 135: [131, 8, 43, 13, 112, 18, 83, 117, 29, 30, 185], 136: [73, 51], 137: [65, 34, 98, 103, 43, 12, 77, 46, 50, 20, 88, 26, 148, 203, 215, 218], 138: [26, 134, 34, 6, 215], 139: [32, 3, 6, 108, 51, 214], 140: [1, 7, 11, 54, 23, 170, 216], 141: [129, 69, 40, 106, 43, 13, 112, 49, 82, 29, 30, 144, 164, 215], 142: [32, 59, 105, 44, 27, 28, 126], 143: [3, 6, 70, 138, 139, 46, 50, 89, 26, 215], 144: [129, 34, 98, 36, 134, 103, 43, 46, 111, 84, 88, 89, 26, 175, 198, 218], 145: [34, 3, 36, 98, 38, 134, 43, 77, 46, 48, 112, 60, 175, 215], 146: [11, 23, 54, 79, 225], 147: [11, 44, 80, 54, 23, 87, 156, 170, 190, 225], 148: [65, 34, 98, 37, 134, 103, 43, 12, 141, 46, 20, 88, 89, 26, 175, 203, 226, 227], 149: [0, 11, 4, 153, 170, 197, 223], 150: [35, 43, 80, 49, 146, 117, 89, 158, 170, 173, 178, 190, 206, 225], 151: [0, 27, 140, 44, 170, 184, 197, 223], 152: [0, 64, 11, 80, 49, 147, 54, 87, 153, 158, 178, 225], 153: [7, 11, 140, 44, 53, 54, 174], 154: [117, 83, 37, 46, 175, 227], 155: [128, 0, 32, 98, 6, 19, 51], 156: [32, 130, 11, 54, 23, 120, 158], 157: [116, 139, 68, 214], 158: [0, 32, 78, 51, 19, 120, 125, 182, 184, 222, 228], 159: [32, 66, 3, 6, 139, 108, 19, 51, 115, 157, 163], 160: [1, 34, 3, 98, 5, 43, 77, 46, 89, 215], 161: [160, 34, 98, 5, 6, 103, 134, 43, 77, 46, 48, 112, 144, 22, 86, 89, 175, 215, 218, 226], 162: [64, 130, 35, 101, 80, 49, 158, 178, 213, 225], 163: [1], 164: [129, 98, 131, 40, 141, 46, 144, 49, 82, 83, 117, 26, 124, 29, 175, 224, 227], 165: [135, 106, 46, 144, 49, 18, 117, 89, 58, 94, 175, 206], 166: [105, 44, 188], 167: [11, 16, 117, 58, 29, 94, 178, 213], 168: [32, 28, 53, 27, 156, 158], 169: [0, 64, 105, 87, 120, 153, 170, 173, 196], 170: [0, 167, 11, 23, 178], 171: [0, 105, 10, 139, 51, 19], 172: [69, 137, 43, 13, 112, 82, 30, 193, 215], 173: [170, 43, 11, 146, 117, 119, 89, 58, 29, 190, 205, 206, 213, 225], 174: [24, 59, 28, 44], 175: [89, 34, 98, 43, 20, 84, 86, 25, 30], 176: [106, 43, 170, 16, 49, 83, 117, 89, 58, 29, 94, 178, 194, 196, 206, 213], 177: [49, 11], 178: [32, 33, 64, 7, 170, 44, 149, 54, 27], 179: [64, 43, 76, 49, 146, 54, 89, 158, 190, 206, 225], 180: [0, 170, 51, 54, 27, 184, 197], 181: [64, 80, 49, 146, 152, 61], 182: [169, 170, 11, 7], 183: [98, 3, 70, 26, 93, 214, 218], 184: [0, 33, 170, 139, 140, 80, 151, 197], 185: [89, 98, 165, 106, 43, 13, 46, 175, 144, 49, 18, 117, 25, 94, 206], 186: [34, 98, 90, 70, 6, 134, 26, 215], 187: [32, 1, 34, 5], 188: [32, 105, 44, 142], 189: [0, 64, 101, 11, 80, 49, 178, 54, 119, 152, 158, 190, 196, 200], 190: [64, 170, 80, 146, 147, 178, 119, 189, 158, 200, 225], 191: [64, 130, 35, 170, 11, 80, 49, 178, 147, 153, 200, 213, 225], 192: [], 193: [164, 69, 137, 43, 172, 13, 141, 112, 82, 29, 30, 215, 227], 194: [100, 170, 11, 16, 178, 117, 89, 94], 195: [0, 32, 98, 128, 138, 51, 19], 196: [106, 43, 170, 176, 178, 83, 117, 89, 58, 29, 94, 206], 197: [0, 33, 64, 4, 196, 8, 105, 170, 11, 149, 150, 54, 213], 198: [2, 13, 14, 77, 112, 49, 20, 84, 89, 91, 227], 199: [7, 168, 11, 142, 53, 24, 27, 120, 158], 200: [11, 173, 110, 79, 178, 153, 28, 158], 201: [3, 6, 138, 45, 116], 202: [98, 86, 127], 203: [65, 34, 97, 98, 193, 43, 12, 141, 46, 172, 144, 178, 20, 84, 89, 26, 30, 227], 204: [161, 34, 3, 98, 5, 6, 38, 90, 134, 77, 46, 47, 109, 183, 26, 215], 205: [170, 11, 76, 80, 49, 146, 179, 178, 190, 158, 213, 225], 206: [98, 100, 106, 13, 141, 175, 144, 84, 117, 58], 207: [0, 196, 197, 170, 11, 178, 23], 208: [1, 34, 68, 5, 138, 115], 209: [170, 43, 11, 205, 206, 146, 117, 89, 190, 158, 213, 225], 210: [98, 106, 75, 13, 175, 84, 85, 117, 25, 30, 227], 211: [32, 11, 49, 53, 153], 212: [0, 32, 66, 19, 51, 122, 125, 216], 213: [0, 153, 11, 177, 146, 147, 178, 179, 121, 158], 214: [32, 34, 3, 98, 195, 6, 70, 138, 45, 143, 116], 215: [65, 99, 43, 12, 77, 20, 30, 218, 226, 227], 216: [32, 17, 19, 163], 217: [0, 32, 51, 19, 216], 218: [193, 34, 98, 43, 77, 46, 141, 82, 20, 88, 89, 26, 30, 226, 227], 219: [97, 98, 8, 43, 77, 112, 20, 84], 220: [34, 3, 98, 90, 134, 77, 47, 26], 221: [131, 164, 37, 43, 175, 117, 56, 29, 227], 222: [0, 32, 66, 166, 136, 139, 44, 19, 51], 223: [64, 7, 170, 140, 51, 54, 120, 184,  191], 224: [65, 132, 43, 13, 175, 112, 49, 144, 29, 30], 225: [130, 146, 206, 15], 226: [3, 103, 43, 12, 13, 46, 175, 203, 20, 215, 26, 29], 227: [69, 137, 13, 141, 112, 82, 30], 228: [0, 32, 66, 105, 19, 211, 51, 118, 182, 27], 229: [0, 32, 105, 44, 19, 51, 184, 217, 27], 230: [32, 163, 51, 19, 216], 231: [224, 65, 98, 37, 8, 106, 43, 175, 144, 49, 18, 117, 56, 25, 29], 232: [32, 163, 230, 51, 19], 233: [136, 98, 51], 234: [228, 199, 11, 53, 24, 27, 158]}
+components:  {20: {20}, 55: {55}, 63: {63}, 81: {81}, 82: {82}, 92: {92}, 95: {95}, 96: {96}, 102: {102}, 114: {114}, 123: {123}, 127: {127}, 133: {133}, 145: {145}, 154: {154}, 171: {171}, 180: {180}, 186: {186}, 187: {187}, 192: {192}, 201: {201}, 202: {202}, 204: {204}, 207: {207}, 208: {208}, 209: {209}, 210: {210}, 217: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 94, 97, 98, 99, 100, 101, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 115, 116, 117, 118, 119, 120, 121, 122, 124, 125, 126, 128, 129, 130, 131, 132, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 146, 147, 148, 149, 150, 151, 152, 153, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 181, 182, 183, 184, 185, 188, 189, 190, 191, 193, 194, 195, 196, 197, 198, 199, 200, 203, 205, 206, 211, 212, 213, 214, 215, 216, 217, 218, 222, 223, 224, 225, 226, 227, 228, 229}, 219: {219}, 220: {220}, 221: {221}, 230: {230}, 231: {231}, 232: {232}, 233: {233}, 234: {234}}
