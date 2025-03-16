@@ -330,6 +330,8 @@ class ReachabilityRoadmap(Roadmap):
                     for second in departures_from_start[s_c_indx]:
                         for penult in arrivals_to_goal[g_c_indx]:
                             plans.append(self.bfs_plan(second,penult))
+
+        print("planning done with ", len(plans), "possible plans")
         if len(plans) == 0:
             return -2 #plan failure
         
@@ -397,6 +399,12 @@ class ReachabilityRoadmap(Roadmap):
 
                 if(s_comp not in self.condensation_graph_edges.keys()): self.condensation_graph_edges[s_comp] = set()
                 if(s_comp != e_comp): self.condensation_graph_edges[s_comp].add(e_comp)
+        for comp in self.components:
+            if comp not in self.condensation_graph_edges.keys():
+                self.condensation_graph_edges[comp] = set()
+        for node in self.nodes:
+            if node not in self.edges.keys():
+                self.edges[node] = set()
 
         
 
@@ -481,7 +489,7 @@ if __name__ == '__main__':
         goal = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
         while roadmap.env.unwrapped.pt_collision_check(goal[:2]):
             goal = np.random.uniform(roadmap.uenv.start_limit[:, 0], roadmap.uenv.start_limit[:, 1], size=(roadmap.uenv.obs_dims,))
-            
+
         print("Start Test #",i, ": from (",start,") to (",goal,")")
 
         result = roadmap.query_roadmap(start,goal)
