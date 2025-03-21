@@ -91,9 +91,10 @@ class ReachabilityRoadmap(Roadmap):
                         if d not in self.condensation_graph_edges[c]:
                             thief_caught = False
             elif(len(c_merge) == 0):
-                if(len(c_arr) > 0):#If A = nullset, its a guard.
-                    if(len(c_dep) == 0):#if D = nullset, its a thief and is caught
+                if(len(c_dep)+len(c_arr) > 0):#If A  = nullset, its a guard.
+                    if(len(c_arr)*len(c_dep) == 0):#if A xor D = nullset, its a thief and is caught
                         thief_caught = True
+                        stepsSinceAdd -= 1
                     else:
                         thief_caught=True  #check if all a's arrive at all d's on comp_graph
                         for a in c_arr:
@@ -343,9 +344,10 @@ class ReachabilityRoadmap(Roadmap):
                 done, traj = self._query_rollout(cur,subgoal,self.max_steps_c)
                 if not done: 
                     trial_fail = True
-                    break
                 cur = traj[-1]
-            if not trial_fail: exec_fail = False
+            if not trial_fail: 
+                exec_fail = False
+                return 0
         if exec_fail: return -1
         return 0
     
@@ -415,12 +417,14 @@ argparser.add_argument('--train_config', type=str, default="analytical_mushr")
 argparser.add_argument('--alg', choices=['PPO', "HER_SAC", "BangBang"], type=str, default="HER_SAC")
 argparser.add_argument('--model_path', type=str, default=os.path.dirname(__file__).removesuffix("Roadmap")+'trained_models/latest/best/best_model')
 argparser.add_argument('--max_steps', type=int, default=1e10)
-argparser.add_argument('--output', type=str, default="roadmap_files/latest")
-argparser.add_argument('--input', type=str, default="roadmap_files/n5")
+argparser.add_argument('--output', type=str, default="roadmap_files/n10c2")
+argparser.add_argument('--input', type=str, default="roadmap_files/n10c2")
+argparser.add_argument('--n', type= int, default = 20)
+argparser.add_argument('--read_from_file', default=False, action='store_true')
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-
+ 
 if __name__ == '__main__':
     args = argparser.parse_args()
 
@@ -469,15 +473,17 @@ if __name__ == '__main__':
 
 
     roadmap = ReachabilityRoadmap(config=config, env=env, controller=model, ctrl_env=model_env)
-
-    roadmap_indir = os.path.join(os.path.dirname(__file__),args.input)
-    roadmap.build_from_file(roadmap_indir)
-
     
-    # os.makedirs(os.path.join(args.output), exist_ok = True)
-    # roadmap_dir = os.path.join(os.path.dirname(__file__),args.output)
+    if(args.read_from_file):
+        roadmap_indir = os.path.join(os.path.dirname(__file__),args.input)
+        roadmap.build_from_file(roadmap_indir)
+    else:
+        roadmap.build(args.n)
+        os.makedirs(os.path.join(args.output), exist_ok = True)
+        roadmap_dir = os.path.join(os.path.dirname(__file__),args.output)
+        roadmap.save_roadmap(roadmap_dir)
 
-    #roadmap.save_roadmap(roadmap_dir)
+
     #output files
     num_plan_fail = 0
     num_exec_fail = 0
@@ -494,7 +500,13 @@ if __name__ == '__main__':
 
         result = roadmap.query_roadmap(start,goal)
 
-        if result == -2: num_plan_fail = num_plan_fail + 1
-        elif result == -1: num_exec_fail = num_exec_fail + 1 
+        if result == -2: 
+            print("plan fail")
+            num_plan_fail = num_plan_fail + 1
+        elif result == -1: 
+            num_exec_fail = num_exec_fail + 1 
+            print("exec fail")
+
+    print("of 100 tests: ",num_plan_fail,"failed in planning,",num_exec_fail,"failed in execution")
 
     # #testing
